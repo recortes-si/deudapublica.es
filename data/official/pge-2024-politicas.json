@@ -1,0 +1,63 @@
+{
+  "dataset": "PGE 2024-P",
+  "year": 2024,
+  "status": "prorrogado",
+  "scope": "Presupuesto estatal consolidado · políticas de gasto · capítulos 1 a 8",
+  "unit": "millones de euros",
+  "total": 480626,
+  "sourceId": "pge-politicas-2024",
+  "root": {
+    "name": "Presupuesto estatal",
+    "children": [
+      {
+        "name": "Estado del bienestar",
+        "children": [
+          { "name": "Pensiones", "value": 190687 },
+          { "name": "Otras prestaciones económicas", "value": 22299 },
+          { "name": "Desempleo", "value": 21278 },
+          { "name": "Fomento del empleo", "value": 7516 },
+          { "name": "Servicios sociales y promoción social", "value": 5744 },
+          { "name": "Gestión de inclusión, Seguridad Social y migración", "value": 6965 },
+          { "name": "Sanidad", "value": 5505 },
+          { "name": "Educación", "value": 5338 },
+          { "name": "Acceso a la vivienda", "value": 3483 }
+        ]
+      },
+      {
+        "name": "Seguridad y justicia",
+        "children": [
+          { "name": "Defensa", "value": 12317 },
+          { "name": "Seguridad ciudadana e instituciones penitenciarias", "value": 10673 },
+          { "name": "Justicia", "value": 2231 },
+          { "name": "Política exterior y cooperación", "value": 2151 }
+        ]
+      },
+      {
+        "name": "Economía e inversión",
+        "children": [
+          { "name": "Investigación civil", "value": 15970 },
+          { "name": "Infraestructuras y ecosistemas resilientes", "value": 12578 },
+          { "name": "Industria y energía", "value": 9801 },
+          { "name": "Agricultura, pesca y alimentación", "value": 8412 },
+          { "name": "Comercio, turismo y PYMES", "value": 3095 },
+          { "name": "Subvenciones al transporte", "value": 3446 },
+          { "name": "Investigación militar", "value": 1833 },
+          { "name": "Otras actuaciones económicas", "value": 1433 },
+          { "name": "Cultura", "value": 1652 }
+        ]
+      },
+      {
+        "name": "Administración y deuda",
+        "children": [
+          { "name": "Transferencias a otras Administraciones Públicas", "value": 66274 },
+          { "name": "Servicios de carácter general", "value": 25944 },
+          { "name": "Deuda pública", "value": 31275 },
+          { "name": "Administración financiera y tributaria", "value": 1750 },
+          { "name": "Órganos constitucionales, Gobierno y otros", "value": 855 },
+          { "name": "Gestión de trabajo y economía social", "value": 119 },
+          { "name": "Ajustes de redondeo de la tabla oficial", "value": 2 }
+        ]
+      }
+    ]
+  }
+}

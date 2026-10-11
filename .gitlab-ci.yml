@@ -1,0 +1,10 @@
+image: node:22-alpine
+
+pages:
+  script:
+    - npm run check
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

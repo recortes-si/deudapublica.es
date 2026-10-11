@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+port="${1:-8080}"
+host="${WEB_HOST:-127.0.0.1}"
+directory="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+
+printf 'deudapublica.es: http://%s:%s\n' "$host" "$port"
+exec @PYTHON@ -m http.server "$port" --bind "$host" --directory "$directory"

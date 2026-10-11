@@ -1,0 +1,9 @@
+{
+  "debtSourceId": "bde-deuda-anual",
+  "ratioSourceId": "eurostat-deuda-pib",
+  "spendingSourceId": "igae-cofog",
+  "budgetSourceId": "pge-politicas-2024",
+  "populationSourceId": "ine-poblacion-2025",
+  "featuredSpendingCodes": ["10", "07", "09", "04"],
+  "provisionalSpendingYears": [2024]
+}

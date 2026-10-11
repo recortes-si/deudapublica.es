@@ -1,0 +1,16 @@
+{
+  "name": "deudapublica.es",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Visualización pública de la deuda española",
+  "scripts": {
+    "dev": "npm run build && node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs",
+    "test": "node scripts/test.mjs",
+    "check": "npm test && npm run build"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

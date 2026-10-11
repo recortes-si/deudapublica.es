@@ -1,0 +1,12 @@
+<section class="counter" id="contador" aria-labelledby="counter-title">
+  <div class="counter-card">
+    <div class="counter-head"><span class="card-kicker" id="counter-title">La cuenta sigue corriendo</span><span class="counter-tag">proyección · no es un dato en directo</span></div>
+    <div class="counter-readout" id="live-debt">{{DEBT}} billones €</div>
+    <div class="counter-meta">
+      <div><strong id="live-per-second">{{SECOND_FLOW}} €</strong><span>variación equivalente / segundo</span></div>
+      <div><strong id="live-per-minute">{{MINUTE_FLOW}} €</strong><span>variación equivalente / minuto</span></div>
+      <div><strong id="live-per-day">{{DAY_FLOW}} M€</strong><span>variación equivalente / día</span></div>
+    </div>
+    <div class="counter-bottom"><p class="counter-note">{{COUNTER_NOTE}}</p><button id="counter-pause" class="quiet-button" type="button" aria-pressed="false">Pausar contador</button></div>
+  </div>
+</section>

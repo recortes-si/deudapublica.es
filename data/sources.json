@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-10-11",
+  "datasets": [
+    {
+      "id": "bde-deuda-anual",
+      "title": "Deuda bruta consolidada de las Administraciones Públicas. Datos anuales",
+      "publisher": "Banco de España",
+      "period": "1994-2025",
+      "updated": "2026-07-10",
+      "file": "raw/bde-deuda-anual.csv",
+      "url": "https://datos.bde.es/datos/es/datasets/000/003.html",
+      "download": "https://www.bde.es/webbe/es/estadisticas/compartido/datos/csv/agr_dav_deu_anual.csv",
+      "license": "https://www.bde.es/wbe/es/estadisticas/recursos/terminos/terminos-de-uso.html"
+    },
+    {
+      "id": "eurostat-deuda-pib",
+      "title": "Government deficit/surplus, debt and associated data",
+      "publisher": "Eurostat",
+      "period": "1995-2025",
+      "updated": "2026-04-22",
+      "file": "raw/eurostat-deuda-pib.json",
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=en",
+      "download": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10dd_edpt1?geo=ES&unit=PC_GDP&na_item=GD&sector=S13",
+      "license": "https://ec.europa.eu/eurostat/about/legal-notices"
+    },
+    {
+      "id": "igae-cofog",
+      "title": "Clasificación funcional del gasto de las Administraciones Públicas (COFOG)",
+      "publisher": "Intervención General de la Administración del Estado",
+      "period": "2020-2024 (2024 provisional)",
+      "updated": "2025-09-30",
+      "file": "official/spending-cofog-2020-2024.csv",
+      "url": "https://www.igae.pap.hacienda.gob.es/sitios/igae/es-ES/Contabilidad/ContabilidadNacional/Publicaciones/Paginas/iacogof.aspx",
+      "download": "https://www.igae.pap.hacienda.gob.es/sitios/igae/es-ES/Contabilidad/ContabilidadNacional/Publicaciones/Documents/AAPP_A/Resumen.pdf",
+      "license": "https://www.igae.pap.hacienda.gob.es/sitios/igae/es-ES/Paginas/AvisoLegal.aspx"
+    },
+    {
+      "id": "pge-politicas-2024",
+      "title": "Presupuestos Generales del Estado consolidados. Políticas de gasto",
+      "publisher": "Ministerio de Hacienda · Secretaría de Estado de Presupuestos y Gastos",
+      "period": "2024-P",
+      "updated": "2024-12-20",
+      "file": "official/pge-2024-politicas.json",
+      "url": "https://www.sepg.pap.hacienda.gob.es/sitios/sepg/es-ES/Presupuestos/DocumentacionEstadisticas/Estadisticas/Paginas/Estadisticas.aspx",
+      "download": "https://www.sepg.pap.hacienda.gob.es/sitios/sepg/es-ES/Presupuestos/DocumentacionEstadisticas/Estadisticas/Documents/2024-P/01%20Presupuestos%20Generales%20del%20Estado%20Consolidados.pdf",
+      "license": "https://www.hacienda.gob.es/es-ES/Paginas/Avisolegal.aspx"
+    },
+    {
+      "id": "ine-poblacion-2025",
+      "title": "Censo Anual de Población. Primeros resultados 2025",
+      "publisher": "Instituto Nacional de Estadística",
+      "period": "1 de enero de 2025",
+      "updated": "2025-12-02",
+      "file": "official/ine-poblacion-2025.json",
+      "url": "https://www.ine.es/dyngs/Prensa/CensoVariables2025.htm",
+      "download": "https://www.ine.es/dyngs/Prensa/CensoVariables2025.pdf",
+      "license": "https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1254735849170&p=1254735849170&pagename=ProductosYServicios%2FPYSLayout"
+    },
+    {
+      "id": "reference-deuda-publica-espana",
+      "title": "Deuda Pública de España · referencia visual y metodológica",
+      "publisher": "deuda-publica-espana.com",
+      "period": "consulta 2026",
+      "updated": "2024-07-20",
+      "file": null,
+      "url": "https://deuda-publica-espana.com/",
+      "license": "No indicada en la web consultada"
+    }
+  ]
+}

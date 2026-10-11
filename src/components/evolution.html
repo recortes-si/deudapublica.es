@@ -1,0 +1,9 @@
+<section class="section" id="evolucion" aria-labelledby="evolution-title">
+  <div class="section-heading"><h2 id="evolution-title"><span class="section-index">01 / La trayectoria</span>Décadas de deuda.<br>El futuro en juego.</h2><p>Compara el importe acumulado y su peso sobre el PIB. El porcentaje puede bajar mientras la deuda en euros sigue creciendo.</p></div>
+  <div class="chart-card">
+    <div class="chart-top"><div class="chart-title">Deuda de las Administraciones Públicas <span id="debt-unit">En porcentaje del PIB · {{START_YEAR}}—{{YEAR}}</span></div><div class="chart-controls"><label for="debt-period">Periodo <select id="debt-period"><option value="all">Toda la serie</option><option value="20">Últimos 20 años</option><option value="10">Últimos 10 años</option></select></label><div class="switcher" role="group" aria-label="Unidad del gráfico"><button type="button" class="active" data-mode="pib" aria-pressed="true">% PIB</button><button type="button" data-mode="euros" aria-pressed="false">€ billones</button></div></div></div>
+    <div class="chart-wrap"><div id="debt-chart" role="img" aria-label="Evolución de la deuda pública. Serie completa disponible en la tabla inferior."></div></div>
+    <div class="chart-foot"><span>Fuentes: Banco de España y Eurostat · series anuales</span><span>Importe nominal y porcentaje del PIB: dos lecturas distintas.</span></div>
+  </div>
+  <details class="data-details"><summary>Ver los datos de la evolución</summary>{{DEBT_TABLE}}</details>
+</section>
