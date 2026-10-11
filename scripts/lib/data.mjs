@@ -1,6 +1,10 @@
+import { earningsModel, commonTaxesModel } from './economy.mjs';
 import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { parseCsv, numeric } from './csv.mjs';
+import { financesModel, workerModel } from './finances.mjs';
+import { validateFiscalContext } from '../../src/shared/worker.mjs';
+import { interestModel, taxComparison } from './interest.mjs';
 
 export const nodeTotal = node => node.children ? node.children.reduce((sum, child) => sum + nodeTotal(child), 0) : node.value;
 
@@ -26,8 +30,8 @@ export async function loadData(root) {
     return { source, path };
   };
   const read = async key => readFile(sourceFor(key).path, 'utf8');
-  const [debtText, ratioText, spendingText, budgetText, populationText] = await Promise.all(
-    ['debtSourceId','ratioSourceId','spendingSourceId','budgetSourceId','populationSourceId'].map(read)
+  const [debtText, ratioText, spendingText, budgetText, populationText, interestText, taxText, financesText, workerText, earningsText, inflationText, commonTaxesText] = await Promise.all(
+    ['debtSourceId','ratioSourceId','spendingSourceId','budgetSourceId','populationSourceId','interestSourceId','taxSourceId','financesSourceId','workerSourceId','earningsSourceId','inflationSourceId','commonTaxesSourceId'].map(read)
   );
   const bdeRows = parseCsv(debtText);
   // Find the total debt series by its official identifier, rather than a column position.
@@ -80,6 +84,17 @@ export async function loadData(root) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(population.date)) throw new Error('Población: date debe tener formato AAAA-MM-DD');
   if (!Array.isArray(config.featuredSpendingCodes) || config.featuredSpendingCodes.length !== 4 || new Set(config.featuredSpendingCodes).size !== 4) throw new Error('site.json: indicar cuatro códigos COFOG distintos');
   if (spendingHistory.some(row => config.featuredSpendingCodes.some(code => !row.items.some(item => item.code === code))) || !spendingHistory.at(-1).items.some(item => item.code === '10')) throw new Error('COFOG: faltan categorías configuradas o protección social (10)');
+  const taxes = JSON.parse(taxText);
+  if (taxes.sourceId !== config.taxSourceId) throw new Error('Impuestos: sourceId no coincide con site.json');
+  const interest = interestModel(JSON.parse(interestText), taxes, config.taxExampleIds);
   const spendingLatest = spendingHistory.at(-1);
-  return { generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
+  interest.taxOnlyExample = taxComparison(interest.value, interest.taxes.items, config.taxOnlyExampleIds);
+  if (!interest.taxOnlyExample.count || !interest.taxOnlyExample.covered || config.taxOnlyExampleIds.some(id => interest.taxes.items.find(item => item.id === id).control || ['autonomous','contributions'].includes(id))) throw new Error('El ejemplo de supresión debe contener solo impuestos completos y cubrirse con los intereses');
+  const finances = financesModel(JSON.parse(financesText));
+  const worker = workerModel(JSON.parse(workerText), config.workerSourceId);
+  const earnings=earningsModel(earningsText,JSON.parse(inflationText),worker,sourceFor('earningsSourceId').source.estimatedYears);
+  const commonTaxes=commonTaxesModel(JSON.parse(commonTaxesText),earnings);
+  const fiscalContext = await json('official/fiscal-context.json');
+  validateFiscalContext(fiscalContext);
+  return { earnings,commonTaxes,fiscalContext, finances, worker, interest, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
 }

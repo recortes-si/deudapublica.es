@@ -4,6 +4,33 @@
   "spendingSourceId": "igae-cofog",
   "budgetSourceId": "pge-politicas-2024",
   "populationSourceId": "ine-poblacion-2025",
-  "featuredSpendingCodes": ["10", "07", "09", "04"],
-  "provisionalSpendingYears": [2024]
+  "featuredSpendingCodes": [
+    "10",
+    "07",
+    "09",
+    "04"
+  ],
+  "provisionalSpendingYears": [
+    2024
+  ],
+  "interestSourceId": "eurostat-intereses-2024",
+  "taxSourceId": "fiscal-scenarios-2024",
+  "taxExampleIds": [
+    "inheritance",
+    "autonomous",
+    "iva",
+    "contributions"
+  ],
+  "taxOnlyExampleIds": [
+    "inheritance",
+    "hydrocarbons",
+    "electricity",
+    "plastic",
+    "insurance"
+  ],
+  "financesSourceId": "eurostat-finanzas",
+  "workerSourceId": "oecd-trabajador-2025",
+  "earningsSourceId": "oecd-salarios-impuestos",
+  "inflationSourceId": "eurostat-inflacion",
+  "commonTaxesSourceId": "impuestos-habituales"
 }

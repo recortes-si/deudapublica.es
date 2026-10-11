@@ -1,0 +1,67 @@
+{
+  "vat": [
+    {
+      "year": 2000,
+      "month": 1,
+      "rate": 16
+    },
+    {
+      "year": 2010,
+      "month": 7,
+      "rate": 18
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "rate": 21
+    }
+  ],
+  "vatSource": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2012/IART12_eu_es.pdf",
+  "meiSource": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724#dtcuadragesimatercera",
+  "mei": [
+    {
+      "year": 2023,
+      "total": 0.6,
+      "employer": 0.5,
+      "employee": 0.1
+    },
+    {
+      "year": 2024,
+      "total": 0.7,
+      "employer": 0.58,
+      "employee": 0.12
+    },
+    {
+      "year": 2025,
+      "total": 0.8,
+      "employer": 0.67,
+      "employee": 0.13
+    },
+    {
+      "year": 2026,
+      "total": 0.9,
+      "employer": 0.75,
+      "employee": 0.15
+    },
+    {
+      "year": 2027,
+      "total": 1,
+      "employer": 0.83,
+      "employee": 0.17
+    },
+    {
+      "year": 2028,
+      "total": 1.1,
+      "employer": 0.92,
+      "employee": 0.18
+    },
+    {
+      "year": 2029,
+      "total": 1.2,
+      "employer": 1,
+      "employee": 0.2
+    }
+  ],
+  "exampleAnnualBase": 30000,
+  "meiEndYear": 2050
+}

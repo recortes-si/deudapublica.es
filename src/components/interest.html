@@ -1,0 +1,28 @@
+<section class="interest-section" id="intereses" aria-labelledby="interest-title">
+  <div class="interest-heading"><span class="section-index">El precio de endeudarse</span><h2 id="interest-title">Intereses que pagamos.<br>Impuestos que podríamos ahorrarnos.</h2><p>Sin deuda no habría intereses de esa deuda. Manteniendo el resto de las cuentas constantes, ese ahorro podría destinarse a reducir impuestos.</p></div>
+  <div class="interest-grid">
+    <article class="interest-bill">
+      <span class="card-kicker">Intereses · todas las Administraciones · {{INTEREST_YEAR}}</span>
+      <strong class="interest-amount">{{INTEREST_VALUE}}</strong><span class="interest-unit">millones de euros al año</span>
+      <p>Solo intereses. Sin devolver el principal de la deuda.</p>
+      <div class="interest-daily"><strong>{{INTEREST_DAY}} M€</strong><span>cada día, en promedio</span></div>
+      <a href="{{INTEREST_SOURCE}}" target="_blank" rel="noreferrer">Eurostat · gasto por intereses D.41 ↗</a>
+    </article>
+    <article class="tax-example">
+      <span class="card-kicker">Escenario sin deuda · mismo año {{INTEREST_YEAR}}</span>
+      <h3>¿Cuántos impuestos podríamos suprimir?</h3>
+      <p>El ahorro cubriría, por ejemplo, <strong>{{TAX_ONLY_COUNT}} impuestos completos</strong> por {{TAX_ONLY_TOTAL}} M€ al año. Elige tarjetas para combinar supresiones y rebajas.</p>
+
+      <div class="tax-summary" aria-live="polite" aria-atomic="true">
+        <div class="tax-summary-top"><div><strong id="tax-count">{{TAX_EXAMPLE_COUNT}}</strong><span>medidas con ahorro</span></div><div><strong id="tax-total">{{TAX_EXAMPLE_TOTAL}} M€</strong><span>coste anual estimado</span></div></div>
+        <div class="tax-meter" id="tax-meter" role="img" aria-label="{{TAX_EXAMPLE_SHARE}}% del ahorro en intereses utilizado"><span id="tax-meter-fill" style="width:{{TAX_EXAMPLE_SHARE_RAW}}%"></span></div>
+        <p id="tax-status">Se cubrirían las medidas y quedarían {{TAX_EXAMPLE_REMAINING}} M€ de ahorro anual.</p>
+      </div>
+      <fieldset class="tax-choices"><legend>Elige las medidas · coste anual estimado</legend><div class="tax-choice-grid">{{TAX_CHOICES}}</div></fieldset>
+      {{TAX_ADJUSTMENTS}}
+      <div class="tax-actions"><button class="tax-reset" type="button" id="tax-only">Ejemplo: {{TAX_ONLY_COUNT}} impuestos completos</button><button class="tax-reset" type="button" id="tax-reset">Volver a las {{TAX_EXAMPLE_COUNT}} medidas iniciales</button></div>
+    </article>
+  </div>
+  <p class="interest-method">Comparación de magnitudes de {{INTEREST_YEAR}}: intereses devengados (Eurostat), recaudación tributaria (AEAT y Hacienda) e ingresos de gestión ordinaria de la Seguridad Social. Se asume deuda e intereses cero y el resto de ingresos y gastos constantes. No calcula el coste de amortizar la deuda ni los efectos económicos de eliminar impuestos. Los impuestos AEAT excluyen la recaudación foral; herencias y donaciones sí la incluyen. Las cotizaciones excluyen RETA, que se ofrece por separado. La rebaja del IRPF estima una reducción proporcional de recaudación, sin simular tramos ni rebajas en puntos de los tipos. La rebaja del IVA escala proporcionalmente todos sus tipos y su recaudación; no es una previsión de una reforma.</p>
+  <details class="data-details"><summary>Ver importes, fuentes y cálculo del ejemplo</summary>{{TAX_TABLE}}<p class="interest-formula">Medidas iniciales: {{TAX_EXAMPLE_DESCRIPTION}}.</p><p class="interest-formula">Ahorro restante = intereses anuales − coste estimado de las medidas seleccionadas. Ejemplo inicial: {{INTEREST_VALUE}} − {{TAX_EXAMPLE_TOTAL}} = {{TAX_EXAMPLE_REMAINING}} M€ (cifras redondeadas).</p></details>
+</section>

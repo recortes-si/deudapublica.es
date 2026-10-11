@@ -1,9 +1,13 @@
 const context = createContext(window.APP_DATA);
 initIndicators(context);
+initInterest(context);
+const fiscalTimeline = createFiscalTimeline(context.data);
+const workerView = initWorker(context, fiscalTimeline);
+const financesView = initFinances(context, fiscalTimeline);
 const debtView = initDebtChart(context);
 initSpending(context);
 const budgetView = initBudget(context);
-const resizeCharts = () => { debtView.resize(); budgetView.resize(); };
+const resizeCharts = () => { debtView.resize(); budgetView.resize(); financesView.resize(); workerView.resize(); };
 new ResizeObserver(resizeCharts).observe(document.querySelector('main'));
 window.addEventListener('resize', resizeCharts);
-context.reducedMotion.addEventListener('change', () => { debtView.refresh(); budgetView.refresh(); });
+context.reducedMotion.addEventListener('change', () => { debtView.refresh(); budgetView.refresh(); financesView.refresh(); workerView.refresh(); });

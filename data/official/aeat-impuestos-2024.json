@@ -1,0 +1,59 @@
+{
+  "year": 2024,
+  "unit": "millones de euros",
+  "basis": "recaudación neta en caja",
+  "scope": "Recaudación gestionada por la AEAT por cuenta del Estado, comunidades autónomas y entidades locales del territorio de régimen fiscal común. No incluye la recaudación propia de las haciendas forales.",
+  "sourceId": "aeat-impuestos-2024",
+  "retrievedAt": "2026-10-11",
+  "items": [
+    {
+      "id": "hydrocarbons",
+      "name": "Hidrocarburos",
+      "value": 12304.823,
+      "sourceLocator": "Cuadro 5.1, AF42",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_5.1.xlsx"
+    },
+    {
+      "id": "tobacco",
+      "name": "Labores del tabaco",
+      "value": 6927.059,
+      "sourceLocator": "Cuadro 5.1, AF43",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_5.1.xlsx"
+    },
+    {
+      "id": "electricity",
+      "name": "Electricidad",
+      "value": 1111.788,
+      "sourceLocator": "Cuadro 5.1, AF46",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_5.1.xlsx"
+    },
+    {
+      "id": "plastic",
+      "name": "Envases de plástico no reutilizables",
+      "value": 571.46,
+      "sourceLocator": "Cuadro 5.1, AF45",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_5.1.xlsx"
+    },
+    {
+      "id": "insurance",
+      "name": "Primas de seguros",
+      "value": 2567.218,
+      "sourceLocator": "Cuadro 6.4, AF15",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_6.4.xlsx"
+    },
+    {
+      "id": "irpf",
+      "name": "IRPF",
+      "value": 129408,
+      "sourceLocator": "Informe anual 2024, apartado 2, primer párrafo",
+      "sourceUrl": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2024/2-impuesto-sobre-renta-personas-fisicas.html"
+    },
+    {
+      "id": "iva",
+      "name": "IVA",
+      "value": 90541,
+      "sourceLocator": "Informe anual 2024, apartado 4, primer párrafo",
+      "sourceUrl": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2024/4-impuesto-sobre-valor-anadido.html"
+    }
+  ]
+}

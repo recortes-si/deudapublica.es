@@ -247,3 +247,231 @@ td { text-align:right; white-space:nowrap; }
   *, *:before, *:after { animation:none !important; transition:none !important; }
 }
 @media (max-width:760px) { .chart-foot span { display:block; } }
+
+/* Interest cost and the tax revenue that could be replaced in a zero-debt scenario. */
+.interest-section { padding-top:65px; }
+.interest-heading { max-width:850px; margin-bottom:28px; }
+.interest-heading h2 { font-size:clamp(30px, 3.8vw, 49px); line-height:1.05; }
+.interest-heading > p { max-width:650px; color:var(--muted); font-size:15px; margin:18px 0 0; }
+.interest-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:24px; align-items:start; }
+.interest-bill { background:var(--ink); color:#fff; padding:32px; border-radius:4px; position:relative; overflow:hidden; }
+.interest-bill:after { content:"€"; position:absolute; right:-15px; bottom:70px; color:#ffffff06; font-size:220px; font-weight:900; pointer-events:none; }
+.interest-bill .card-kicker { color:#b6c5d6; line-height:1.7; }
+.interest-amount { display:block; margin-top:40px; font-size:clamp(58px, 6.6vw, 92px); line-height:1; color:var(--acid); letter-spacing:-.075em; font-variant-numeric:tabular-nums; }
+.interest-unit { display:block; margin-top:12px; font-size:18px; font-weight:650; }
+.interest-bill > p { color:#b6c5d6; font-size:13px; margin-top:18px; }
+.interest-daily { margin-top:32px; padding:22px 0; border-top:1px solid #52667d; border-bottom:1px solid #52667d; }
+.interest-daily strong { display:block; font-size:36px; letter-spacing:-.06em; }
+.interest-daily span { color:#b6c5d6; font-size:12px; }
+.interest-bill > a { display:inline-flex; min-height:44px; align-items:center; color:#b6c5d6; font-size:12px; margin-top:14px; text-decoration:underline; }
+.tax-example { padding:28px; background:var(--white); border:1px solid var(--line); border-radius:4px; }
+.tax-example h3 { margin:12px 0; font-size:27px; line-height:1.15; letter-spacing:-.05em; }
+.tax-example > p { color:var(--muted); font-size:13px; }
+.tax-choices { border:0; margin:24px 0 0; padding:0; min-width:0; }
+.tax-choices legend { color:var(--muted); font-size:11px; margin-bottom:10px; }
+.tax-choice { display:grid; grid-template-columns:20px 1fr auto; align-items:center; gap:10px; min-height:49px; border-bottom:1px solid var(--line); font-size:12px; cursor:pointer; }
+.tax-choice input { width:18px; height:18px; accent-color:var(--ink); margin:0; }
+.tax-choice b { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.tax-summary { background:#edf4df; padding:20px; margin-top:24px; border-radius:4px; }
+.tax-summary-top { display:flex; justify-content:space-between; align-items:end; gap:18px; }
+.tax-summary-top div:first-child strong { font-size:52px; line-height:1; }
+.tax-summary-top strong { display:block; font-size:23px; letter-spacing:-.055em; font-variant-numeric:tabular-nums; }
+.tax-summary-top span { display:block; margin-top:7px; font-size:10px; color:var(--muted); }
+.tax-summary-top div:last-child { text-align:right; }
+.tax-meter { height:16px; background:#d2dec7; border-radius:3px; overflow:hidden; margin-top:18px; }
+.tax-meter span { display:block; height:100%; background:#436828; }
+.tax-summary p { font-size:12px; margin:12px 0 0; font-weight:650; }
+.tax-summary.over-budget { background:#fff0e8; }
+.tax-summary.over-budget .tax-meter span { background:#c64a36; }
+.tax-reset { padding:8px 0; border:0; background:transparent; font-size:12px; font-weight:700; cursor:pointer; color:#315f8d; margin-top:10px; }
+.interest-method { color:var(--muted); font-size:12px; line-height:1.65; margin:18px 0; }
+.interest-formula { padding:0 18px 18px; font-size:12px; color:var(--muted); }
+.stat-value i { font-size:.7em; }
+@media (max-width:760px) {
+  .interest-section { padding-top:50px; }
+  .interest-grid { grid-template-columns:1fr; gap:16px; }
+  .interest-bill { padding:25px; }
+  .interest-amount { font-size:clamp(62px, 17vw, 88px); margin-top:25px; }
+  .interest-daily { margin-top:22px; }
+  .tax-example { padding:22px 18px; }
+  .tax-example h3 { font-size:25px; }
+  .tax-summary { padding:16px; }
+  .tax-summary-top strong { font-size:20px; }
+  .tax-choice { grid-template-columns:18px 1fr auto; gap:8px; font-size:11px; padding:6px 0; }
+}
+
+/* Compact fiscal cards, with one adjustable measure visible at a time. */
+.tax-choice-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+.tax-choice { position:relative; display:grid; grid-template-columns:20px minmax(0,1fr); grid-template-rows:1fr auto auto; gap:5px 8px; align-items:start; min-height:114px; padding:12px; border:1px solid var(--line); border-radius:6px; background:#f8faf7; font-size:13px; line-height:1.35; }
+.tax-choice input { width:20px; height:20px; accent-color:#315f32; margin:0; }
+.tax-choice > span { font-weight:650; overflow-wrap:anywhere; }
+.tax-choice small,.tax-choice b { grid-column:1/-1; }
+.tax-choice small { color:var(--muted); font-size:12px; }
+.tax-choice b { font-size:16px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.tax-choice:has(input:checked) { background:#edf4df; border-color:#7c975e; }
+.tax-choice:has(input:checked) small { color:#315f32; }
+.tax-choice:focus-within { outline:2px solid #315f8d; outline-offset:2px; }
+.tax-adjustments { margin-top:16px; padding:16px; border:1px solid var(--line); border-radius:6px; background:#f6f8fa; }
+.tax-adjustment-heading { margin:0 0 10px; font-size:14px; font-weight:700; }
+.tax-adjustment-heading span { display:block; margin-top:4px; color:var(--muted); font-size:12px; font-weight:400; }
+.tax-editor-tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+.tax-editor-tabs button { flex:1; min-height:44px; padding:8px; border:1px solid var(--line); border-radius:4px; background:#fff; color:var(--ink); font:inherit; font-size:13px; cursor:pointer; }
+.tax-editor-tabs button[aria-pressed="true"] { background:var(--ink); color:#fff; border-color:var(--ink); }
+.tax-parameter-top { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.tax-parameter label { font-size:13px; color:var(--muted); }
+.tax-parameter output { font-size:22px; font-weight:750; color:#315f32; white-space:nowrap; }
+.tax-parameter input { display:block; width:100%; min-height:44px; accent-color:#436828; cursor:pointer; margin:0; }
+.tax-note { margin:4px 0 0; color:var(--muted); font-size:12px; line-height:1.5; }
+.tax-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.tax-reset { min-height:44px; padding:8px 12px; background:#edf1f4; border-radius:4px; text-align:left; }
+.tax-example { min-width:0; }
+@media (min-width:761px) and (max-width:1080px) { .interest-grid { grid-template-columns:1fr; } .interest-bill { display:grid; grid-template-columns:1fr 1fr; column-gap:30px; } .interest-bill > .card-kicker, .interest-bill > a { grid-column:1/-1; } .interest-amount { margin-top:24px; } .interest-unit { align-self:end; } .interest-daily { margin-top:16px; } }
+@media (max-width:480px) {
+  .tax-choice-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .tax-choice { min-height:108px; padding:10px; font-size:13px; }
+  .tax-adjustments { padding:12px; }
+  .tax-actions { flex-direction:column; }
+}
+@media (pointer:coarse) { select { font-size:16px !important; } }
+@media (min-width:1081px) { .interest-bill { position:sticky; top:24px; } }
+
+/* Future budgets, comparable public finances and the worker's euro. */
+.future-section { margin-top:60px; padding:30px; background:var(--ink); color:#fff; border-radius:6px; }
+.future-section .section-index { color:var(--acid); }
+.future-section h2 { font-size:clamp(32px,4vw,52px); line-height:1.05; }
+.future-section > div > p { max-width:700px; margin-top:16px; color:#c4d2df; font-size:15px; }
+.future-steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; list-style:none; padding:0; margin:28px 0; }
+.future-steps li { border-top:1px solid #52667d; padding-top:16px; }
+.future-steps b { color:var(--acid); font-size:25px; }
+.future-steps strong,.future-steps span { display:block; margin-top:8px; }
+.future-steps span { color:#c4d2df; font-size:13px; }
+.future-note { color:#c4d2df; font-size:12px; line-height:1.6; }
+.finance-kpis { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:24px 0; }
+.finance-kpis > div { padding:20px; background:#fff; border:1px solid var(--line); border-radius:4px; min-width:0; }
+.finance-kpis span,.finance-kpis small { display:block; color:var(--muted); font-size:12px; }
+.finance-kpis strong { display:block; font-size:clamp(22px,2.7vw,35px); letter-spacing:-.04em; margin:10px 0; overflow-wrap:anywhere; }
+.finance-chart-card { padding:24px; background:#fff; border:1px solid var(--line); border-radius:4px; }
+.finance-chart-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+.finance-chart-top p { color:var(--muted); font-size:12px; margin-top:6px; }
+.finances-controls { display:flex; align-items:center; gap:8px; font-size:13px; }
+.finances-controls select { min-height:44px; padding:8px; font:inherit; border:1px solid var(--line); background:#fff; border-radius:4px; }
+#finance-chart { height:320px; width:100%; margin-top:16px; }
+.finance-legend { display:flex; flex-wrap:wrap; gap:16px; font-size:12px; }
+.finance-legend span { display:flex; align-items:center; gap:7px; }
+.finance-legend i { width:18px; height:4px; }
+.tax-dot { background:#a84919; }.revenue-dot { background:#3274a2; }.spend-dot { background:#10243e; }
+.worker-section { padding-top:65px; }
+@media (max-width:760px) {
+ .future-section { margin-top:45px; padding:22px; }
+ .future-steps { grid-template-columns:1fr; gap:16px; }
+ .future-steps li { display:grid; grid-template-columns:40px 1fr; gap:4px 12px; }
+ .future-steps b { grid-row:1/3; }.future-steps strong,.future-steps span { margin:0; }
+ .finance-kpis { grid-template-columns:1fr; gap:10px; }
+ .finance-kpis > div { padding:16px; }.finance-kpis strong { font-size:30px; }
+ .finance-chart-card { padding:18px 12px; }#finance-chart { height:270px; }
+ .worker-section { padding-top:55px; }
+}
+@media (max-width:760px) {
+ .finance-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .finance-kpis > div { padding:14px; }
+ .finance-kpis > div:last-child { grid-column:1/-1; }
+ .finance-kpis strong { font-size:clamp(23px,6.2vw,30px); }
+}
+
+/* A shared year links public revenue with the worker's retained share. */
+.income-panel { margin-top:22px; padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; }
+.income-heading { display:flex; justify-content:space-between; gap:24px; align-items:start; }
+.income-heading h3 { font-size:23px; line-height:1.2; }
+.income-heading p { max-width:580px; font-size:13px; color:var(--muted); margin-top:8px; }
+.income-heading > div:last-child { text-align:right; flex-shrink:0; }
+.income-heading > div:last-child strong { display:block; font-size:24px; }
+.income-heading > div:last-child span { font-size:12px; color:var(--muted); }
+.fiscal-year-control { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px; margin:22px 0; font-size:13px; font-weight:650; }
+.fiscal-year-control output { color:#315f32; font-size:23px; font-variant-numeric:tabular-nums; }
+.fiscal-year-control input { grid-column:1/-1; width:100%; min-height:44px; accent-color:#436828; margin:0; cursor:pointer; }
+.income-parts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.income-part { min-width:0; }
+.income-part > div:first-child { display:flex; flex-direction:column; gap:4px; font-size:13px; }
+.income-part > div:first-child span { color:var(--muted); font-variant-numeric:tabular-nums; }
+.income-track { height:7px; background:#e8edf0; border-radius:3px; overflow:hidden; margin-top:8px; }
+.income-track span { display:block; height:100%; background:#3274a2; }
+.income-part p,.income-method { color:var(--muted); font-size:12px; line-height:1.6; margin-top:8px; }
+.finance-worker-link { display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; margin-top:24px; padding:18px; background:#edf4df; border-radius:4px; }
+.finance-worker-link > span { flex:1 1 250px; font-size:14px; }
+.finance-worker-link strong { font-size:25px; color:#436828; }
+.finance-worker-link a { font-size:13px; text-decoration:underline; min-height:44px; display:flex; align-items:center; }
+.worker-history-kpis { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:24px 0; }
+.worker-history-kpis > div { border:1px solid var(--line); padding:20px; border-radius:4px; background:#fff; }
+.worker-history-kpis span,.worker-history-kpis small { display:block; font-size:12px; color:var(--muted); }
+.worker-history-kpis strong { display:block; font-size:clamp(26px,3vw,40px); letter-spacing:-.04em; margin:10px 0; }
+.worker-history-kpis > div:last-child { background:#fff0e8; }
+.worker-history-kpis > div:last-child strong { color:#a84919; }
+.worker-chart-card { padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; }
+#worker-chart { width:100%; height:320px; margin-top:12px; }
+.worker-net-dot { background:#436828; }.worker-base-dot { background:#3274a2; }
+.worker-year-result { padding:16px; background:#edf4df; border-radius:4px; }
+.worker-year-result strong { color:#436828; font-size:22px; }
+.worker-year-result p { color:var(--muted); font-size:13px; margin-top:6px; }
+@media(max-width:760px) {
+ .income-panel { padding:20px 16px; }.income-heading { flex-direction:column; gap:12px; }.income-heading > div:last-child { text-align:left; }
+ .income-parts { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 12px; }
+ .worker-history-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }.worker-history-kpis > div { padding:14px; }.worker-history-kpis > div:last-child { grid-column:1/-1; }
+ .worker-chart-card { padding:20px 12px; }#worker-chart { height:280px; }
+}
+
+/* Fiscal burden and consumption scenarios remain readable on narrow screens. */
+.fiscal-callout { margin:22px 0; padding:20px; border-left:4px solid #a84919; background:#fff0e8; font-size:14px; line-height:1.7; }
+.fiscal-callout strong { display:block; font-size:18px; }.fiscal-callout p { margin-top:6px; }
+.balance-panel,.youth-card { margin-top:24px; padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; }
+#balance-chart { width:100%; height:310px; }
+.balance-result { font-size:clamp(20px,3vw,28px); font-weight:750; margin:18px 0 6px; font-variant-numeric:tabular-nums; }
+.balance-result[data-sign="deficit"] { color:#bb3434; }.balance-result[data-sign="surplus"] { color:#436828; }
+.surplus-dot { background:#436828; }.deficit-dot { background:#bb3434; }
+.consumption-controls { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; padding:20px; background:#edf2f5; margin:22px 0; border-radius:6px; }
+.consumption-controls label { display:grid; grid-template-columns:1fr auto; align-content:start; align-items:center; gap:8px; font-size:13px; font-weight:650; }
+.consumption-controls select,.consumption-controls input { grid-column:1/-1; width:100%; min-width:0; min-height:44px; font:inherit; accent-color:#436828; }
+.consumption-controls select { padding:8px; background:#fff; border:1px solid var(--line); border-radius:4px; }
+.consumption-controls p { grid-column:1/-1; font-size:12px; color:var(--muted); line-height:1.6; }
+.worker-breakdown { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-top:18px; }
+.worker-breakdown > div { padding:12px; border:1px solid var(--line); border-radius:4px; }
+.worker-breakdown span { font-size:12px; display:block; color:var(--muted); }.worker-breakdown strong { display:block; font-size:20px; margin-top:6px; }
+.mei-timeline { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:14px; margin:30px 0; }
+.mei-year { text-align:center; min-width:0; }.mei-year strong { color:#a84919; font-size:22px; }.mei-year b,.mei-year small { display:block; margin-top:8px; }.mei-year small { color:var(--muted); font-size:10px; }
+.mei-bar { height:145px; display:flex; align-items:end; background:#f7f1ed; border-bottom:2px solid var(--ink); margin-top:12px; }.mei-bar span { width:100%; background:#a84919; }
+.future-rate .mei-bar span { background:repeating-linear-gradient(135deg,#d98755,#d98755 6px,#f3c9af 6px,#f3c9af 10px); }
+.youth-example { padding:18px; background:#fff0e8; border-radius:4px; line-height:1.7; }.youth-example p { font-size:14px; margin-top:6px; }
+@media(max-width:760px) {
+ .balance-panel,.youth-card { padding:20px 12px; }#balance-chart { height:280px; }
+ .consumption-controls { grid-template-columns:1fr; padding:16px; }.worker-breakdown { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .mei-timeline { gap:6px; }.mei-year strong { font-size:clamp(12px,3.3vw,20px); }.mei-year b { font-size:12px; }.mei-year small { font-size:9px; }.mei-bar { height:100px; }
+}
+
+/* Historical taxes and wages, each with its own explicit denominator. */
+.common-tax-choices { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:26px 0 18px; }
+.common-tax-choice { text-align:left; min-width:0; padding:20px 16px; border:1px solid var(--line); border-radius:5px; background:#fff; color:var(--ink); font:inherit; cursor:pointer; }
+.common-tax-choice.active { background:#fff0e8; border-color:#a84919; box-shadow:inset 0 -3px #a84919; }
+.common-tax-choice > span { display:block; font-size:14px; font-weight:700; }.common-tax-choice strong { display:block; font-size:clamp(19px,2.2vw,29px); margin:12px 0; letter-spacing:-.04em; }.common-tax-choice b { color:var(--muted); font-weight:400; }
+.common-tax-choice small { display:block; font-size:11px; color:var(--muted); line-height:1.6; }
+.tax-history-period { font-size:13px; color:var(--muted); }.common-tax-result { padding:14px 16px; background:#fff0e8; border-radius:4px; color:#a84919; font-weight:700; }
+.tax-history-sources { display:flex; flex-wrap:wrap; gap:0 18px; margin-top:10px; }.tax-history-sources a { display:flex; align-items:center; font-size:12px; min-height:44px; text-decoration:underline; }
+.housing-history { display:grid; grid-template-columns:1fr 1fr; gap:24px; padding:26px; background:#fff0e8; border:1px solid #ecd7c9; border-radius:6px; margin:32px 0 52px; }
+.housing-history h3,.earnings-heading h3 { font-size:clamp(26px,3.3vw,38px); line-height:1.12; letter-spacing:-.04em; margin-top:12px; }
+.housing-history p { font-size:13px; line-height:1.7; margin-top:12px; }.housing-comparison { display:grid; grid-template-columns:1fr 1fr; gap:14px; align-content:center; }
+.housing-comparison div { padding:16px; border:1px solid #ecd7c9; background:#fff; border-radius:4px; }.housing-comparison span { font-size:12px; color:var(--muted); }.housing-comparison strong { display:block; font-size:clamp(24px,3vw,35px); margin-top:8px; letter-spacing:-.04em; }.housing-comparison p { grid-column:1/-1; }.housing-comparison b { color:#a84919; }
+.housing-deduction,.housing-history > .income-method { grid-column:1/-1; }.housing-deduction { padding-top:20px; border-top:1px solid #ecd7c9; }.housing-deduction a { display:inline-flex; align-items:center; min-height:44px; font-size:12px; text-decoration:underline; }
+.earnings-heading p { font-size:14px; color:var(--muted); line-height:1.7; margin-top:14px; max-width:650px; }
+.earnings-chart-card,.state-share-card { padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; margin-top:24px; }
+#earnings-chart { height:320px; width:100%; margin:12px 0; }#state-share-chart { height:290px; width:100%; margin:14px 0; }
+.earnings-year-result,.state-share-result { font-size:14px; line-height:1.7; margin-top:18px; padding:16px; background:#edf4df; border-radius:4px; }
+.gross-dot { background:#3274a2; }.prices-dot { background:#a84919; }.irpf-dot { background:#805d99; }.employer-dot { background:#b86c35; }.employee-dot { background:#e6ac72; }.other-dot { background:#68788b; }
+.state-share-kpis { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0; }.state-share-kpis div { padding:18px; background:#fff0e8; border-radius:4px; }.state-share-kpis div:last-child { background:#edf4df; }.state-share-kpis span,.state-share-kpis small { display:block; font-size:12px; color:var(--muted); }.state-share-kpis strong { display:block; font-size:clamp(28px,3.5vw,42px); letter-spacing:-.04em; margin:10px 0; }
+.consumption-details { margin-top:22px; border-top:1px solid var(--line); }.consumption-details summary { padding:16px 0; cursor:pointer; font-size:13px; font-weight:700; min-height:44px; }
+.state-share-card .worker-breakdown { grid-template-columns:repeat(4,minmax(0,1fr)); }
+@media(max-width:760px) {
+ .common-tax-choices { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }.common-tax-choice { padding:14px 12px; }.common-tax-choice strong { font-size:clamp(18px,5.5vw,27px); }.common-tax-choice > span { font-size:13px; }
+ .housing-history { grid-template-columns:1fr; padding:20px 16px; gap:18px; }.housing-comparison strong { font-size:clamp(23px,7vw,32px); }.housing-comparison div { padding:12px; }
+ .earnings-chart-card,.state-share-card { padding:20px 12px; }#earnings-chart { height:280px; }#state-share-chart { height:260px; }
+ .state-share-kpis { gap:10px; }.state-share-kpis div { padding:14px; }.state-share-card .worker-breakdown { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+.earnings-chart-card .finances-controls { max-width:100%; flex-wrap:wrap; }
+#earnings-mode { min-width:0; max-width:100%; }

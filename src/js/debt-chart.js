@@ -1,7 +1,7 @@
 function initDebtChart({ data, format, reducedMotion }) {
   const latest = data.latest;
   const debtChart = echarts.init(document.querySelector('#debt-chart'), null, { renderer: 'canvas' });
-  let debtMode = 'pib';
+  let debtMode = 'euros';
   let debtPeriod = 'all';
   function renderDebt() {
     const isRatio = debtMode === 'pib';

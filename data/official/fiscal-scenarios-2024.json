@@ -1,0 +1,131 @@
+{
+  "year": 2024,
+  "unit": "millones de euros",
+  "basis": "Bases distintas documentadas por partida; comparación anual de magnitudes.",
+  "scope": "Cada partida identifica su ámbito y base contable.",
+  "sourceId": "fiscal-scenarios-2024",
+  "retrievedAt": "2026-10-11",
+  "items": [
+    {
+      "id": "inheritance",
+      "name": "Herencias y donaciones",
+      "value": 3552.8,
+      "sourceUrl": "https://www.hacienda.gob.es/ig/memorias/memoria-tributaria-2024/mat-2024.pdf",
+      "sourceLocator": "Memoria tributaria 2024: IV.11 (3.267,7) + IV.14 (179,8) + IV.16 (75,3)",
+      "basis": "recaudación tributaria",
+      "scope": "Estado, CCAA de régimen común, País Vasco y Navarra.",
+      "note": "Incluye Sucesiones y Donaciones, no solo herencias. Suma territorio común y haciendas forales.",
+      "shortName": "Herencias y donaciones"
+    },
+    {
+      "id": "autonomous",
+      "name": "Cuota de autónomos · RETA",
+      "value": 12362.79,
+      "sourceUrl": "https://www.seg-social.es/wps/wcm/connect/wss/93f96bf2-0f29-4298-bbc1-800620165015/02_TOMO%2BII_Memoria_CGSS_2024.pdf?MOD=AJPERES",
+      "sourceLocator": "Memoria CGSS 2024, anexo I.1.B, página 272: régimen especial de trabajadores autónomos",
+      "basis": "ingresos de gestión ordinaria",
+      "scope": "Entidades gestoras, servicios comunes y mutuas de la Seguridad Social.",
+      "note": "Suprime la partida de aportaciones RETA. Las contingencias profesionales figuran en otra partida de las cuentas; no se calcula una cuota mensual individual. Es una cotización obligatoria: también forma parte de la carga fiscal.",
+      "shortName": "Autónomos · RETA"
+    },
+    {
+      "id": "iva",
+      "name": "Bajada del IVA",
+      "value": 90541,
+      "sourceLocator": "Informe anual 2024, apartado 4, primer párrafo",
+      "sourceUrl": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2024/4-impuesto-sobre-valor-anadido.html",
+      "basis": "recaudación neta en caja",
+      "scope": "Recaudación gestionada por la AEAT por cuenta del Estado, comunidades autónomas y entidades locales del territorio de régimen fiscal común. No incluye la recaudación propia de las haciendas forales.",
+      "note": "Estimación proporcional: todos los tipos bajan en la misma proporción. El general pasa de 21% al valor elegido; los tipos reducidos también bajan. No estima una rebaja exclusiva del tipo general.",
+      "control": {
+        "type": "vat",
+        "min": 0,
+        "max": 21,
+        "default": 18,
+        "from": 21
+      },
+      "shortName": "IVA"
+    },
+    {
+      "id": "contributions",
+      "name": "Bajada de cotizaciones sociales",
+      "value": 162870.99,
+      "sourceUrl": "https://www.seg-social.es/wps/wcm/connect/wss/93f96bf2-0f29-4298-bbc1-800620165015/02_TOMO%2BII_Memoria_CGSS_2024.pdf?MOD=AJPERES",
+      "sourceLocator": "Memoria CGSS 2024, anexo I.1.B, página 272: total 162.870,99 − RETA 12.362,79",
+      "basis": "ingresos de gestión ordinaria",
+      "scope": "Entidades gestoras, servicios comunes y mutuas de la Seguridad Social, excluida la partida RETA.",
+      "note": "Reducción proporcional de los ingresos por cotizaciones, excluyendo RETA para evitar duplicarlo con autónomos. Mantiene prestaciones constantes. Las cotizaciones obligatorias también son impuestos en la clasificación fiscal de la OCDE.",
+      "control": {
+        "type": "reduction",
+        "min": 0,
+        "max": 100,
+        "default": 5
+      },
+      "excludeIds": [
+        "autonomous"
+      ],
+      "shortName": "Cotizaciones"
+    },
+    {
+      "id": "hydrocarbons",
+      "name": "Hidrocarburos",
+      "value": 12304.823,
+      "sourceLocator": "Cuadro 5.1, AF42",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_5.1.xlsx",
+      "basis": "recaudación neta en caja",
+      "scope": "Recaudación gestionada por la AEAT por cuenta del Estado, comunidades autónomas y entidades locales del territorio de régimen fiscal común. No incluye la recaudación propia de las haciendas forales.",
+      "note": "Supresión del impuesto en el ámbito de esta fuente; coste igual a la recaudación anual.",
+      "shortName": "Hidrocarburos"
+    },
+    {
+      "id": "electricity",
+      "name": "Electricidad",
+      "value": 1111.788,
+      "sourceLocator": "Cuadro 5.1, AF46",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_5.1.xlsx",
+      "basis": "recaudación neta en caja",
+      "scope": "Recaudación gestionada por la AEAT por cuenta del Estado, comunidades autónomas y entidades locales del territorio de régimen fiscal común. No incluye la recaudación propia de las haciendas forales.",
+      "note": "Supresión del impuesto en el ámbito de esta fuente; coste igual a la recaudación anual.",
+      "shortName": "Electricidad"
+    },
+    {
+      "id": "plastic",
+      "name": "Envases de plástico no reutilizables",
+      "value": 571.46,
+      "sourceLocator": "Cuadro 5.1, AF45",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_5.1.xlsx",
+      "basis": "recaudación neta en caja",
+      "scope": "Recaudación gestionada por la AEAT por cuenta del Estado, comunidades autónomas y entidades locales del territorio de régimen fiscal común. No incluye la recaudación propia de las haciendas forales.",
+      "note": "Supresión del impuesto en el ámbito de esta fuente; coste igual a la recaudación anual.",
+      "shortName": "Plástico"
+    },
+    {
+      "id": "insurance",
+      "name": "Primas de seguros",
+      "value": 2567.218,
+      "sourceLocator": "Cuadro 6.4, AF15",
+      "sourceUrl": "https://www3.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2024/Cuadro_6.4.xlsx",
+      "basis": "recaudación neta en caja",
+      "scope": "Recaudación gestionada por la AEAT por cuenta del Estado, comunidades autónomas y entidades locales del territorio de régimen fiscal común. No incluye la recaudación propia de las haciendas forales.",
+      "note": "Supresión del impuesto en el ámbito de esta fuente; coste igual a la recaudación anual.",
+      "shortName": "Seguros"
+    },
+    {
+      "id": "irpf",
+      "name": "IRPF",
+      "value": 129408,
+      "sourceLocator": "Informe anual 2024, apartado 2, primer párrafo",
+      "sourceUrl": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2024/2-impuesto-sobre-renta-personas-fisicas.html",
+      "basis": "recaudación neta en caja",
+      "scope": "Recaudación gestionada por la AEAT por cuenta del Estado, comunidades autónomas y entidades locales del territorio de régimen fiscal común. No incluye la recaudación propia de las haciendas forales.",
+      "note": "Estimación proporcional de la recaudación: una rebaja del 10% cuesta el 10% de los ingresos anuales. No equivale a bajar diez puntos los tipos ni simula tramos, deducciones o efectos económicos.",
+      "shortName": "IRPF",
+      "control": {
+        "type": "reduction",
+        "min": 0,
+        "max": 100,
+        "default": 10
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "sourceId": "oecd-trabajador-2025",
+  "year": 2025,
+  "country": "ES",
+  "profile": "Persona soltera sin hijos, con el 100% del salario medio",
+  "taxWedgePercent": 41.4,
+  "netTaxGrossPercent": 23.5,
+  "sourceLocator": "Taxing Wages 2026: Spain, páginas 2–4 del PDF",
+  "history": [
+    {
+      "year": 2000,
+      "taxWedgePercent": 38.6
+    },
+    {
+      "year": 2001,
+      "taxWedgePercent": 38.9
+    },
+    {
+      "year": 2002,
+      "taxWedgePercent": 39.1
+    },
+    {
+      "year": 2003,
+      "taxWedgePercent": 38.6
+    },
+    {
+      "year": 2004,
+      "taxWedgePercent": 38.8
+    },
+    {
+      "year": 2005,
+      "taxWedgePercent": 39.0
+    },
+    {
+      "year": 2006,
+      "taxWedgePercent": 39.1
+    },
+    {
+      "year": 2007,
+      "taxWedgePercent": 39.0
+    },
+    {
+      "year": 2008,
+      "taxWedgePercent": 38.0
+    },
+    {
+      "year": 2009,
+      "taxWedgePercent": 38.3
+    },
+    {
+      "year": 2010,
+      "taxWedgePercent": 39.7
+    },
+    {
+      "year": 2011,
+      "taxWedgePercent": 40.0
+    },
+    {
+      "year": 2012,
+      "taxWedgePercent": 40.6
+    },
+    {
+      "year": 2013,
+      "taxWedgePercent": 40.7
+    },
+    {
+      "year": 2014,
+      "taxWedgePercent": 40.7
+    },
+    {
+      "year": 2015,
+      "taxWedgePercent": 39.4
+    },
+    {
+      "year": 2016,
+      "taxWedgePercent": 39.4
+    },
+    {
+      "year": 2017,
+      "taxWedgePercent": 39.6
+    },
+    {
+      "year": 2018,
+      "taxWedgePercent": 39.7
+    },
+    {
+      "year": 2019,
+      "taxWedgePercent": 39.8
+    },
+    {
+      "year": 2020,
+      "taxWedgePercent": 39.3
+    },
+    {
+      "year": 2021,
+      "taxWedgePercent": 39.9
+    },
+    {
+      "year": 2022,
+      "taxWedgePercent": 40.0
+    },
+    {
+      "year": 2023,
+      "taxWedgePercent": 40.8
+    },
+    {
+      "year": 2024,
+      "taxWedgePercent": 41.1
+    },
+    {
+      "year": 2025,
+      "taxWedgePercent": 41.4
+    }
+  ]
+}
