@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {loadData} from '../lib/data.mjs';
 import {financesModel,workerModel} from '../lib/finances.mjs';
-import {loadArchivedWorker} from './archived-economy.mjs';
+import {loadArchivedWorker,loadArchivedEconomy} from './archived-economy.mjs';
 import {workerEuro} from '../../src/shared/worker.mjs';
 const root=resolve(import.meta.dirname,'../..');
 
@@ -48,7 +48,7 @@ test('fiscal revenue includes contributions without adding them to total revenue
 
 test('consumption scenarios reconcile taxes, purchases and savings across historical VAT changes',async()=>{
  const {workerScenario,validateFiscalContext}=await import('../../src/shared/worker.mjs');
- const {fiscalContext:p}=await loadData(root);
+ const {fiscalContext:p}=await loadArchivedEconomy();
  const w=await loadArchivedWorker();
  const first=workerScenario(w.history[0],p),last=workerScenario(w.history.at(-1),p);
  assert.ok(Math.abs(first.retained-61.4/1.16)<1e-10);

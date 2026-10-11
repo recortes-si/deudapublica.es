@@ -274,20 +274,9 @@ La sección «Deuda hoy. Impuestos futuros.» explica también gasto, otros ingr
 y refinanciación; no afirma una subida automática de impuestos ni convierte
 el stock de deuda en una obligación tributaria individual.
 
-### Calendario del MEI
-
-`data/official/fiscal-context.json` contiene el MEI con reparto entre empresa y
-trabajador y enlaces oficiales. Para ampliar su calendario, añade años consecutivos
-con total, empresa y trabajador; `src/shared/worker.mjs` valida estos datos en el build.
-La sección muestra MEI del 0,6% (2023) al 1,2% (2029), con años futuros diferenciados.
-La norma mantiene 1,2% hasta 2050. Afecta a todas las edades: no se presenta como
-serie fiscal específica de jóvenes ni como consecuencia directa de la deuda.
-El ejemplo conserva una base anual de 30.000 € y distingue coste empresarial
-de descuento en nómina.
-
 ### Datos archivados
 
-Las vistas de impuestos habituales, salarios e inflación y reparto del coste
+Las vistas del MEI, impuestos habituales, salarios e inflación y reparto del coste
 laboral se han retirado, junto con sus controles, estilos y enlaces. Sus datasets
 originales permanecen en `data/` para conservar su trazabilidad, con
 `archived: true` en `data/sources.json`. Las fuentes archivadas no se publican
@@ -355,3 +344,9 @@ La gráfica histórica de saldo añade la deuda total al cierre del año (Banco 
 España), con eje derecho propio y valores exactos en el tooltip, el resumen del
 año elegido y la tabla. Si una serie se amplía sin una observación de deuda,
 se muestra «sin dato» y un hueco en la línea; no se inventa ni se arrastra otro año.
+
+### Desglose navegable del presupuesto
+
+`data/official/pge-2024-politicas.json` admite tantos niveles de `children` como sean necesarios. Los programas llevan su código oficial y cada política desglosada identifica la tabla 1.6, columna 2024-P, del documento de Hacienda. Los importes se expresan en millones y los hijos deben conservar el total de la política; el resto no separado y el redondeo se identifican expresamente. No mezclar ejecución de Seguridad Social ni COFOG con estos créditos presupuestados. El IMV y las prestaciones familiares permanecen agrupados como en el programa 221A.
+
+Orden editorial: situación y trayectoria de la deuda → factura futura e intereses → ingresos y déficit → gasto total → presupuesto estatal detallado → plan de repago → claves y fuentes. La navegación sigue el mismo orden y está disponible también en móviles.

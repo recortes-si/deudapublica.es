@@ -130,7 +130,8 @@
       "period": "2023–2029; mantenimiento hasta 2050",
       "updated": "2026-10-11",
       "file": "official/fiscal-context.json",
-      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724#dtcuadragesimatercera"
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724#dtcuadragesimatercera",
+      "archived": true
     },
     {
       "id": "iva-historico",

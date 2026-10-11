@@ -3,7 +3,6 @@ import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { parseCsv, numeric } from './csv.mjs';
 import { financesModel } from './finances.mjs';
-import { validateFiscalContext } from '../../src/shared/worker.mjs';
 import { interestModel, taxComparison } from './interest.mjs';
 
 export const nodeTotal = node => node.children ? node.children.reduce((sum, child) => sum + nodeTotal(child), 0) : node.value;
@@ -92,10 +91,8 @@ export async function loadData(root) {
   interest.taxOnlyExample = taxComparison(interest.value, interest.taxes.items, config.taxOnlyExampleIds);
   if (!interest.taxOnlyExample.count || !interest.taxOnlyExample.covered || config.taxOnlyExampleIds.some(id => interest.taxes.items.find(item => item.id === id).control || ['autonomous','contributions'].includes(id))) throw new Error('El ejemplo de supresión debe contener solo impuestos completos y cubrirse con los intereses');
   const finances = financesModel(JSON.parse(financesText));
-  const fiscalContext = await json('official/fiscal-context.json');
-  validateFiscalContext(fiscalContext);
   const benefits = JSON.parse(await read('benefitsSourceId'));
   if (benefits.sourceId !== config.benefitsSourceId) throw new Error('Prestaciones: sourceId no coincide');
   const repayment = repaymentModel(await json('official/repayment-plan.json'), {debt,finances,interest,benefits,spendingHistory});
-  return { repayment, fiscalContext, finances, interest, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
+  return { repayment, finances, interest, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
 }

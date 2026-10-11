@@ -1,6 +1,8 @@
 function initBudget({ data, format, escapeHtml, reducedMotion }) {
   const budgetChart = echarts.init(document.querySelector('#budget-chart'), null, { renderer: 'canvas' });
   const budgetBack = document.querySelector('#budget-back');
+  const budgetHome = document.querySelector('#budget-home');
+  const budgetSummary = document.querySelector('#budget-level-summary');
   const budgetPath = document.querySelector('#budget-path');
   const budgetList = document.querySelector('#budget-list');
   const budgetStack = [data.budget.root];
@@ -12,8 +14,10 @@ function initBudget({ data, format, escapeHtml, reducedMotion }) {
     const items = node.children || [];
     const levelTotal = items.reduce((sum, item) => sum + nodeTotal(item), 0);
     budgetBack.disabled = budgetStack.length === 1;
+    budgetHome.disabled = budgetStack.length === 1;
+    budgetSummary.textContent = `${budgetNumber(levelTotal)} · ${format(levelTotal / data.budget.total * 100, 1)}% del presupuesto estatal · ${items.length} partidas${node.sourceLocator ? ' · ' + node.sourceLocator : ''}`;
     budgetPath.textContent = budgetStack.map(item => item.name).join(' / ');
-    budgetList.innerHTML = items.map((item,index) => `<li>${item.children ? `<button type="button" data-budget-index="${index}">${escapeHtml(item.name)} <span>Explorar →</span></button>` : `<span>${escapeHtml(item.name)}</span>`}<b>${budgetNumber(nodeTotal(item))}</b></li>`).join('');
+    budgetList.innerHTML = items.map((item,index) => `<li>${item.children ? `<button type="button" data-budget-index="${index}">${escapeHtml(item.name)} <span>Explorar →</span></button>` : `<span>${escapeHtml(item.name)}${item.code ? ` <small>· ${escapeHtml(item.code)}</small>` : ''}</span>`}<b>${budgetNumber(nodeTotal(item))}<small>${format(nodeTotal(item) / levelTotal * 100, 1)}% del nivel</small></b></li>`).join('');
     budgetChart.setOption({
       animation: animate,
       color: budgetColors,
@@ -41,6 +45,7 @@ function initBudget({ data, format, escapeHtml, reducedMotion }) {
   budgetBack.addEventListener('click', () => {
     if (budgetStack.length > 1) { budgetStack.pop(); drawBudget(budgetStack.at(-1)); if (budgetBack.disabled) budgetList.querySelector('button')?.focus(); }
   });
+  budgetHome.addEventListener('click', () => { budgetStack.splice(1); drawBudget(budgetStack[0]); budgetList.querySelector('button')?.focus(); });
   const pgeSource = data.sources.find(source => source.id === data.budget.sourceId);
   const budgetSource = document.querySelector('#budget-source');
   budgetSource.href = pgeSource.url;

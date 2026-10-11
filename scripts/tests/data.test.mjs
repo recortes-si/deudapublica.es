@@ -55,7 +55,7 @@ test('invalid numbers and totals fail with an actionable error', async () => fix
 test('budget tree cannot disagree with its total', async () => fixture(async directory => {
   const file = resolve(directory,'data/official/pge-2024-politicas.json');
   const budget = JSON.parse(await readFile(file,'utf8'));
-  budget.root.children[0].children[0].value += 100;
+  budget.root.children[0].children[0].children[0].value += 100;
   await writeFile(file,JSON.stringify(budget));
   await assert.rejects(loadData(directory), /árbol no suma/);
 }));

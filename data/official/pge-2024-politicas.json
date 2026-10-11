@@ -12,52 +12,576 @@
       {
         "name": "Estado del bienestar",
         "children": [
-          { "name": "Pensiones", "value": 190687 },
-          { "name": "Otras prestaciones económicas", "value": 22299 },
-          { "name": "Desempleo", "value": 21278 },
-          { "name": "Fomento del empleo", "value": 7516 },
-          { "name": "Servicios sociales y promoción social", "value": 5744 },
-          { "name": "Gestión de inclusión, Seguridad Social y migración", "value": 6965 },
-          { "name": "Sanidad", "value": 5505 },
-          { "name": "Educación", "value": 5338 },
-          { "name": "Acceso a la vivienda", "value": 3483 }
+          {
+            "name": "Pensiones",
+            "children": [
+              {
+                "code": "211A",
+                "name": "Contributivas de la Seguridad Social",
+                "value": 159689
+              },
+              {
+                "code": "211B",
+                "name": "Clases Pasivas",
+                "value": 20369
+              },
+              {
+                "code": "211C",
+                "name": "Otras prestaciones de Clases Pasivas",
+                "value": 49
+              },
+              {
+                "code": "212A",
+                "name": "No contributivas y asistenciales",
+                "value": 2808
+              },
+              {
+                "code": "212B",
+                "name": "Pensiones de guerra",
+                "value": 81
+              },
+              {
+                "code": "212C",
+                "name": "Complementos a mínimos",
+                "value": 7261
+              },
+              {
+                "code": "219M",
+                "name": "Gestión de prestaciones de la Seguridad Social",
+                "value": 425
+              },
+              {
+                "code": "219N",
+                "name": "Gestión de Clases Pasivas",
+                "value": 5
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Otras prestaciones económicas",
+            "children": [
+              {
+                "code": "221A",
+                "name": "Ingreso mínimo vital y prestaciones familiares",
+                "value": 4193
+              },
+              {
+                "code": "221B",
+                "name": "Incapacidad temporal y otras prestaciones",
+                "value": 16793
+              },
+              {
+                "code": "222M",
+                "name": "Mutualismo administrativo",
+                "value": 426
+              },
+              {
+                "code": "223A",
+                "name": "Garantía salarial",
+                "value": 830
+              },
+              {
+                "code": "224A",
+                "name": "Cese de actividad",
+                "value": 57
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Desempleo",
+            "value": 21278
+          },
+          {
+            "name": "Fomento del empleo",
+            "children": [
+              {
+                "code": "241A",
+                "name": "Inserción y estabilidad laboral",
+                "value": 4121
+              },
+              {
+                "code": "241B",
+                "name": "Formación profesional para el empleo",
+                "value": 3305
+              },
+              {
+                "code": "24TA",
+                "name": "Recualificación de la población activa",
+                "value": 74
+              },
+              {
+                "code": "241N",
+                "name": "Economía social y responsabilidad empresarial",
+                "value": 10
+              },
+              {
+                "name": "Resto de programas y redondeo",
+                "value": 6
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Servicios sociales y promoción social",
+            "children": [
+              {
+                "code": "231I",
+                "name": "Autonomía personal y dependencia",
+                "value": 3522
+              },
+              {
+                "code": "231H",
+                "name": "Atención a inmigrantes",
+                "value": 745
+              },
+              {
+                "code": "231F",
+                "name": "Otros servicios sociales del Estado",
+                "value": 461
+              },
+              {
+                "code": "232C",
+                "name": "Prevención de la violencia de género",
+                "value": 260
+              },
+              {
+                "code": "232B",
+                "name": "Igualdad de oportunidades",
+                "value": 232
+              },
+              {
+                "code": "231D",
+                "name": "Servicios a personas mayores",
+                "value": 123
+              },
+              {
+                "code": "231C",
+                "name": "Servicios a personas con discapacidad",
+                "value": 45
+              },
+              {
+                "code": "231G",
+                "name": "Infancia y familias",
+                "value": 46
+              },
+              {
+                "name": "Resto de programas y redondeo",
+                "value": 310
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Gestión de inclusión, Seguridad Social y migración",
+            "children": [
+              {
+                "code": "291M",
+                "name": "Dirección y servicios generales",
+                "value": 6762
+              },
+              {
+                "code": "291A",
+                "name": "Inspección y control de protección social",
+                "value": 203
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Sanidad",
+            "value": 5505
+          },
+          {
+            "name": "Educación",
+            "value": 5338
+          },
+          {
+            "name": "Acceso a la vivienda",
+            "children": [
+              {
+                "code": "26BA",
+                "name": "Rehabilitación de entornos residenciales",
+                "value": 1980
+              },
+              {
+                "code": "26BB",
+                "name": "Construcción de vivienda en alquiler social",
+                "value": 500
+              },
+              {
+                "code": "261N",
+                "name": "Promoción y ayudas de acceso y rehabilitación",
+                "value": 959
+              },
+              {
+                "code": "261O",
+                "name": "Ordenación y fomento de la edificación",
+                "value": 30
+              },
+              {
+                "code": "261P",
+                "name": "Urbanismo y suelo",
+                "value": 7
+              },
+              {
+                "code": "261M",
+                "name": "Dirección y servicios generales de vivienda",
+                "value": 7
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          }
         ]
       },
       {
         "name": "Seguridad y justicia",
         "children": [
-          { "name": "Defensa", "value": 12317 },
-          { "name": "Seguridad ciudadana e instituciones penitenciarias", "value": 10673 },
-          { "name": "Justicia", "value": 2231 },
-          { "name": "Política exterior y cooperación", "value": 2151 }
+          {
+            "name": "Defensa",
+            "children": [
+              {
+                "code": "122B",
+                "name": "Programas especiales de modernización",
+                "value": 4902
+              },
+              {
+                "code": "121M",
+                "name": "Administración y servicios generales",
+                "value": 2537
+              },
+              {
+                "code": "122M",
+                "name": "Operaciones de las Fuerzas Armadas",
+                "value": 2306
+              },
+              {
+                "code": "122N",
+                "name": "Apoyo logístico",
+                "value": 1028
+              },
+              {
+                "code": "121O",
+                "name": "Personal en reserva",
+                "value": 580
+              },
+              {
+                "code": "121N",
+                "name": "Formación del personal",
+                "value": 494
+              },
+              {
+                "code": "122A",
+                "name": "Modernización de las Fuerzas Armadas",
+                "value": 459
+              },
+              {
+                "name": "Resto de programas y redondeo",
+                "value": 11
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Seguridad ciudadana e instituciones penitenciarias",
+            "children": [
+              {
+                "code": "132A",
+                "name": "Seguridad ciudadana",
+                "value": 7417
+              },
+              {
+                "code": "133A",
+                "name": "Centros penitenciarios",
+                "value": 1326
+              },
+              {
+                "code": "132B",
+                "name": "Seguridad vial",
+                "value": 844
+              },
+              {
+                "code": "131M",
+                "name": "Dirección y servicios generales",
+                "value": 443
+              },
+              {
+                "code": "131O",
+                "name": "Personal en reserva",
+                "value": 305
+              },
+              {
+                "code": "131N",
+                "name": "Formación de fuerzas de seguridad",
+                "value": 179
+              },
+              {
+                "code": "132C",
+                "name": "Actuaciones policiales sobre drogas",
+                "value": 108
+              },
+              {
+                "name": "Resto de programas y redondeo",
+                "value": 51
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Justicia",
+            "children": [
+              {
+                "code": "112A",
+                "name": "Tribunales y Ministerio Fiscal",
+                "value": 1963
+              },
+              {
+                "code": "111N",
+                "name": "Dirección y servicios generales",
+                "value": 133
+              },
+              {
+                "code": "111M",
+                "name": "Gobierno del Poder Judicial",
+                "value": 43
+              },
+              {
+                "code": "113M",
+                "name": "Registros vinculados a la fe pública",
+                "value": 37
+              },
+              {
+                "name": "Resto de programas y redondeo",
+                "value": 55
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Política exterior y cooperación",
+            "children": [
+              {
+                "code": "143A",
+                "name": "Cooperación para el desarrollo",
+                "value": 1002
+              },
+              {
+                "code": "142A",
+                "name": "Acción del Estado en el exterior",
+                "value": 856
+              },
+              {
+                "code": "144A",
+                "name": "Cooperación y difusión cultural",
+                "value": 159
+              },
+              {
+                "code": "141M",
+                "name": "Dirección y servicios generales",
+                "value": 96
+              },
+              {
+                "code": "142B",
+                "name": "Acción diplomática ante la Unión Europea",
+                "value": 24
+              },
+              {
+                "code": "144B",
+                "name": "Cooperación educativa",
+                "value": 13
+              },
+              {
+                "name": "Resto de programas y redondeo",
+                "value": 1
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          }
         ]
       },
       {
         "name": "Economía e inversión",
         "children": [
-          { "name": "Investigación civil", "value": 15970 },
-          { "name": "Infraestructuras y ecosistemas resilientes", "value": 12578 },
-          { "name": "Industria y energía", "value": 9801 },
-          { "name": "Agricultura, pesca y alimentación", "value": 8412 },
-          { "name": "Comercio, turismo y PYMES", "value": 3095 },
-          { "name": "Subvenciones al transporte", "value": 3446 },
-          { "name": "Investigación militar", "value": 1833 },
-          { "name": "Otras actuaciones económicas", "value": 1433 },
-          { "name": "Cultura", "value": 1652 }
+          {
+            "name": "Investigación civil",
+            "value": 15970
+          },
+          {
+            "name": "Infraestructuras y ecosistemas resilientes",
+            "value": 12578
+          },
+          {
+            "name": "Industria y energía",
+            "value": 9801
+          },
+          {
+            "name": "Agricultura, pesca y alimentación",
+            "value": 8412
+          },
+          {
+            "name": "Comercio, turismo y PYMES",
+            "value": 3095
+          },
+          {
+            "name": "Subvenciones al transporte",
+            "value": 3446
+          },
+          {
+            "name": "Investigación militar",
+            "value": 1833
+          },
+          {
+            "name": "Otras actuaciones económicas",
+            "value": 1433
+          },
+          {
+            "name": "Cultura",
+            "value": 1652
+          }
         ]
       },
       {
         "name": "Administración y deuda",
         "children": [
-          { "name": "Transferencias a otras Administraciones Públicas", "value": 66274 },
-          { "name": "Servicios de carácter general", "value": 25944 },
-          { "name": "Deuda pública", "value": 31275 },
-          { "name": "Administración financiera y tributaria", "value": 1750 },
-          { "name": "Órganos constitucionales, Gobierno y otros", "value": 855 },
-          { "name": "Gestión de trabajo y economía social", "value": 119 },
-          { "name": "Ajustes de redondeo de la tabla oficial", "value": 2 }
+          {
+            "name": "Transferencias a otras Administraciones Públicas",
+            "children": [
+              {
+                "code": "941M",
+                "name": "Participación de comunidades autónomas en ingresos del Estado",
+                "value": 23553
+              },
+              {
+                "code": "942M",
+                "name": "Participación de entidades locales en ingresos del Estado",
+                "value": 20793
+              },
+              {
+                "code": "943M",
+                "name": "Aportación al presupuesto de la Unión Europea",
+                "value": 17779
+              },
+              {
+                "code": "942N",
+                "name": "Otras transferencias a entidades locales",
+                "value": 2128
+              },
+              {
+                "code": "941O",
+                "name": "Otras transferencias a comunidades autónomas",
+                "value": 895
+              },
+              {
+                "code": "941N",
+                "name": "Compensación interterritorial",
+                "value": 582
+              },
+              {
+                "code": "943N",
+                "name": "Fondos europeos de desarrollo y apoyo a la paz",
+                "value": 264
+              },
+              {
+                "code": "94KC",
+                "name": "Modernización digital de comunidades y entidades locales",
+                "value": 221
+              },
+              {
+                "code": "942A",
+                "name": "Cooperación económica local",
+                "value": 58
+              },
+              {
+                "name": "Resto de programas y redondeo",
+                "value": 1
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Servicios de carácter general",
+            "children": [
+              {
+                "code": "922N",
+                "name": "Coordinación y relaciones financieras territoriales",
+                "value": 16009
+              },
+              {
+                "code": "929N",
+                "name": "Fondo de contingencia",
+                "value": 3964
+              },
+              {
+                "code": "923S",
+                "name": "Aportaciones al mutualismo administrativo",
+                "value": 2281
+              },
+              {
+                "code": "923M",
+                "name": "Dirección y servicios generales de Hacienda",
+                "value": 1083
+              },
+              {
+                "code": "923P",
+                "name": "Relaciones con instituciones financieras multilaterales",
+                "value": 520
+              },
+              {
+                "code": "924M",
+                "name": "Elecciones y partidos políticos",
+                "value": 462
+              },
+              {
+                "code": "923R",
+                "name": "Contratación centralizada",
+                "value": 317
+              },
+              {
+                "code": "921P",
+                "name": "Administración del Estado en el territorio",
+                "value": 286
+              },
+              {
+                "code": "923A",
+                "name": "Patrimonio del Estado",
+                "value": 227
+              },
+              {
+                "code": "923C",
+                "name": "Estadística pública",
+                "value": 193
+              },
+              {
+                "name": "Resto de programas y redondeo",
+                "value": 602
+              }
+            ],
+            "sourceLocator": "Tabla 1.6 · Programas de gasto · columna 2024-P"
+          },
+          {
+            "name": "Deuda pública",
+            "value": 31275
+          },
+          {
+            "name": "Administración financiera y tributaria",
+            "value": 1750
+          },
+          {
+            "name": "Órganos constitucionales, Gobierno y otros",
+            "value": 855
+          },
+          {
+            "name": "Gestión de trabajo y economía social",
+            "value": 119
+          },
+          {
+            "name": "Ajustes de redondeo de la tabla oficial",
+            "value": 2
+          }
         ]
       }
     ]
-  }
+  },
+  "breakdownNote": "Programas seleccionados de la tabla 1.6, columna 2024-P. El resto conserva los programas no separados y el redondeo de la tabla. IMV y prestaciones familiares se publican juntos en el programa 221A."
 }

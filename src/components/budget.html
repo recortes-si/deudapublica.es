@@ -1,11 +1,13 @@
 <section class="section" id="presupuesto" aria-labelledby="budget-title">
-  <div class="section-heading"><h2 id="budget-title"><span class="section-index">03 / Abre las cuentas</span>Sigue el dinero.<br>Exige respuestas.</h2><p>Explora las políticas del presupuesto estatal. Cada bloque ocupa un área proporcional a su importe. Toca una categoría para ver su detalle.</p></div>
+  <div class="section-heading"><h2 id="budget-title"><span class="section-index">03 / Abre las cuentas</span>Sigue el dinero.<br>Exige respuestas.</h2><p>Explora las políticas del presupuesto estatal. Cada bloque ocupa un área proporcional a su importe. Abre una categoría y después una política para llegar a sus programas.</p></div>
   <div class="budget-card">
     <div class="budget-heading"><div><span class="card-kicker">{{BUDGET_DATASET}} · capítulos 1 a 8</span><h3>Distribución del presupuesto estatal</h3></div><div class="budget-total"><strong>{{BUDGET_TOTAL}} M€</strong><span>presupuesto consolidado · {{BUDGET_STATUS}}</span></div></div>
-    <div class="budget-toolbar"><button id="budget-back" type="button" disabled>← Volver</button><span id="budget-path" aria-live="polite">Presupuesto estatal</span><span class="budget-hint">Toca un bloque o utiliza la lista inferior</span></div>
+    <div class="budget-toolbar"><button id="budget-back" type="button" disabled>← Volver</button><button id="budget-home" type="button" disabled>Ver todo</button><span id="budget-path" aria-live="polite">Presupuesto estatal</span><span class="budget-hint">Toca un bloque o utiliza la lista inferior</span></div>
+    <p class="budget-level-summary" id="budget-level-summary" aria-live="polite"></p>
     <div id="budget-chart" role="img" aria-label="Distribución del presupuesto estatal. Alternativa navegable en la lista inferior."></div>
     <ul class="budget-list" id="budget-list" aria-label="Categorías del nivel actual"></ul>
     <div class="budget-foot"><span>Fuente: Ministerio de Hacienda · {{BUDGET_DATASET}}. Ámbito estatal; distinto del gasto COFOG de todas las Administraciones.</span><a id="budget-source" href="#fuentes">Ver ficha y fuente ↗</a></div>
   </div>
+  <p class="income-method">Créditos del presupuesto estatal prorrogado de 2024, no gasto ejecutado. Sanidad y educación no incluyen aquí todo el gasto autonómico. El IMV y las prestaciones familiares aparecen juntos en el programa 221A. «Resto de programas y redondeo» conserva lo no desglosado; abrir una partida no añade gasto al total.</p>
   <details class="data-details"><summary>Ver el presupuesto completo en texto</summary><div class="budget-tree">{{BUDGET_TREE}}</div></details>
 </section>
