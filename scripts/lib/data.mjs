@@ -1,8 +1,8 @@
-import { earningsModel, commonTaxesModel } from './economy.mjs';
+import { repaymentModel } from './repayment.mjs';
 import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { parseCsv, numeric } from './csv.mjs';
-import { financesModel, workerModel } from './finances.mjs';
+import { financesModel } from './finances.mjs';
 import { validateFiscalContext } from '../../src/shared/worker.mjs';
 import { interestModel, taxComparison } from './interest.mjs';
 
@@ -13,15 +13,16 @@ export async function loadData(root) {
   const json = async file => JSON.parse(await readFile(resolve(dataRoot, file), 'utf8'));
   const [config, catalog] = await Promise.all([json('site.json'), json('sources.json')]);
   if (!Array.isArray(config.provisionalSpendingYears) || config.provisionalSpendingYears.some(year => !Number.isInteger(year))) throw new Error('site.json: provisionalSpendingYears debe ser una lista de años');
-  const sources = catalog.datasets;
-  if (!Array.isArray(sources)) throw new Error('sources.json: datasets debe ser una lista');
+  const allSources = catalog.datasets;
+  if (!Array.isArray(allSources)) throw new Error('sources.json: datasets debe ser una lista');
   const byId = new Map();
-  for (const source of sources) {
+  for (const source of allSources) {
     if (!source.id || byId.has(source.id)) throw new Error(`Fuente duplicada o sin id: ${source.id}`);
     if (!source.title || !source.publisher || !source.period || !/^\d{4}-\d{2}-\d{2}$/.test(source.updated)) throw new Error(`Metadatos incompletos: ${source.id}`);
     if (!/^https?:$/.test(new URL(source.url).protocol)) throw new Error(`URL de fuente no válida: ${source.id}`);
     byId.set(source.id, source);
   }
+  const sources = allSources.filter(source => !source.archived);
   const sourceFor = key => {
     const source = byId.get(config[key]);
     if (!source?.file) throw new Error(`site.json: ${key} debe referenciar una fuente con file`);
@@ -30,8 +31,8 @@ export async function loadData(root) {
     return { source, path };
   };
   const read = async key => readFile(sourceFor(key).path, 'utf8');
-  const [debtText, ratioText, spendingText, budgetText, populationText, interestText, taxText, financesText, workerText, earningsText, inflationText, commonTaxesText] = await Promise.all(
-    ['debtSourceId','ratioSourceId','spendingSourceId','budgetSourceId','populationSourceId','interestSourceId','taxSourceId','financesSourceId','workerSourceId','earningsSourceId','inflationSourceId','commonTaxesSourceId'].map(read)
+  const [debtText, ratioText, spendingText, budgetText, populationText, interestText, taxText, financesText] = await Promise.all(
+    ['debtSourceId','ratioSourceId','spendingSourceId','budgetSourceId','populationSourceId','interestSourceId','taxSourceId','financesSourceId'].map(read)
   );
   const bdeRows = parseCsv(debtText);
   // Find the total debt series by its official identifier, rather than a column position.
@@ -91,10 +92,10 @@ export async function loadData(root) {
   interest.taxOnlyExample = taxComparison(interest.value, interest.taxes.items, config.taxOnlyExampleIds);
   if (!interest.taxOnlyExample.count || !interest.taxOnlyExample.covered || config.taxOnlyExampleIds.some(id => interest.taxes.items.find(item => item.id === id).control || ['autonomous','contributions'].includes(id))) throw new Error('El ejemplo de supresión debe contener solo impuestos completos y cubrirse con los intereses');
   const finances = financesModel(JSON.parse(financesText));
-  const worker = workerModel(JSON.parse(workerText), config.workerSourceId);
-  const earnings=earningsModel(earningsText,JSON.parse(inflationText),worker,sourceFor('earningsSourceId').source.estimatedYears);
-  const commonTaxes=commonTaxesModel(JSON.parse(commonTaxesText),earnings);
   const fiscalContext = await json('official/fiscal-context.json');
   validateFiscalContext(fiscalContext);
-  return { earnings,commonTaxes,fiscalContext, finances, worker, interest, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
+  const benefits = JSON.parse(await read('benefitsSourceId'));
+  if (benefits.sourceId !== config.benefitsSourceId) throw new Error('Prestaciones: sourceId no coincide');
+  const repayment = repaymentModel(await json('official/repayment-plan.json'), {debt,finances,interest,benefits,spendingHistory});
+  return { repayment, fiscalContext, finances, interest, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
 }

@@ -1,3 +1,4 @@
+import { repaymentValues } from './render-repayment.mjs';
 import { financialValues } from './render-finances.mjs';
 import { measureCost } from '../../src/shared/fiscal.mjs';
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c]);
@@ -13,6 +14,7 @@ export function templateValues(data) {
   const status = spendingHistory.at(-1).provisional ? 'provisional' : 'definitivo';
   const period = `${previous.year} → ${latest.year}`;
   return {
+    ...repaymentValues(data, { format, escapeHtml }),
     ...financialValues(data, { format, escapeHtml, table, signed }),
     INTEREST_YEAR: interest.year, INTEREST_VALUE: format(interest.value,0), INTEREST_DAY: format(interest.perDay,0),
     INTEREST_SOURCE: escapeHtml(data.sources.find(source => source.id === data.config.interestSourceId).download),

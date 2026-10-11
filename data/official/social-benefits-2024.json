@@ -1,0 +1,15 @@
+{
+  "year": 2024,
+  "unit": "millones de euros",
+  "basis": "Obligaciones reconocidas acumuladas a diciembre de 2024; ejecución presupuestaria de la Seguridad Social",
+  "sourceId": "ss-prestaciones-2024",
+  "sourceUrl": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/Documents/2025/310325-ejecucion-presupuesto-dic-2024.pdf",
+  "items": [
+    {"id":"pensions","name":"Pensiones contributivas","shortName":"Contributivas","value":172666.48,"locator":"Página 6 impresa (7 del PDF), SUMA DE PENSIONES, obligaciones reconocidas","note":"Seguridad Social; sin complementos a mínimos ni Clases Pasivas.","pension":true},
+    {"id":"noncontributory","name":"Pensiones no contributivas","shortName":"No contributivas","value":3238.49,"locator":"Página 7 impresa (8 del PDF): invalidez 1289,47 + jubilación 1946,81 + orfandad 0,59 + pensiones DANA 1,62","note":"Se suman las filas de pensiones no contributivas; los complementos a mínimos van aparte."},
+    {"id":"minimum","name":"Complementos a mínimos","shortName":"Mínimos","value":7873.4,"locator":"Página 7 impresa (8 del PDF), COMPL. A MÍNIMOS PENSIONES CONTRIBUTIVAS, obligaciones reconocidas","note":"Complementan pensiones contributivas; no se vuelven a contar en la base contributiva anterior."},
+    {"id":"imv","name":"Ingreso mínimo vital","shortName":"IMV","value":3854.67,"locator":"Página 7 impresa (8 del PDF), INGRESO MÍNIMO VITAL, obligaciones reconocidas","note":"Solo la fila de IMV. La fila de IMV DANA no registra obligaciones; las prestaciones familiares van aparte."},
+    {"id":"family","name":"Prestaciones familiares","shortName":"Familiares","value":1720.05,"locator":"Página 7 impresa (8 del PDF), RESTO DE PRESTACIONES FAMILIARES, obligaciones reconocidas","note":"Resto de prestaciones familiares, separado del IMV."}
+  ],
+  "checks": {"noncontributoryAndMinimum":11111.89,"imvAndFamily":5574.72}
+}

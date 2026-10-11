@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {loadData} from '../lib/data.mjs';
 import {financesModel,workerModel} from '../lib/finances.mjs';
+import {loadArchivedWorker} from './archived-economy.mjs';
 import {workerEuro} from '../../src/shared/worker.mjs';
 const root=resolve(import.meta.dirname,'../..');
 
@@ -23,14 +24,15 @@ test('public finances reject missing observations, wrong dimensions and inconsis
 });
 
 test('worker euro distinguishes labour cost, gross pay and VAT-inclusive spending',async()=>{
- const {worker:w}=await loadData(root);assert.equal(w.year,2025);assert.equal(w.net,58.6);assert.equal(w.netGrossPercent,76.5);
+ const w=await loadArchivedWorker();assert.equal(w.year,2025);assert.equal(w.net,58.6);assert.equal(w.netGrossPercent,76.5);
  const shares=workerEuro(41.4,21);assert.ok(Math.abs(shares.purchasing-58.6/1.21)<1e-10);assert.ok(Math.abs(shares.labourTaxes+shares.purchasing+shares.vat-100)<1e-10);
  assert.equal(workerEuro(41.4).vat,0);assert.throws(()=>workerEuro(101),/rango/);assert.throws(()=>workerEuro(41.4,-1),/rango/);
  const wrong=structuredClone(w);wrong.history.at(-1).taxWedgePercent=40;assert.throws(()=>workerModel(wrong,w.sourceId),/último dato/);
 });
 
 test('the revenue breakdown closes without counting capital taxes twice',async()=>{
- const {finances:f,worker:w}=await loadData(root);
+ const {finances:f}=await loadData(root);
+ const w=await loadArchivedWorker();
  for(const row of f.rows) assert.equal(row.incomeParts.reduce((sum,part)=>sum+part.value,0),row.revenue);
  const last=f.latest;assert.equal(last.incomeParts.find(part=>part.id==='social').value,223612);
  assert.equal(last.incomeParts.find(part=>part.id==='capital').value,17842);
@@ -46,7 +48,8 @@ test('fiscal revenue includes contributions without adding them to total revenue
 
 test('consumption scenarios reconcile taxes, purchases and savings across historical VAT changes',async()=>{
  const {workerScenario,validateFiscalContext}=await import('../../src/shared/worker.mjs');
- const {fiscalContext:p,worker:w}=await loadData(root);
+ const {fiscalContext:p}=await loadData(root);
+ const w=await loadArchivedWorker();
  const first=workerScenario(w.history[0],p),last=workerScenario(w.history.at(-1),p);
  assert.ok(Math.abs(first.retained-61.4/1.16)<1e-10);
  assert.ok(Math.abs(last.retained-58.6/1.21)<1e-10);

@@ -120,7 +120,8 @@
       "file": "official/oecd-trabajador-2025.json",
       "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/04/taxing-wages-2026-country-notes_491a0e97/spain_20d4847c/a9a524da-en.pdf",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "note": "Cálculos y presentación propios a partir de datos OCDE (2026), Taxing Wages 2026: Spain. Las opiniones de esta web no representan a la OCDE. El PDF original está en data/raw/."
+      "note": "Cálculos y presentación propios a partir de datos OCDE (2026), Taxing Wages 2026: Spain. Las opiniones de esta web no representan a la OCDE. El PDF original está en data/raw/.",
+      "archived": true
     },
     {
       "id": "fiscal-context-mei",
@@ -137,7 +138,8 @@
       "publisher": "Agencia Tributaria",
       "period": "2010 y 2012",
       "updated": "2026-10-11",
-      "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2012/IART12_eu_es.pdf"
+      "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2012/IART12_eu_es.pdf",
+      "archived": true
     },
     {
       "id": "oecd-tax-definition",
@@ -159,7 +161,8 @@
       "license": "https://www.oecd.org/en/about/terms-conditions.html",
       "estimatedYears": [
         2025
-      ]
+      ],
+      "archived": true
     },
     {
       "id": "eurostat-inflacion",
@@ -170,7 +173,8 @@
       "file": "raw/eurostat-inflacion-2000-2025.json",
       "url": "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_aind/default/table?lang=en",
       "download": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_aind?geo=ES&coicop=CP00&unit=INX_A_AVG&sinceTimePeriod=2000",
-      "license": "https://ec.europa.eu/eurostat/about/legal-notices"
+      "license": "https://ec.europa.eu/eurostat/about/legal-notices",
+      "archived": true
     },
     {
       "id": "impuestos-habituales",
@@ -179,7 +183,34 @@
       "period": "2000–2025",
       "updated": "2026-10-11",
       "file": "official/common-taxes.json",
-      "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2012/IART12_eu_es.pdf"
+      "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2012/IART12_eu_es.pdf",
+      "archived": true
+    },
+    {
+      "id": "pensiones-reforma-2013",
+      "title": "Ley 23/2013 · índice de revalorización de las pensiones",
+      "publisher": "Boletín Oficial del Estado",
+      "period": "Reforma de 2013 · referencia histórica",
+      "updated": "2013-12-26",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-13617"
+    },
+    {
+      "id": "pensiones-ipc-2021",
+      "title": "Ley 21/2021 · recuperación de la revalorización según IPC",
+      "publisher": "Boletín Oficial del Estado",
+      "period": "Ley de 2021 · referencia normativa",
+      "updated": "2021-12-29",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-21652"
+    },
+    {
+      "id": "ss-prestaciones-2024",
+      "title": "Ejecución presupuestaria: pensiones, complementos, IMV y prestaciones familiares",
+      "publisher": "Seguridad Social · Ministerio de Inclusión",
+      "period": "2024 · acumulado a diciembre",
+      "updated": "2025-03-31",
+      "file": "official/social-benefits-2024.json",
+      "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/Documents/2025/310325-ejecucion-presupuesto-dic-2024.pdf",
+      "note": "Obligaciones reconocidas. Cuadros de las páginas 6 y 7 impresas. Las filas separan mínimos e IMV para evitar solapamientos."
     }
   ]
 }

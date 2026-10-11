@@ -29,8 +29,5 @@
     "insurance"
   ],
   "financesSourceId": "eurostat-finanzas",
-  "workerSourceId": "oecd-trabajador-2025",
-  "earningsSourceId": "oecd-salarios-impuestos",
-  "inflationSourceId": "eurostat-inflacion",
-  "commonTaxesSourceId": "impuestos-habituales"
+  "benefitsSourceId": "ss-prestaciones-2024"
 }

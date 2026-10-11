@@ -1,0 +1,88 @@
+{
+  "year": 2024,
+  "defaultHorizon": 40,
+  "defaultInflation": 2,
+  "maxHorizon": 80,
+  "pensionModes": [
+    {
+      "id": "ipc",
+      "label": "Mantener IPC",
+      "rate": null
+    },
+    {
+      "id": "freeze",
+      "label": "Congelar · 0%",
+      "rate": 0
+    },
+    {
+      "id": "floor",
+      "label": "Subir un 0,25%",
+      "rate": 0.25
+    }
+  ],
+  "cuts": [
+    {
+      "id": "general",
+      "code": "01",
+      "name": "Servicios generales sin intereses",
+      "excludeInterest": true,
+      "note": "Se resta D.41 para no volver a contar el ahorro de intereses. No todo este gasto es burocracia."
+    },
+    {
+      "id": "economy",
+      "code": "04",
+      "name": "Asuntos económicos",
+      "note": "Incluye inversión, transporte y ayudas económicas. Recortar no equivale automáticamente a eliminar despilfarro."
+    },
+    {
+      "id": "health",
+      "code": "07",
+      "name": "Sanidad",
+      "note": "Gasto de todas las Administraciones. El recorte puede afectar a los servicios."
+    },
+    {
+      "id": "education",
+      "code": "09",
+      "name": "Educación",
+      "note": "Gasto de todas las Administraciones. El recorte puede afectar a los servicios."
+    },
+    {
+      "id": "social",
+      "code": "10",
+      "name": "Protección social",
+      "note": "Incluye pensiones, desempleo y otras prestaciones. El cambio global se aplica al importe que queda tras tus cambios individuales; las bases presupuestarias de prestaciones son una aproximación dentro de COFOG."
+    },
+    {
+      "id": "security",
+      "code": "03",
+      "name": "Orden público y seguridad",
+      "note": "Policía, justicia, prisiones y otros servicios de seguridad."
+    },
+    {
+      "id": "culture",
+      "code": "08",
+      "name": "Ocio, cultura y religión",
+      "note": "Incluye actividades culturales, recreativas y deportivas."
+    },
+    {
+      "id": "environment",
+      "code": "05",
+      "name": "Medio ambiente",
+      "note": "Tratamiento de residuos, agua y protección ambiental."
+    },
+    {
+      "id": "defence",
+      "code": "02",
+      "name": "Defensa",
+      "note": "Gasto militar de todas las Administraciones."
+    },
+    {
+      "id": "housing",
+      "code": "06",
+      "name": "Vivienda y servicios comunitarios",
+      "note": "Vivienda, urbanismo y servicios comunitarios."
+    }
+  ],
+  "pensionReformUrl": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-13617",
+  "pensionIpcUrl": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-21652"
+}

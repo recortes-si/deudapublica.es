@@ -243,7 +243,7 @@ nix-build
 La derivación ejecuta las mismas pruebas y genera el mismo HTML; añade `websrv`
 como utilidad local. GitLab Pages publica directamente el resultado de Node.
 
-### Finanzas públicas y el euro del trabajador
+### Finanzas públicas y saldo anual
 
 `financesSourceId` apunta a una respuesta JSON-stat de Eurostat `gov_10a_main`,
 España, S.13, anual y MIO_EUR. `scripts/lib/finances.mjs` lee las posiciones
@@ -254,112 +254,104 @@ suman también D61REC: impuestos + cotizaciones. Las cotizaciones obligatorias
 públicas son impuestos según la clasificación OCDE. El agregado D61REC de
 Eurostat incluye imputadas, por lo que no equivale a la recaudación fiscal OCDE
 (que las excluye). Ingresos totales = TR; gasto = TE;
-saldo = B9 = TR − TE. D61REC muestra cotizaciones netas en la tabla (incluidas
-las imputadas según SEC 2010). Son euros corrientes, no tipos de impuestos ni
+saldo = B9 = TR − TE. Son euros corrientes, no tipos de impuestos ni
 importes ajustados por inflación. El déficit no es el incremento exacto de deuda.
 
-`workerSourceId` apunta a `official/oecd-trabajador-2025.json`, extraído de la
-nota España de **OCDE (2026), Taxing Wages 2026**; el PDF original se conserva.
-Usa la edición 2026, que revisa valores anteriores, y el perfil soltero sin hijos
-al 100% del salario medio. Cuña fiscal de 2025: 41,4% del coste laboral; neto:
-58,6%. La tasa neta sobre salario bruto es distinta (23,5%; neto 76,5%). No
-representa todos los trabajadores, ni un porcentaje de la producción o facturación.
-El histórico es el publicado en esa misma edición, sin mezclar revisiones.
-
-La serie de cuña fiscal se conserva como referencia de la carga laboral del perfil.
-La nueva sección del trabajador usa importes comparables del mismo modelo OCDE
-y distingue tipos de impuestos, salarios nominales, salarios reales y reparto
-del coste laboral, como se detalla más abajo.
-
-`src/js/fiscal-timeline.js` sincroniza ambos selectores de año, el desglose de
-recaudación, el neto del trabajador y los puntos destacados en ambos gráficos.
-Solo permite años comunes de las series. Al elegir un año fuera del periodo corto,
-la gráfica pública vuelve a toda la serie. Esto permite comparar las dos magnitudes
-sin afirmar causalidad ni que todos los ingresos procedan de nóminas.
+`src/js/fiscal-timeline.js` selecciona cualquier año disponible de finanzas públicas.
+El selector actualiza el desglose de ingresos y el saldo anual. Al elegir un año
+fuera del periodo corto, las gráficas vuelven a toda la serie.
+El gráfico de saldo usa un eje simétrico alrededor de cero: verde arriba para
+superávit, rojo abajo para déficit. Tocar una barra selecciona ese año.
+Las tablas y el desglose inicial se generan también sin JavaScript.
 
 El desglose de TR muestra impuestos; D61REC (cotizaciones); P11_P12_P131 (ventas,
 servicios y producción para uso propio); D4REC (rentas de la propiedad); D7REC
 (transferencias corrientes); D9REC − D91REC (transferencias de capital, evitando
 duplicar impuestos) y D39REC (subvenciones). El build verifica que suman TR en
 cada año. No son íntegramente cobros de caja. Emitir deuda es financiación, no TR.
-Las tablas y las comparaciones iniciales se generan también sin JS.
 
-La sección «Deuda hoy. Impuestos futuros.» es una lectura editorial de la carga
-sobre presupuestos futuros. Explica también gasto, otros ingresos y refinanciación;
-no afirma una subida automática de impuestos ni convierte el stock de deuda
-en una obligación tributaria individual.
+La sección «Deuda hoy. Impuestos futuros.» explica también gasto, otros ingresos
+y refinanciación; no afirma una subida automática de impuestos ni convierte
+el stock de deuda en una obligación tributaria individual.
 
-### Consumo, saldo público y generaciones
+### Calendario del MEI
 
-`data/official/fiscal-context.json` contiene el calendario del IVA general y
-el MEI con reparto entre empresa y trabajador, junto con enlaces oficiales.
-`src/shared/worker.mjs` valida estos datos y comparte los cálculos entre build
-y navegador. Para añadir cambios del IVA, añade una entrada con año, mes y tipo;
-para ampliar el MEI, añade años consecutivos con total, empresa y trabajador.
-
-El escenario inicial gasta todo el neto con IVA general y separa el ahorro del
-consumo. La sección actual parte de los importes OCDE, con su precisión completa;
-los detalles del cálculo y las vistas nuevas figuran en el apartado siguiente.
-
-El gráfico de saldo usa un eje simétrico alrededor de cero: verde arriba para
-superávit, rojo abajo para déficit. Comparte periodo y año con las otras vistas.
-Una barra selecciona ese año; también se conserva una tabla sin JavaScript.
-
-La sección de jóvenes muestra un ejemplo legal de aumento: MEI del 0,6% (2023)
-al 1,2% (2029), con años futuros diferenciados. La norma mantiene 1,2% hasta 2050.
-Afecta a todas las edades: no se presenta como serie fiscal específica de jóvenes,
-ni como estimación de toda su carga, ni como consecuencia directa de la deuda.
+`data/official/fiscal-context.json` contiene el MEI con reparto entre empresa y
+trabajador y enlaces oficiales. Para ampliar su calendario, añade años consecutivos
+con total, empresa y trabajador; `src/shared/worker.mjs` valida estos datos en el build.
+La sección muestra MEI del 0,6% (2023) al 1,2% (2029), con años futuros diferenciados.
+La norma mantiene 1,2% hasta 2050. Afecta a todas las edades: no se presenta como
+serie fiscal específica de jóvenes ni como consecuencia directa de la deuda.
 El ejemplo conserva una base anual de 30.000 € y distingue coste empresarial
 de descuento en nómina.
 
-### Historial de impuestos, salarios e inflación
+### Datos archivados
 
-La sección `src/components/worker.html` sustituye la curva normalizada anterior
-por tres vistas: tipos de impuestos habituales, salarios frente a precios y
-reparto del coste laboral entre impuestos y valor conservado. El mismo año se
-sincroniza con la sección de finanzas públicas.
+Las vistas de impuestos habituales, salarios e inflación y reparto del coste
+laboral se han retirado, junto con sus controles, estilos y enlaces. Sus datasets
+originales permanecen en `data/` para conservar su trazabilidad, con
+`archived: true` en `data/sources.json`. Las fuentes archivadas no se publican
+ni sus series se cargan en el build o se incluyen en el HTML final.
+Los adaptadores conservan sus pruebas, que leen estos archivos por separado
+mediante `scripts/tests/archived-economy.mjs`.
 
-- `data/official/common-taxes.json` define tarjetas, colores, bases, fuentes y
-  calendarios legales (fechas ISO). IVA general y vivienda nueva se representan
-  con el tipo vigente **al cierre de cada año**. Se conserva la rebaja temporal
-  al 4% de vivienda desde agosto de 2011 hasta diciembre de 2012. La vivienda
-  nueva no representa ITP de vivienda usada, IBI, AJD ni territorios sin IVA.
-- IRPF y cotizaciones son tipos **efectivos** sobre bruto del mismo perfil OCDE,
-  no tipos marginales máximos. Sus porcentajes no se suman con los de IVA, cuyas
-  bases son diferentes. Las cotizaciones no se fuerzan a crecer: aparecen sus
-  descensos y sus variaciones pequeñas.
-- `earningsSourceId` usa CSV SDMX de `DSD_TAX_WAGES_COU@DF_TW_COU` 2.1, España,
-  S_C0, AW100, cónyuge no aplicable y frecuencia anual. `scripts/lib/economy.mjs`
-  lee las columnas por nombre y valida el perfil, moneda, magnitudes y su
-  reconciliación con la cuña publicada. No aplica impuestos OCDE a salarios de
-  otra población. En `sources.json`, `estimatedYears` identifica 2025 como salario
-  estimado por la Secretaría OCDE, indicado también en la página y tabla.
-- `inflationSourceId` usa Eurostat IPCA general, promedio anual. Las tres curvas
-  parten de 100 en 2000: bruto nominal, neto nominal y precios. La vista alternativa
-  divide el bruto/neto por IPCA del año / IPCA inicial y muestra euros de 2000.
-  El IPCA incluye IVA en los precios: **no se descuenta IVA otra vez del neto real**.
-  La compra de vivienda no forma parte de esta medida de inflación de consumo.
-- La serie `prc_hicp_aind` está archivada hasta 2025. Para añadir años posteriores,
-  usar su sustituta `prc_hicp_ainr` y enlazar/rebasar la serie homogéneamente; no
-  concatenar números con distinta base. El build falla si falta algún año de precios
-  o alguna de las magnitudes laborales necesarias.
+### Coste de la deuda y simulador de repago
 
-En el perfil usado, 2000–2025 deja un aumento del bruto nominal del 88,68%,
-precios del 77,83% y neto real del 1,21%. La carga laboral pasa de 38,63% a 41,44%
-del coste. Son una comparación del perfil medio de referencia, no un seguimiento
-de una persona ni una estimación específica de jóvenes.
+`data/official/repayment-plan.json` configura el año, horizonte, inflación hipotética,
+reglas de revalorización y partidas COFOG. `benefitsSourceId` apunta a
+`data/official/social-benefits-2024.json`: obligaciones reconocidas de contributivas,
+no contributivas, complementos a mínimos, IMV y prestaciones familiares.
+Cada fila identifica su localización en la fuente oficial. Se comprueban las sumas
+publicadas: no contributivas + mínimos, e IMV + familiares. Las contributivas no
+incluyen mínimos ni Clases Pasivas. No se agregan transferencias entre administraciones.
 
-El reparto apilado parte del coste laboral observado OCDE de cada año y separa
-IRPF, cuota empresarial y cuota del trabajador. Después incorpora IVA y la carga
-adicional del escenario; el resto es bienes sin impuestos + ahorro. Todas las
-partidas suman 100. Por defecto, todo el neto se gasta al IVA general histórico.
-El año seleccionado muestra ambos resultados, antes y después del consumo.
-La vivienda es una compra puntual y no se añade automáticamente a cada nómina.
+El simulador empieza sin cambios. Las pestañas conservan cambios independientes
+entre −100% y +100% del gasto de referencia. El resultado principal muestra déficit,
+equilibrio o superávit después de intereses, y cuánto principal se devuelve el
+primer año. Tipos, inflación, revalorización y plazo están en opciones desplegables.
+Los resultados iniciales y fuentes se generan también sin JavaScript.
 
-El ejemplo de vivienda conserva 200.000 € de precio antes de IVA para aislar el
-cambio del 7% al 10% (14.000 € → 20.000 €). La pérdida de acceso a la deducción
-para nuevas adquisiciones desde 2013 se distingue del régimen transitorio. El
-límite ilustrativo de 1.356 € supone 15% (7,5% estatal + 7,5% autonómico) sobre
-9.040 €, cumpliendo requisitos y cuota suficiente. Hay deducciones y porcentajes
-autonómicos diferentes. No se presenta como impuesto exclusivo por edad ni
-como demostración de que todos los jóvenes paguen más que todas las personas mayores.
+`src/shared/repayment.mjs` comparte cálculos entre navegador y pruebas. Saldo
+primario = saldo público + intereses; deuda siguiente = deuda anterior + intereses
+− saldo primario con las medidas, con mínimo cero. El ahorro de intereses entra
+al reducir el principal; no se suma dos veces. El objetivo aplica amortización a
+tipo constante, con caso de interés cero.
+
+Por defecto se mantiene IPC. Un recorte contributivo del 10% ahorra el 10% de su
+base. Si se cambia la actualización, el factor que queda es (1 + subida elegida)
+× (1 − recorte) / (1 + IPC supuesto); el ahorro es base × (1 − factor). Se muestra
+el efecto nominal y en poder adquisitivo. Cambiar la revalorización solo afecta
+al bloque contributivo, y no acumula congelaciones sucesivas. Los otros bloques
+se recortan directamente sobre su base, sin volver a recortar un total agregado.
+
+Las partidas cubren las diez funciones COFOG. Servicios generales resta
+D.41 para excluir intereses. El botón de completar conserva las prestaciones,
+los ingresos y las otras seis funciones, y sustituye los cambios de servicios
+generales, asuntos económicos, sanidad y educación por un porcentaje común
+para alcanzar el objetivo. Es un ejemplo matemático; no estima los efectos sobre
+servicios, actividad, demografía o recaudación. Las bases presupuestarias de
+Seguridad Social no se presentan como una reconciliación con Eurostat.
+
+### Variaciones de gasto, impuestos y crecimiento
+
+El selector de gasto incluye las diez funciones COFOG, ordenadas por importe.
+Los controles de pantalla usan cambios de gasto: negativo reduce, positivo aumenta.
+Los cálculos conservan internamente el signo de ahorro (contrario). Protección
+social aplica su variación al importe que queda después de cambios individuales
+en prestaciones: no suma un recorte sobre dos bases solapadas. Su encaje con las
+bases presupuestarias de Seguridad Social se identifica como aproximación.
+La suma de las diez bases excluye intereses, que se calculan sobre deuda pendiente.
+
+La recaudación fiscal base incluye impuestos y cotizaciones. El cambio fiscal
+es un cambio proporcional de recaudación, no de puntos en tipos. El crecimiento
+es nominal y compuesto: ingresos fiscales del año t = base × (1 + cambio fiscal)
+× (1 + crecimiento)^t. Se supone elasticidad uno y constantes los otros ingresos
+y gastos tras las medidas. No estima respuestas a impuestos, recortes o inflación.
+`repaymentRevenue` genera ingresos por año; `repaymentProjection` admite saldos
+primarios anuales. `requiredSpendingAdjustment` descuenta esos flujos para
+calcular el ajuste de gasto constante que completa el plazo elegido.
+
+La gráfica histórica de saldo añade la deuda total al cierre del año (Banco de
+España), con eje derecho propio y valores exactos en el tooltip, el resumen del
+año elegido y la tabla. Si una serie se amplía sin una observación de deuda,
+se muestra «sin dato» y un hueco en la línea; no se inventa ni se arrastra otro año.

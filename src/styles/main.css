@@ -335,7 +335,7 @@ td { text-align:right; white-space:nowrap; }
 @media (pointer:coarse) { select { font-size:16px !important; } }
 @media (min-width:1081px) { .interest-bill { position:sticky; top:24px; } }
 
-/* Future budgets, comparable public finances and the worker's euro. */
+/* Future budgets and comparable public finances. */
 .future-section { margin-top:60px; padding:30px; background:var(--ink); color:#fff; border-radius:6px; }
 .future-section .section-index { color:var(--acid); }
 .future-section h2 { font-size:clamp(32px,4vw,52px); line-height:1.05; }
@@ -360,7 +360,6 @@ td { text-align:right; white-space:nowrap; }
 .finance-legend span { display:flex; align-items:center; gap:7px; }
 .finance-legend i { width:18px; height:4px; }
 .tax-dot { background:#a84919; }.revenue-dot { background:#3274a2; }.spend-dot { background:#10243e; }
-.worker-section { padding-top:65px; }
 @media (max-width:760px) {
  .future-section { margin-top:45px; padding:22px; }
  .future-steps { grid-template-columns:1fr; gap:16px; }
@@ -369,7 +368,6 @@ td { text-align:right; white-space:nowrap; }
  .finance-kpis { grid-template-columns:1fr; gap:10px; }
  .finance-kpis > div { padding:16px; }.finance-kpis strong { font-size:30px; }
  .finance-chart-card { padding:18px 12px; }#finance-chart { height:270px; }
- .worker-section { padding-top:55px; }
 }
 @media (max-width:760px) {
  .finance-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
@@ -378,7 +376,7 @@ td { text-align:right; white-space:nowrap; }
  .finance-kpis strong { font-size:clamp(23px,6.2vw,30px); }
 }
 
-/* A shared year links public revenue with the worker's retained share. */
+/* Public revenue breakdown for the selected fiscal year. */
 .income-panel { margin-top:22px; padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; }
 .income-heading { display:flex; justify-content:space-between; gap:24px; align-items:start; }
 .income-heading h3 { font-size:23px; line-height:1.2; }
@@ -396,30 +394,12 @@ td { text-align:right; white-space:nowrap; }
 .income-track { height:7px; background:#e8edf0; border-radius:3px; overflow:hidden; margin-top:8px; }
 .income-track span { display:block; height:100%; background:#3274a2; }
 .income-part p,.income-method { color:var(--muted); font-size:12px; line-height:1.6; margin-top:8px; }
-.finance-worker-link { display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; margin-top:24px; padding:18px; background:#edf4df; border-radius:4px; }
-.finance-worker-link > span { flex:1 1 250px; font-size:14px; }
-.finance-worker-link strong { font-size:25px; color:#436828; }
-.finance-worker-link a { font-size:13px; text-decoration:underline; min-height:44px; display:flex; align-items:center; }
-.worker-history-kpis { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:24px 0; }
-.worker-history-kpis > div { border:1px solid var(--line); padding:20px; border-radius:4px; background:#fff; }
-.worker-history-kpis span,.worker-history-kpis small { display:block; font-size:12px; color:var(--muted); }
-.worker-history-kpis strong { display:block; font-size:clamp(26px,3vw,40px); letter-spacing:-.04em; margin:10px 0; }
-.worker-history-kpis > div:last-child { background:#fff0e8; }
-.worker-history-kpis > div:last-child strong { color:#a84919; }
-.worker-chart-card { padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; }
-#worker-chart { width:100%; height:320px; margin-top:12px; }
-.worker-net-dot { background:#436828; }.worker-base-dot { background:#3274a2; }
-.worker-year-result { padding:16px; background:#edf4df; border-radius:4px; }
-.worker-year-result strong { color:#436828; font-size:22px; }
-.worker-year-result p { color:var(--muted); font-size:13px; margin-top:6px; }
 @media(max-width:760px) {
  .income-panel { padding:20px 16px; }.income-heading { flex-direction:column; gap:12px; }.income-heading > div:last-child { text-align:left; }
  .income-parts { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 12px; }
- .worker-history-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }.worker-history-kpis > div { padding:14px; }.worker-history-kpis > div:last-child { grid-column:1/-1; }
- .worker-chart-card { padding:20px 12px; }#worker-chart { height:280px; }
 }
 
-/* Fiscal burden and consumption scenarios remain readable on narrow screens. */
+/* Public balance and the MEI calendar remain readable on narrow screens. */
 .fiscal-callout { margin:22px 0; padding:20px; border-left:4px solid #a84919; background:#fff0e8; font-size:14px; line-height:1.7; }
 .fiscal-callout strong { display:block; font-size:18px; }.fiscal-callout p { margin-top:6px; }
 .balance-panel,.youth-card { margin-top:24px; padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; }
@@ -427,14 +407,6 @@ td { text-align:right; white-space:nowrap; }
 .balance-result { font-size:clamp(20px,3vw,28px); font-weight:750; margin:18px 0 6px; font-variant-numeric:tabular-nums; }
 .balance-result[data-sign="deficit"] { color:#bb3434; }.balance-result[data-sign="surplus"] { color:#436828; }
 .surplus-dot { background:#436828; }.deficit-dot { background:#bb3434; }
-.consumption-controls { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; padding:20px; background:#edf2f5; margin:22px 0; border-radius:6px; }
-.consumption-controls label { display:grid; grid-template-columns:1fr auto; align-content:start; align-items:center; gap:8px; font-size:13px; font-weight:650; }
-.consumption-controls select,.consumption-controls input { grid-column:1/-1; width:100%; min-width:0; min-height:44px; font:inherit; accent-color:#436828; }
-.consumption-controls select { padding:8px; background:#fff; border:1px solid var(--line); border-radius:4px; }
-.consumption-controls p { grid-column:1/-1; font-size:12px; color:var(--muted); line-height:1.6; }
-.worker-breakdown { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-top:18px; }
-.worker-breakdown > div { padding:12px; border:1px solid var(--line); border-radius:4px; }
-.worker-breakdown span { font-size:12px; display:block; color:var(--muted); }.worker-breakdown strong { display:block; font-size:20px; margin-top:6px; }
 .mei-timeline { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:14px; margin:30px 0; }
 .mei-year { text-align:center; min-width:0; }.mei-year strong { color:#a84919; font-size:22px; }.mei-year b,.mei-year small { display:block; margin-top:8px; }.mei-year small { color:var(--muted); font-size:10px; }
 .mei-bar { height:145px; display:flex; align-items:end; background:#f7f1ed; border-bottom:2px solid var(--ink); margin-top:12px; }.mei-bar span { width:100%; background:#a84919; }
@@ -442,36 +414,50 @@ td { text-align:right; white-space:nowrap; }
 .youth-example { padding:18px; background:#fff0e8; border-radius:4px; line-height:1.7; }.youth-example p { font-size:14px; margin-top:6px; }
 @media(max-width:760px) {
  .balance-panel,.youth-card { padding:20px 12px; }#balance-chart { height:280px; }
- .consumption-controls { grid-template-columns:1fr; padding:16px; }.worker-breakdown { grid-template-columns:repeat(2,minmax(0,1fr)); }
  .mei-timeline { gap:6px; }.mei-year strong { font-size:clamp(12px,3.3vw,20px); }.mei-year b { font-size:12px; }.mei-year small { font-size:9px; }.mei-bar { height:100px; }
 }
 
-/* Historical taxes and wages, each with its own explicit denominator. */
-.common-tax-choices { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:26px 0 18px; }
-.common-tax-choice { text-align:left; min-width:0; padding:20px 16px; border:1px solid var(--line); border-radius:5px; background:#fff; color:var(--ink); font:inherit; cursor:pointer; }
-.common-tax-choice.active { background:#fff0e8; border-color:#a84919; box-shadow:inset 0 -3px #a84919; }
-.common-tax-choice > span { display:block; font-size:14px; font-weight:700; }.common-tax-choice strong { display:block; font-size:clamp(19px,2.2vw,29px); margin:12px 0; letter-spacing:-.04em; }.common-tax-choice b { color:var(--muted); font-weight:400; }
-.common-tax-choice small { display:block; font-size:11px; color:var(--muted); line-height:1.6; }
-.tax-history-period { font-size:13px; color:var(--muted); }.common-tax-result { padding:14px 16px; background:#fff0e8; border-radius:4px; color:#a84919; font-weight:700; }
-.tax-history-sources { display:flex; flex-wrap:wrap; gap:0 18px; margin-top:10px; }.tax-history-sources a { display:flex; align-items:center; font-size:12px; min-height:44px; text-decoration:underline; }
-.housing-history { display:grid; grid-template-columns:1fr 1fr; gap:24px; padding:26px; background:#fff0e8; border:1px solid #ecd7c9; border-radius:6px; margin:32px 0 52px; }
-.housing-history h3,.earnings-heading h3 { font-size:clamp(26px,3.3vw,38px); line-height:1.12; letter-spacing:-.04em; margin-top:12px; }
-.housing-history p { font-size:13px; line-height:1.7; margin-top:12px; }.housing-comparison { display:grid; grid-template-columns:1fr 1fr; gap:14px; align-content:center; }
-.housing-comparison div { padding:16px; border:1px solid #ecd7c9; background:#fff; border-radius:4px; }.housing-comparison span { font-size:12px; color:var(--muted); }.housing-comparison strong { display:block; font-size:clamp(24px,3vw,35px); margin-top:8px; letter-spacing:-.04em; }.housing-comparison p { grid-column:1/-1; }.housing-comparison b { color:#a84919; }
-.housing-deduction,.housing-history > .income-method { grid-column:1/-1; }.housing-deduction { padding-top:20px; border-top:1px solid #ecd7c9; }.housing-deduction a { display:inline-flex; align-items:center; min-height:44px; font-size:12px; text-decoration:underline; }
-.earnings-heading p { font-size:14px; color:var(--muted); line-height:1.7; margin-top:14px; max-width:650px; }
-.earnings-chart-card,.state-share-card { padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; margin-top:24px; }
-#earnings-chart { height:320px; width:100%; margin:12px 0; }#state-share-chart { height:290px; width:100%; margin:14px 0; }
-.earnings-year-result,.state-share-result { font-size:14px; line-height:1.7; margin-top:18px; padding:16px; background:#edf4df; border-radius:4px; }
-.gross-dot { background:#3274a2; }.prices-dot { background:#a84919; }.irpf-dot { background:#805d99; }.employer-dot { background:#b86c35; }.employee-dot { background:#e6ac72; }.other-dot { background:#68788b; }
-.state-share-kpis { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0; }.state-share-kpis div { padding:18px; background:#fff0e8; border-radius:4px; }.state-share-kpis div:last-child { background:#edf4df; }.state-share-kpis span,.state-share-kpis small { display:block; font-size:12px; color:var(--muted); }.state-share-kpis strong { display:block; font-size:clamp(28px,3.5vw,42px); letter-spacing:-.04em; margin:10px 0; }
-.consumption-details { margin-top:22px; border-top:1px solid var(--line); }.consumption-details summary { padding:16px 0; cursor:pointer; font-size:13px; font-weight:700; min-height:44px; }
-.state-share-card .worker-breakdown { grid-template-columns:repeat(4,minmax(0,1fr)); }
+/* Debt costs and an explicit primary-balance repayment scenario. */
+.debt-cost-flow,.debt-cost-risks { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.debt-cost-flow article,.debt-cost-risks article { min-width:0; padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; }
+.debt-cost-flow span,.debt-cost-risks span { color:var(--muted); font-size:12px; }
+.debt-cost-flow strong,.debt-cost-risks strong { display:block; font-size:clamp(22px,2.6vw,34px); line-height:1.2; letter-spacing:-.04em; margin:14px 0; }
+.debt-cost-flow p,.debt-cost-risks p { font-size:13px; line-height:1.65; color:var(--muted); }
+.debt-cost-flow .debt-cost-interest { background:var(--ink); color:#fff; border-color:var(--ink); }.debt-cost-interest span,.debt-cost-interest p { color:#c7d4e0; }
+.debt-cost-comparison { margin:22px 0; padding:24px; background:#fff0e8; border-radius:6px; }.debt-cost-comparison h3 { font-size:24px; }.debt-cost-comparison p { font-size:14px; line-height:1.7; margin-top:10px; max-width:760px; }
+.cost-scale { max-width:760px; margin-top:22px; display:grid; gap:14px; }.cost-scale > div { display:grid; grid-template-columns:75px minmax(0,1fr) 60px; align-items:center; gap:12px; font-size:12px; }.cost-scale i { height:18px; width:100%; display:block; background:#3274a2; border-radius:3px; }.cost-scale > div:last-child i { background:#a84919; }
+.repay-planner { margin-top:38px; padding:30px; border:1px solid var(--line); background:#fff; border-radius:6px; }.repay-planner-heading h3 { font-size:clamp(28px,3vw,42px); line-height:1.1; letter-spacing:-.05em; margin:10px 0; }.repay-planner-heading p { max-width:750px; font-size:14px; line-height:1.7; color:var(--muted); }
+.repay-assumptions { display:grid; grid-template-columns:1fr 1fr; gap:20px; background:#edf2f5; border-radius:5px; padding:20px; margin:24px 0; }.repay-assumptions > p { grid-column:1/-1; color:var(--muted); font-size:12px; line-height:1.6; }
+.repay-assumptions label,.repay-pensions label,.repay-cut label { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:8px; font-size:13px; font-weight:700; }
+.repay-interactive input { width:100%; min-width:0; min-height:44px; accent-color:#436828; grid-column:1/-1; cursor:pointer; }.repay-interactive output { font-variant-numeric:tabular-nums; color:#436828; }
+.repay-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; }.repay-measures,.repay-results { min-width:0; }
+.repay-pensions { min-width:0; margin:0; border:1px solid #ecd7c9; padding:20px; border-radius:5px; background:#fff0e8; }.repay-pensions legend { font-weight:750; padding:0 5px; font-size:16px; }.repay-pensions label { margin-top:12px; }.repay-pensions select { grid-column:1/-1; width:100%; min-width:0; min-height:44px; padding:10px; font:inherit; background:#fff; border:1px solid var(--line); border-radius:4px; }.repay-pensions p { font-size:12px; line-height:1.7; margin-top:12px; color:var(--muted); }.repay-pensions #repay-pension-effect { color:var(--ink); font-size:14px; font-weight:700; }
+.repay-other { margin-top:20px; border:1px solid var(--line); border-radius:5px; padding:0 16px; }.repay-other summary { min-height:48px; padding:14px 0; cursor:pointer; font-weight:700; font-size:14px; }.repay-cut { padding:18px 0; border-top:1px solid var(--line); margin-top:12px; }.repay-cut label { grid-template-columns:1fr; }.repay-cut p { font-size:11px; color:var(--muted); line-height:1.65; }
+.repay-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }.repay-actions button { min-height:44px; padding:12px 14px; font:inherit; font-size:13px; font-weight:700; border:1px solid var(--line); border-radius:4px; cursor:pointer; background:#fff; color:var(--ink); }.repay-actions button:first-child { background:#436828; color:#fff; border-color:#436828; }
+.repay-target { padding:22px; background:var(--ink); color:#fff; border-radius:5px; }.repay-target > span { font-size:13px; }.repay-target > strong { display:block; font-size:clamp(28px,3.5vw,44px); letter-spacing:-.05em; margin:12px 0; }.repay-target p { font-size:14px; line-height:1.6; color:#ffd0b6; }.repay-target p[data-met="true"] { color:#dbedba; }
+.repay-result-kpis { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:18px 0; }.repay-result-kpis > div { padding:14px; background:#f3f6ef; border-radius:4px; min-width:0; }.repay-result-kpis span { color:var(--muted); font-size:12px; display:block; }.repay-result-kpis strong { display:block; font-size:clamp(19px,2vw,26px); margin-top:10px; letter-spacing:-.04em; }
+.repay-steps { list-style:none; padding:0; display:grid; gap:16px; }.repay-steps strong { display:block; font-size:15px; }.repay-steps span { display:block; font-size:13px; color:var(--muted); margin-top:6px; line-height:1.6; }
+.repay-chart-card { margin-top:28px; padding-top:24px; border-top:1px solid var(--line); }.repay-chart-card h3 { font-size:24px; }.repay-chart-card > p { font-size:12px; color:var(--muted); margin-top:8px; }#repay-chart { height:340px; width:100%; }.repay-method p { font-size:13px; color:var(--muted); line-height:1.75; margin:14px 0; }
 @media(max-width:760px) {
- .common-tax-choices { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }.common-tax-choice { padding:14px 12px; }.common-tax-choice strong { font-size:clamp(18px,5.5vw,27px); }.common-tax-choice > span { font-size:13px; }
- .housing-history { grid-template-columns:1fr; padding:20px 16px; gap:18px; }.housing-comparison strong { font-size:clamp(23px,7vw,32px); }.housing-comparison div { padding:12px; }
- .earnings-chart-card,.state-share-card { padding:20px 12px; }#earnings-chart { height:280px; }#state-share-chart { height:260px; }
- .state-share-kpis { gap:10px; }.state-share-kpis div { padding:14px; }.state-share-card .worker-breakdown { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .debt-cost-flow,.debt-cost-risks,.repay-layout,.repay-assumptions { grid-template-columns:1fr; }
+ .debt-cost-flow article,.debt-cost-risks article,.debt-cost-comparison { padding:20px; }.repay-planner { padding:20px 12px; }.repay-assumptions { padding:16px; }.repay-pensions { padding:16px 12px; }
+ #repay-chart { height:280px; }.repay-actions button { width:100%; }.repay-target { padding:18px; }
 }
-.earnings-chart-card .finances-controls { max-width:100%; flex-wrap:wrap; }
-#earnings-mode { min-width:0; max-width:100%; }
+
+.repay-step-title { font-size:20px; line-height:1.3; margin:8px 0 12px; }
+.repay-start { display:flex; flex-direction:column; gap:8px; background:#fff0e8; border-left:4px solid #bb3434; padding:18px; margin:22px 0; font-size:15px; }.repay-start span { font-size:13px; color:var(--muted); }
+.repay-benefit-tabs { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }.repay-benefit-tabs button { min-height:44px; padding:10px 12px; border:1px solid var(--line); border-radius:4px; background:#fff; font:inherit; font-size:13px; cursor:pointer; color:var(--ink); }.repay-benefit-tabs button[aria-pressed="true"] { background:var(--ink); color:#fff; border-color:var(--ink); }
+.repay-benefit-panel { padding:20px; border:1px solid #ecd7c9; border-radius:5px; background:#fff0e8; }.repay-benefit-panel[hidden] { display:none; }.repay-benefit-panel h4 { font-size:23px; margin:0; }.repay-benefit-panel p { font-size:12px; color:var(--muted); line-height:1.7; margin-top:12px; }.repay-benefit-panel label { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-weight:700; font-size:14px; margin-top:20px; }.repay-benefit-panel .repay-benefit-saving { font-size:18px; font-weight:750; color:#436828; }
+.repay-balance { padding:22px; border-radius:6px; border:1px solid #e4bebe; background:#fff0ef; color:#a32e2e; }.repay-balance > span { font-size:12px; display:block; }.repay-balance strong { display:block; font-size:32px; margin:12px 0 6px; }.repay-balance > b { display:block; font-size:clamp(24px,3vw,34px); letter-spacing:-.04em; }.repay-balance p { font-size:14px; line-height:1.7; margin-top:14px; }.repay-balance[data-sign="surplus"] { background:#edf4df; border-color:#bdd197; color:#36591e; }.repay-balance[data-sign="balanced"] { background:#edf2f5; color:var(--ink); border-color:var(--line); }
+.repay-account,.repay-chosen { font-size:13px; }.repay-account p,.repay-chosen p { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--line); }.repay-account p:last-child { font-weight:750; }.repay-account b,.repay-chosen b { flex-shrink:0; font-variant-numeric:tabular-nums; }.repay-chosen { margin-top:20px; color:var(--muted); }.repay-chosen strong { color:var(--ink); }
+.repay-meter-label { margin-top:18px; font-size:12px; font-weight:700; }.repay-meter { height:12px; border-radius:4px; background:#f2d9d4; overflow:hidden; margin-top:8px; }.repay-meter span { display:block; height:100%; background:#436828; }
+.repay-goal { margin-top:28px; }.repay-goal > summary { font-size:17px; line-height:1.4; }.repay-goal .repay-target { margin-top:20px; }.repay-pensions { border:0; background:transparent; padding:0 0 20px; }
+@media(max-width:760px) { .repay-benefit-panel { padding:18px 12px; }.repay-benefit-tabs { gap:6px; }.repay-benefit-tabs button { flex:1 1 auto; }.repay-balance { padding:18px; }.repay-account,.repay-chosen { font-size:12px; } }
+
+.balance-debt-result { color:#3274a2; font-size:clamp(16px,2.4vw,23px); font-weight:700; margin:8px 0 18px; }
+.repay-spending-choices { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin:20px 0 26px; }.repay-spending-choices button { min-width:0; text-align:left; border:1px solid var(--line); background:#fff; border-radius:5px; padding:16px 12px; font:inherit; color:var(--ink); cursor:pointer; }.repay-spending-choices button[aria-pressed="true"] { background:var(--ink); color:#fff; border-color:var(--ink); }.repay-spending-choices span { display:block; font-size:12px; min-height:38px; line-height:1.5; }.repay-spending-choices strong { display:block; font-size:clamp(16px,1.6vw,23px); letter-spacing:-.04em; margin:10px 0; }.repay-spending-choices small { display:block; font-size:11px; opacity:.8; }
+.repay-spending-panel { border:1px solid #ecd7c9; border-radius:5px; background:#fff0e8; padding:20px; margin:0; }.repay-spending-panel[hidden] { display:none; }.repay-spending-panel h4 { margin:0 0 18px; font-size:24px; line-height:1.2; }.repay-range-ends { display:flex; justify-content:space-between; gap:12px; }.repay-spending-panel label { grid-template-columns:1fr auto; }
+.repay-income { margin-top:22px; background:#edf2f5; border:1px solid var(--line); border-radius:5px; padding:20px; }.repay-income h4 { font-size:22px; line-height:1.3; margin:0 0 18px; }.repay-income label { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px; font-weight:700; margin-top:18px; }.repay-income p { font-size:12px; color:var(--muted); line-height:1.7; }.repay-income > strong { font-size:14px; display:block; margin-top:18px; }
+.repay-results { position:sticky; top:20px; align-self:start; }
+@media(max-width:1000px) { .repay-spending-choices { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:760px) { .repay-spending-choices { grid-template-columns:repeat(2,minmax(0,1fr)); }.repay-spending-choices button { padding:14px 10px; }.repay-spending-choices strong { font-size:clamp(18px,5vw,24px); }.repay-results { position:static; }.repay-income,.repay-spending-panel { padding:18px 12px; } }
