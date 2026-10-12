@@ -16,11 +16,16 @@ export async function buildSite(directory = 'public') {
   // Fully validate and assemble before touching the published page.
   const data = await loadData(root);
   const text = file => readFile(resolve(root, file), 'utf8');
-  let template = await text('src/index.html');
-  for (const match of template.matchAll(/<!-- COMPONENT:([a-z-]+) -->/g)) {
-    const component = await text(`src/components/${match[1]}.html`);
-    template = template.replace(match[0], () => component);
-  }
+  const assemble = async (template, parents = []) => {
+    for (const match of template.matchAll(/<!-- COMPONENT:([a-z-]+) -->/g)) {
+      const name = match[1];
+      if (parents.includes(name)) throw new Error('Componentes con referencia circular: ' + [...parents, name].join(' → '));
+      const component = await assemble(await text(`src/components/${name}.html`), [...parents, name]);
+      template = template.replace(match[0], () => component);
+    }
+    return template;
+  };
+  const template = await assemble(await text('src/index.html'));
   const [css, vendor, license, ...modules] = await Promise.all([
     text('src/styles/main.css'), text('src/vendor/echarts.min.js'), text('src/vendor/echarts.LICENSE.txt'),
     ...['helpers','indicators','debt-chart','interest','repayment','fiscal-timeline','finances','spending','budget','growth-chart','app'].map(name => text(`src/js/${name}.js`))

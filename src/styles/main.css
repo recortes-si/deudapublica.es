@@ -16,11 +16,6 @@
       h1 { max-width:780px; margin:19px 0 23px; font-size:clamp(52px, 7.2vw, 108px); line-height:.9; letter-spacing:-.085em; font-weight:850; }
       h1 em { color:var(--orange); font-style:normal; }
       .lede { max-width:530px; color:#536579; font-size:18px; line-height:1.55; }
-      .hero-note { border-top:1px solid var(--ink); padding-top:17px; margin-bottom:4px; }
-      .hero-note strong { display:block; font-size:clamp(47px, 6vw, 78px); line-height:1; letter-spacing:-.08em; }
-      .hero-note strong span { color:var(--orange); }
-      .hero-note p { margin:13px 0 0; color:var(--muted); font-size:13px; }
-      .hero-note small { display:block; margin-top:20px; color:#84909c; font-size:10px; }
       .counter { padding:40px 0 0; }
       .counter-card { padding:30px 32px 27px; background:var(--ink); color:var(--white); border-radius:4px; }
       .counter-head { display:flex; justify-content:space-between; align-items:center; gap:16px; }
@@ -144,17 +139,6 @@ main:focus { outline:none; }
 .hero h1 { font-size:clamp(46px, 6.7vw, 94px); letter-spacing:-.075em; line-height:1; }
 .hero-cta { display:inline-flex; align-items:center; gap:22px; padding:14px 0 5px; border-bottom:2px solid var(--ink); font-size:13px; font-weight:750; }
 .hero-cta span { font-size:24px; }
-.hero-note { border:0; padding:30px; background:#e9eee5; border-radius:4px; }
-.hero-note strong { margin-top:18px; font-size:clamp(42px, 5.6vw, 74px); }
-.hero-note small, .context-note { color:#526579; font-size:12px; }
-.ratio-visual { margin-top:32px; }
-.ratio-label { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
-.ratio-label b { font-size:20px; }
-.ratio-meter { position:relative; margin-top:10px; height:22px; border-radius:3px; background:#d0d8cc; }
-.ratio-meter span { display:block; height:100%; background:var(--orange); border-radius:3px; }
-.ratio-meter i { position:absolute; left:66.6667%; top:-6px; bottom:-6px; border-left:2px solid var(--ink); }
-.ratio-scale { display:flex; justify-content:space-between; font-size:10px; margin-top:12px; }
-.ratio-scale span:nth-child(2) { margin-left:auto; margin-right:12%; }
 .counter { padding-top:0; margin-bottom:28px; }
 .counter-card { background:linear-gradient(130deg, #10243e 55%, #213d55); }
 .counter-bottom { display:flex; justify-content:space-between; gap:20px; align-items:center; margin-top:18px; }
@@ -203,7 +187,6 @@ td { text-align:right; white-space:nowrap; }
   .topbar { flex-wrap:wrap; gap:8px 20px; }
   .nav { order:3; width:100%; justify-content:space-between; gap:12px; }
   .hero { gap:30px; }
-  .hero-note { padding:24px; }
   .chart-top { flex-wrap:wrap; }
 }
 @media (max-width:760px) {
@@ -214,8 +197,6 @@ td { text-align:right; white-space:nowrap; }
   .nav { display:flex; font-size:12px; overflow-x:auto; }
   .hero { padding:42px 0 32px; gap:28px; }
   .hero h1 { font-size:clamp(44px, 10.5vw, 74px); }
-  .hero-note { padding:22px; }
-  .hero-note strong { font-size:clamp(37px, 9vw, 60px); }
   .counter-readout { font-size:clamp(19px, 6.3vw, 40px); letter-spacing:-.035em; }
   .counter-head { align-items:flex-start; flex-wrap:wrap; gap:10px; }
   .counter-meta { grid-template-columns:repeat(3, 1fr); margin-top:22px; }
@@ -522,3 +503,17 @@ td { text-align:right; white-space:nowrap; }
   .donate-btn { padding:6px 12px; min-height:36px; }
   .footer-links { justify-content:flex-start; }
 }
+
+/* The four key indicators replace the former hero debt card. */
+.hero { grid-template-columns:minmax(0,1.07fr) minmax(0,1fr); gap:clamp(24px,4vw,64px); align-items:center; }
+.hero > * { min-width:0; }
+.hero .stats { grid-template-columns:repeat(2,minmax(0,1fr)); background:#fff; border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+.hero .stat,.hero .stat:not(:first-child) { min-width:0; min-height:160px; padding:22px 16px; border:0; display:flex; flex-direction:column; align-items:flex-start; }
+.hero .stat:nth-child(odd) { border-right:1px solid var(--line); }
+.hero .stat:nth-child(n+3) { border-top:1px solid var(--line); }
+.hero .stat-value { font-size:clamp(24px,2.6vw,38px); white-space:nowrap; font-variant-numeric:tabular-nums; }
+.hero .stat-value i { font-size:.55em; letter-spacing:-.025em; }
+.hero .stat-label { line-height:1.5; margin-bottom:14px; }
+.hero .stat-change { margin-top:auto; line-height:1.5; }
+.hero a.stat-change { text-decoration:underline; text-underline-offset:3px; }
+@media(max-width:760px) { .hero { grid-template-columns:minmax(0,1fr); gap:28px; } .hero .stat,.hero .stat:not(:first-child) { padding:18px 12px; min-height:155px; } .hero .stat-value { font-size:clamp(24px,5.8vw,36px); } }

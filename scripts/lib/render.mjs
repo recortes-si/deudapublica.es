@@ -44,7 +44,7 @@ export function templateValues(data) {
     })(),
     TAX_TABLE: `<div class="table-scroll"><table><caption>Bases anuales · ${interest.year} · millones de euros · ámbitos y criterios por partida</caption><thead><tr><th scope="col">Partida</th><th scope="col">Base (M€)</th><th scope="col">Fuente y metodología</th></tr></thead><tbody>${interest.taxes.items.map(item => `<tr><th scope="row">${escapeHtml(item.name)}</th><td>${format(item.value,3)}</td><td><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(item.sourceLocator)} ↗</a><p>${escapeHtml(item.basis)}. ${escapeHtml(item.scope)}</p><p>${escapeHtml(item.note)}</p></td></tr>`).join('')}</tbody></table></div>`,
     DEBT: format(latest.euros, 2), YEAR: latest.year, START_YEAR: data.debt[0].year, PREVIOUS_YEAR: previous.year,
-    RATIO_WIDTH: Math.min(100, latest.ratio / 150 * 100), RATIO: format(latest.ratio), RATIO_CHANGE: signed(latest.ratio-previous.ratio), DEBT_CHANGE: signed((latest.euros/previous.euros-1)*100),
+    RATIO: format(latest.ratio), RATIO_CHANGE: signed(latest.ratio-previous.ratio), DEBT_CHANGE: signed((latest.euros/previous.euros-1)*100),
     DEBT_DIVERGENCE_NOTE: (() => {
       for (let i = data.debt.length - 1; i >= 1; i--) {
         const a = data.debt[i - 1], b = data.debt[i];
