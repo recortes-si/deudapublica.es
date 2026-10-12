@@ -6,7 +6,7 @@
       .shell { max-width:1360px; margin:auto; padding:0 5vw; }
       .topbar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px 20px; padding:26px 0; border-bottom:1px solid var(--line); }
       .brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.04em; font-size:19px; }
-      .mark { width:30px; height:30px; flex:none; display:block; border-radius:50%; }
+      .mark { width:36px; height:36px; flex:none; display:block; border-radius:8px; object-fit:contain; }
       .nav { display:flex; flex-wrap:wrap; gap:12px 24px; order:3; width:100%; color:var(--muted); font-size:13px; font-weight:700; }
       .nav a:hover { color:var(--ink); }
       .updated { color:var(--muted); font-size:11px; letter-spacing:.04em; text-transform:uppercase; }

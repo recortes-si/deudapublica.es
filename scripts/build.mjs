@@ -28,11 +28,14 @@ export async function buildSite(directory = 'public') {
   modules.unshift((await text('src/shared/repayment.mjs')).replace(/^export /gm, ''), (await text('src/shared/fiscal.mjs')).replace(/^export /gm, ''));
   const json = JSON.stringify(data).replace(/</g, '\\u003c');
   const inline = script => script.replace(/<\/script/gi, '<\\/script');
-  const page = fillTemplate(template, templateValues(data))
+  const imageUri = async name => 'data:image/png;base64,' + (await readFile(resolve(root, 'src/assets', name))).toString('base64');
+  const [logo, favicon, touchIcon] = await Promise.all(['logo-es.png','favicon-es.png','apple-touch-icon-es.png'].map(imageUri));
+  const page = fillTemplate(template, { ...templateValues(data), BRAND_LOGO: logo })
+    .replace('<!-- BRAND_ICONS -->', () => `<link rel="icon" type="image/png" sizes="64x64" href="${favicon}" />\n    <link rel="apple-touch-icon" sizes="180x180" href="${touchIcon}" />\n    <meta name="theme-color" content="#10243e" />`)
     .replace('<!-- STYLES -->', () => `<style>\n${css}\n</style>`)
     .replace('<!-- DATA_INJECTION -->', () => `<script>window.APP_DATA = ${json};</script>`)
     .replace('<!-- SCRIPTS -->', () => `<!-- Apache ECharts license\n${license.replace(/--/g, '—')}\n-->\n<script>${inline(vendor)}</script>\n<script>\n(() => {\n${inline(modules.join('\n'))}\n})();\n</script>`);
-  if (/<!-- (COMPONENT:|STYLES|DATA_INJECTION|SCRIPTS)|\{\{[A-Z_]+\}\}/.test(page)) throw new Error('Quedan marcadores sin resolver');
+  if (/<!-- (COMPONENT:|STYLES|BRAND_ICONS|DATA_INJECTION|SCRIPTS)|\{\{[A-Z_]+\}\}/.test(page)) throw new Error('Quedan marcadores sin resolver');
   await mkdir(output, { recursive: true });
   const temporary = resolve(output, 'index.html.tmp');
   await writeFile(temporary, page);
