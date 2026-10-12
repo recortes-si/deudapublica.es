@@ -29,5 +29,7 @@
     "insurance"
   ],
   "financesSourceId": "eurostat-finanzas",
-  "benefitsSourceId": "ss-prestaciones-2024"
+  "benefitsSourceId": "ss-prestaciones-2024",
+  "gdpPerCapitaSourceId": "worldbank-gdp-per-capita",
+  "populationSeriesSourceId": "worldbank-poblacion"
 }

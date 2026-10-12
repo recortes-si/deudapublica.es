@@ -57,6 +57,30 @@
       "license": "https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1254735849170&p=1254735849170&pagename=ProductosYServicios%2FPYSLayout"
     },
     {
+      "id": "worldbank-gdp-per-capita",
+      "title": "PIB (corriente), PIB per cápita (corriente) y PIB per cápita real (constante 2015) de España",
+      "publisher": "Banco Mundial · World Development Indicators",
+      "period": "1995-2025",
+      "updated": "2026-10-08",
+      "file": "official/gdp-per-capita.json",
+      "url": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD",
+      "download": "https://data.worldbank.org/indicator/NY.GDP.MKTP.CD",
+      "license": "https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets",
+      "note": "Indicadores NY.GDP.MKTP.CD, NY.GDP.PCAP.CD y NY.GDP.PCAP.KD. El gráfico muestra un índice base 100 = 2000."
+    },
+    {
+      "id": "worldbank-poblacion",
+      "title": "Población total de España (serie histórica)",
+      "publisher": "Banco Mundial · World Development Indicators",
+      "period": "1995-2025",
+      "updated": "2026-10-08",
+      "file": "official/poblacion-serie.json",
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL",
+      "download": "https://api.worldbank.org/v2/country/ES/indicator/SP.POP.TOTL",
+      "license": "https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets",
+      "note": "Indicador SP.POP.TOTL. Se usa para calcular la deuda por habitante en el gráfico de evolución."
+    },
+    {
       "id": "reference-deuda-publica-espana",
       "title": "Deuda Pública de España · referencia visual y metodológica",
       "publisher": "deuda-publica-espana.com",

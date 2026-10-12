@@ -1,0 +1,130 @@
+{
+  "sourceId": "worldbank-poblacion",
+  "unit": "habitantes a 1 de julio · Banco Mundial",
+  "series": [
+    {
+      "year": 1995,
+      "population": 39724050
+    },
+    {
+      "year": 1996,
+      "population": 39889852
+    },
+    {
+      "year": 1997,
+      "population": 40057389
+    },
+    {
+      "year": 1998,
+      "population": 40223509
+    },
+    {
+      "year": 1999,
+      "population": 40386875
+    },
+    {
+      "year": 2000,
+      "population": 40567864
+    },
+    {
+      "year": 2001,
+      "population": 40850412
+    },
+    {
+      "year": 2002,
+      "population": 41431558
+    },
+    {
+      "year": 2003,
+      "population": 42187645
+    },
+    {
+      "year": 2004,
+      "population": 42921895
+    },
+    {
+      "year": 2005,
+      "population": 43653155
+    },
+    {
+      "year": 2006,
+      "population": 44397319
+    },
+    {
+      "year": 2007,
+      "population": 45226803
+    },
+    {
+      "year": 2008,
+      "population": 45954106
+    },
+    {
+      "year": 2009,
+      "population": 46362946
+    },
+    {
+      "year": 2010,
+      "population": 46576897
+    },
+    {
+      "year": 2011,
+      "population": 46742697
+    },
+    {
+      "year": 2012,
+      "population": 46773055
+    },
+    {
+      "year": 2013,
+      "population": 46604197
+    },
+    {
+      "year": 2014,
+      "population": 46460733
+    },
+    {
+      "year": 2015,
+      "population": 46422303
+    },
+    {
+      "year": 2016,
+      "population": 46458139
+    },
+    {
+      "year": 2017,
+      "population": 46571232
+    },
+    {
+      "year": 2018,
+      "population": 46782011
+    },
+    {
+      "year": 2019,
+      "population": 47118501
+    },
+    {
+      "year": 2020,
+      "population": 47359424
+    },
+    {
+      "year": 2021,
+      "population": 47443821
+    },
+    {
+      "year": 2022,
+      "population": 47786102
+    },
+    {
+      "year": 2023,
+      "population": 48352528
+    },
+    {
+      "year": 2024,
+      "population": 48848840
+    },
+    {
+      "year": 2025,
+      "population": 49355143
+    }
+  ]
+}

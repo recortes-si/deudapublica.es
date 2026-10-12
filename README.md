@@ -349,4 +349,12 @@ se muestra «sin dato» y un hueco en la línea; no se inventa ni se arrastra ot
 
 `data/official/pge-2024-politicas.json` admite tantos niveles de `children` como sean necesarios. Los programas llevan su código oficial y cada política desglosada identifica la tabla 1.6, columna 2024-P, del documento de Hacienda. Los importes se expresan en millones y los hijos deben conservar el total de la política; el resto no separado y el redondeo se identifican expresamente. No mezclar ejecución de Seguridad Social ni COFOG con estos créditos presupuestados. El IMV y las prestaciones familiares permanecen agrupados como en el programa 221A.
 
-Orden editorial: situación y trayectoria de la deuda → factura futura e intereses → ingresos y déficit → gasto total → presupuesto estatal detallado → plan de repago → claves y fuentes. La navegación sigue el mismo orden y está disponible también en móviles.
+Orden editorial: situación y trayectoria de la deuda → factura futura e intereses → ingresos y déficit → gasto total → presupuesto estatal detallado → plan de repago → hacer crecer la economía → inmigración y cuentas públicas → precariedad y gasto → claves y fuentes. La navegación sigue el mismo orden y está disponible también en móviles.
+
+### Apartados comparativos (crecer, inmigración, precariedad)
+
+Tres secciones editoriales con cifras oficiales enlazadas (Banco Mundial, INE, Seguridad
+Social, Eurostat) y comentario propio. No se cargan a través del catálogo de datos:
+son análisis comparativo con fuentes citadas en línea, igual que las secciones de
+«factura futura» o «claves». El crecimiento del gasto que citan reutiliza las variables
+`FINANCE_SPEND_GROWTH` y `FINANCE_SOURCE` de la sección de finanzas públicas.

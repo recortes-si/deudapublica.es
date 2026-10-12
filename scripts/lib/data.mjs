@@ -93,6 +93,25 @@ export async function loadData(root) {
   const finances = financesModel(JSON.parse(financesText));
   const benefits = JSON.parse(await read('benefitsSourceId'));
   if (benefits.sourceId !== config.benefitsSourceId) throw new Error('Prestaciones: sourceId no coincide');
+  const gdpPerCapita = JSON.parse(await read('gdpPerCapitaSourceId'));
+  if (gdpPerCapita.sourceId !== config.gdpPerCapitaSourceId) throw new Error('PIB per cápita: sourceId no coincide');
+  if (!Number.isInteger(gdpPerCapita.baseYear) || !Array.isArray(gdpPerCapita.series) || gdpPerCapita.series.length < 2) throw new Error('PIB per cápita: serie o año base inválidos');
+  for (const row of gdpPerCapita.series) {
+    if (!Number.isInteger(row.year) || !(row.gdp > 0) || !(row.pcap > 0) || !(row.pcapReal > 0)) throw new Error(`PIB per cápita: fila inválida ${row.year}`);
+  }
+  const populationSeries = JSON.parse(await read('populationSeriesSourceId'));
+  if (populationSeries.sourceId !== config.populationSeriesSourceId) throw new Error('Población: sourceId no coincide');
+  if (!Array.isArray(populationSeries.series) || populationSeries.series.length < 2) throw new Error('Población: serie inválida');
+  const populationByYear = new Map();
+  for (const row of populationSeries.series) {
+    if (!Number.isInteger(row.year) || !(row.population > 0)) throw new Error(`Población: fila inválida ${row.year}`);
+    populationByYear.set(row.year, row.population);
+  }
+  for (const row of debt) {
+    const population = populationByYear.get(row.year);
+    row.population = population ?? null;
+    row.perCapita = population ? row.euros * 1e12 / population : null;
+  }
   const repayment = repaymentModel(await json('official/repayment-plan.json'), {debt,finances,interest,benefits,spendingHistory});
-  return { repayment, finances, interest, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
+  return { repayment, finances, interest, gdpPerCapita, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
 }

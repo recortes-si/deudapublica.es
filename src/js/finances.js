@@ -2,16 +2,17 @@ function initFinances({data,format,escapeHtml,reducedMotion},timeline) {
   const chart=echarts.init(document.querySelector('#finance-chart'),null,{renderer:'canvas'});
   const balanceChart=echarts.init(document.querySelector('#balance-chart'),null,{renderer:'canvas'});
   const debtByYear=new Map(data.debt.map(row=>[row.year,row.euros*1e6]));
+  const gdpByYear=new Map(data.debt.map(row=>[row.year,row.euros*1e6*100/row.ratio]));
   const period=document.querySelector('#finance-period');
   const slider=document.querySelector('#finance-year');
   function render() {
     const rows=data.finances.rows.filter(row=>period.value==='all' || row.year>data.finances.latest.year-Number(period.value));
     document.querySelector('#finance-unit').textContent=`Miles de millones de euros · ${rows[0].year}—${rows.at(-1).year}`;
-    chart.setOption({animation:!reducedMotion.matches,color:['#a84919','#3274a2','#10243e'],grid:{left:48,right:16,top:20,bottom:32},
+    chart.setOption({animation:!reducedMotion.matches,color:['#a84919','#3274a2','#10243e','#8b9baa'],grid:{left:48,right:56,top:22,bottom:32},
       tooltip:{trigger:'axis',confine:true,formatter:points=>`<strong>${points[0].axisValue}</strong><br>${points.map(point=>`${point.marker}${point.seriesName}: ${format(point.value*1000,0)} M€`).join('<br>')}`},
       xAxis:{type:'category',boundaryGap:false,data:rows.map(row=>String(row.year)),axisLabel:{fontSize:10,interval:Math.max(0,Math.floor(rows.length/5)-1)}},
-      yAxis:{type:'value',min:0,axisLabel:{fontSize:11},splitLine:{lineStyle:{color:'#e2e8e6'}}},
-      series:[['Impuestos + cotizaciones','fiscalRevenue'],['Ingresos totales','revenue'],['Gasto público','expenditure']].map(([name,key],i)=>({name,type:'line',data:rows.map(row=>row[key]/1000),smooth:false,showSymbol:false,lineStyle:{width:3,type:i===1?'dashed':'solid'},...(i===1?{markLine:{silent:true,symbol:'none',label:{show:false},lineStyle:{color:'#68788b',type:'dotted'},data:[{xAxis:String(timeline.year)}]}}:{})}))
+      yAxis:[{type:'value',min:0,axisLabel:{fontSize:11},splitLine:{lineStyle:{color:'#e2e8e6'}}},{type:'value',min:0,axisLabel:{fontSize:10,formatter:value=>format(value,0)},splitLine:{show:false}}],
+      series:[['Impuestos + cotizaciones','fiscalRevenue'],['Ingresos totales','revenue'],['Gasto público','expenditure']].map(([name,key],i)=>({name,type:'line',data:rows.map(row=>row[key]/1000),smooth:false,showSymbol:false,lineStyle:{width:3,type:i===1?'dashed':'solid'},...(i===1?{markLine:{silent:true,symbol:'none',label:{show:false},lineStyle:{color:'#68788b',type:'dotted'},data:[{xAxis:String(timeline.year)}]}}:{})})).concat([{name:'PIB · eje derecho',type:'line',yAxisIndex:1,data:rows.map(row=>gdpByYear.has(row.year)?gdpByYear.get(row.year)/1000:null),smooth:false,showSymbol:false,lineStyle:{width:2,type:'dashed'},itemStyle:{color:'#8b9baa'}}])
     },true);
     const extent=Math.ceil(Math.max(...rows.map(row=>Math.abs(row.balance)))/10000)*10;
     balanceChart.setOption({animation:!reducedMotion.matches,grid:{left:48,right:58,top:38,bottom:32},tooltip:{trigger:'axis',confine:true,formatter:points=>'<strong>'+escapeHtml(points[0].axisValue)+'</strong><br>'+points.map(point=>point.value==null?point.seriesName+': sin dato':point.marker+(point.seriesName==='Saldo público'?(point.value<0?'Déficit':point.value>0?'Superávit':'Equilibrio'):'Deuda total al cierre')+': '+format(point.value*1000,0)+' M€').join('<br>')},

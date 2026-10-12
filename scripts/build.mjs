@@ -23,7 +23,7 @@ export async function buildSite(directory = 'public') {
   }
   const [css, vendor, license, ...modules] = await Promise.all([
     text('src/styles/main.css'), text('src/vendor/echarts.min.js'), text('src/vendor/echarts.LICENSE.txt'),
-    ...['helpers','indicators','debt-chart','interest','repayment','fiscal-timeline','finances','spending','budget','app'].map(name => text(`src/js/${name}.js`))
+    ...['helpers','indicators','debt-chart','interest','repayment','fiscal-timeline','finances','spending','budget','growth-chart','app'].map(name => text(`src/js/${name}.js`))
   ]);
   modules.unshift((await text('src/shared/repayment.mjs')).replace(/^export /gm, ''), (await text('src/shared/fiscal.mjs')).replace(/^export /gm, ''));
   const json = JSON.stringify(data).replace(/</g, '\\u003c');
