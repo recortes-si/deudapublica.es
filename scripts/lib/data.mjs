@@ -1,3 +1,4 @@
+import { housingModel } from './housing.mjs';
 import { citizenIncomeModel } from './citizen-income.mjs';
 import { validateDebtTimeline } from '../../src/shared/debt-timeline.mjs';
 import { debtHistoryModel } from './debt-history.mjs';
@@ -120,5 +121,9 @@ export async function loadData(root) {
   if (debtTimeline.sourceId !== config.debtTimelineSourceId) throw new Error('Cronología: sourceId no coincide');
   const debtHistory = debtHistoryModel(JSON.parse(await read('inflationSourceId')), { debt, finances, sourceId: config.inflationSourceId });
   const repayment = repaymentModel(await json('official/repayment-plan.json'), {debt,finances,interest,benefits,spendingHistory});
-  return { citizenIncome, debtTimeline, debtHistory, repayment, finances, interest, gdpPerCapita, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
+  const emancipationHousing=JSON.parse(await read('emancipationHousingSourceId'));
+  if(emancipationHousing.sourceId!==config.emancipationHousingSourceId)throw Error('Vivienda: sourceId de emancipación no coincide');
+  const housing=housingModel(JSON.parse(await read('housingSourceId')),emancipationHousing);
+  if(housing.sourceId!==config.housingSourceId)throw Error('Vivienda: sourceId no coincide');
+  return { housing, citizenIncome, debtTimeline, debtHistory, repayment, finances, interest, gdpPerCapita, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
 }

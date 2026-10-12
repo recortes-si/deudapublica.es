@@ -420,3 +420,9 @@ Las fichas de fuentes se generan en `scripts/lib/render-sources.mjs`: muestran
 organismo, título, periodo y actualización por separado, con enlaces a la fuente
 y a los datos originales cuando están disponibles. Notas y condiciones de uso
 se despliegan bajo demanda; las tarjetas se adaptan a una columna en móvil.
+
+El gráfico único de vivienda muestra cifras acumuladas desde 2014 hasta 2025: hogares creados, viviendas terminadas y su diferencia. La suma conserva el signo de cada año: un exceso de construcción reduce la brecha. La referencia inicial es cero antes de 2014; no se inventa un déficit preexistente ni se presenta la cifra como un inventario de todas las viviendas que faltan.
+
+Datos en `data/official/housing.json`: ECH (2013–2020, media anual) para los cambios de hogares de 2014–2020; ECP 60131 (enero a enero) desde 2021. Se calculan diferencias dentro de cada fuente, sin restar niveles entre ECH y ECP. El enlace es aproximado por el cambio de metodología y referencia temporal. Los extractos y los totales de construcción se conservan en `data/raw/housing-*.csv`. Construcción 2014–2017: tabla 1.2 del Observatorio anual 2024; 2018–2025: boletín n.º 56, tabla 1.2. Para añadir un año se requiere un total anual oficial o los cuatro trimestres completos, hogares en las fechas correspondientes e índices de precios de cierre.
+
+`data/official/housing-emancipation.json` transcribe la figura 6 del estudio de Cagigas Castro y Beraza Pérez (ICE n.º 942): estimación respecto a 2014, hasta 2024. Es un stock de demanda de emancipación bloqueada: no se acumula por segunda vez, no se suma a la brecha de construcción ni se extrapola a 2025. Los precios se muestran como contexto y en la tabla, sin un segundo gráfico.

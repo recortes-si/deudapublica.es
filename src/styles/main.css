@@ -846,3 +846,68 @@ td { text-align:right; white-space:nowrap; }
 .spending-detail-track i { display:block; height:100%; background:var(--blue); border-radius:4px; }
 .spending-detail-amount { font-size:12px; color:var(--muted); }
 @media(max-width:760px) { .spending-breakdown-list { grid-template-columns:1fr; margin:12px; gap:10px; } .spending-breakdown summary { padding:16px 12px; } .spending-breakdown > p { padding:0 12px; } }
+
+#housing-chart { width:100%; height:490px; margin-top:14px; }
+.housing-panel .housing-controls { margin-top:24px; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.housing-chart-key { display:flex; flex-wrap:wrap; gap:10px 20px; font-size:12px; color:var(--chart-muted); margin-top:14px; }
+.housing-chart-key span { display:flex; gap:7px; align-items:center; }
+.housing-chart-key i { width:12px; height:12px; border-radius:3px; }
+.housing-demand-dot { background:var(--chart-deficit); }.housing-supply-dot { background:var(--chart-surplus); }.housing-price-dot { background:var(--chart-debt); }
+.housing-price-result { font-weight:700; font-size:14px; }
+.housing-panel.chart-surface .housing-kpis { border-color:var(--chart-line); background:var(--chart-line); }
+.housing-panel.chart-surface .housing-kpis > div { background:var(--chart-panel); }
+.housing-panel.chart-surface .housing-kpis span,.housing-panel.chart-surface .data-details p { color:var(--chart-muted); }
+@media(max-width:760px) { .housing-panel { padding:20px 12px; }.housing-panel .housing-controls label { flex:1 1 100%; justify-content:space-between; }.housing-panel .housing-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }.housing-panel .housing-kpis > div:last-child { grid-column:1 / -1; }.housing-panel .housing-kpis strong { font-size:22px; }.housing-panel .housing-kpis > div { padding:14px 10px; }.housing-panel .chart-controls select { max-width:175px; } }
+
+#housing-chart { height:370px; }
+.housing-panel .housing-kpis { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.housing-demand-dot { background:var(--chart-debt); }.housing-gap-dot { background:var(--chart-deficit); }
+.housing-blocked-dot { background:var(--chart-gdp); border-top:2px dashed var(--chart-gdp); height:0!important; border-radius:0!important; }
+.housing-series-note { font-size:12px; line-height:1.6; }
+@media(max-width:1000px) { .housing-panel .housing-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }.housing-panel .housing-kpis > div:last-child { grid-column:auto; } }
+.housing-history-note { font-size:11px; color:var(--chart-muted); margin-top:16px; }
+
+.migration-chain { margin:26px 0; padding:28px; background:#10243e; color:#fff; border-radius:14px; }
+.migration-chain .card-kicker { color:#b5c7da; }
+.migration-chain h3 { margin:12px 0 24px; font-size:clamp(21px,3vw,30px); line-height:1.25; }
+.migration-chain ol { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.migration-chain li { padding:16px; border:1px solid #42536a; border-radius:10px; background:#1b2c43; }
+.migration-chain-number { display:block; color:#d7f84b; font-size:12px; font-weight:700; margin-bottom:10px; }
+.migration-chain li strong { display:block; font-size:15px; line-height:1.4; }
+.migration-chain li p { color:#b5c7da; font-size:13px; line-height:1.6; margin-bottom:0; }
+.migration-chain-note { font-size:12px; line-height:1.7; color:#b5c7da; margin:22px 0 0; }.migration-chain-note a { color:#baddf8; }
+.housing-policy-link { padding-left:16px; border-left:3px solid var(--chart-debt); }
+@media(max-width:1000px) { .migration-chain ol { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:760px) { .migration-chain { padding:22px 14px; }.migration-chain ol { grid-template-columns:1fr; gap:10px; }.migration-chain li { padding:14px; } }
+
+/* Declaración oficial que documenta el objetivo fiscal de la inmigración. */
+.migration-evidence { margin:26px 0; }
+.migration-evidence h3 { margin:12px 0; font-size:clamp(21px,3vw,28px); }
+.migration-evidence > p { font-size:14px; line-height:1.7; color:var(--muted); }
+.migration-evidence blockquote { margin:18px 0; padding:4px 0 4px 18px; border-left:3px solid var(--blue); font-size:clamp(17px,2.3vw,22px); line-height:1.5; color:var(--ink); }
+.migration-evidence > a { font-size:13px; color:var(--blue); text-decoration:underline; }
+.migration-evidence > .growth-note { font-size:13px; }
+@media(max-width:760px) { .migration-evidence { padding:20px 16px; } }
+
+/* Costes públicos: indicadores con denominador y alcance visibles. */
+.migration-costs { margin:32px 0; }
+.migration-costs-heading { max-width:760px; }
+.migration-costs-heading h3 { font-size:clamp(23px,3vw,32px); margin:10px 0; }
+.migration-costs-heading p { color:var(--muted); font-size:14px; line-height:1.7; }
+.migration-costs-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:20px; }
+.migration-cost-card { min-width:0; border-radius:12px; display:flex; flex-direction:column; }
+.migration-cost-card h4 { font-size:19px; line-height:1.35; margin:12px 0 18px; }
+.migration-cost-value { display:block; font-size:clamp(34px,4vw,46px); line-height:1.15; letter-spacing:-.04em; color:var(--ink); }
+.migration-cost-value small { font-size:20px; font-weight:500; }
+.migration-cost-label { display:block; font-size:12px; line-height:1.6; color:var(--muted); margin-top:10px; }
+.migration-cost-card p { font-size:13px; line-height:1.7; color:var(--muted); }
+.migration-cost-card details { margin:4px 0 18px; font-size:12px; border-top:1px solid var(--line); }
+.migration-cost-card summary { padding:12px 0; cursor:pointer; color:var(--ink); line-height:1.5; }
+.migration-cost-card > a { margin-top:auto; font-size:12px; line-height:1.6; color:var(--blue); text-decoration:underline; }
+.migration-rate-comparison { display:grid; gap:10px; }
+.migration-rate-comparison > div { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 8px; font-size:11px; align-items:center; }
+.migration-rate-comparison strong { font-size:23px; color:var(--ink); }
+.migration-rate-comparison i { grid-column:1/-1; display:block; width:var(--rate-width); height:7px; border-radius:4px; background:var(--blue); }
+.migration-rate-comparison > div:last-child i { background:#879bad; }
+@media(max-width:1000px) { .migration-costs-grid { grid-template-columns:1fr; }.migration-cost-card { padding:22px; }.migration-rate-comparison { max-width:360px; } }
+@media(max-width:760px) { .migration-cost-card { padding:20px 16px; } }

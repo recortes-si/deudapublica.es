@@ -264,6 +264,101 @@
       "updated": "2026-10-12",
       "url": "https://www.bde.es/wbe/es/publicaciones/analisis-economico-investigacion/boletin-economico/2023-t1-articulo-16--ingresos-publicos-tras-pandemia--residuos-fiscales-e-inflacion.html",
       "note": "Referencia sobre inflación y recaudación; sus estimaciones no se extrapolan a toda la serie."
+    },
+    {
+      "id": "housing-demand-supply",
+      "title": "Hogares nuevos, viviendas terminadas y precios de compra",
+      "publisher": "INE · Ministerio de Vivienda y Agenda Urbana",
+      "period": "2014-2025",
+      "updated": "2026-10-12",
+      "file": "official/housing.json",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=60131",
+      "download": "https://www.ine.es/jaxiT3/files/t/csv_bdsc/60131.csv",
+      "notes": "2014–2020: diferencia de medias anuales de hogares de la ECH, tabla 01001 (2013–2020). Desde 2021: diferencia entre el 1 de enero del año y el siguiente de la ECP 60131. Se suman cambios calculados dentro de cada fuente; no se resta el nivel ECH de 2020 del nivel ECP de 2021. La referencia temporal y metodología cambian: el enlace histórico es aproximado, no una serie homogénea. Construcción 2014–2017: total anual de viviendas libres y protegidas, tabla 1.2 del Boletín anual 2024 del Observatorio. 2018–2025: suma trimestral, tabla 1.2 del boletín n.º 56, 2025-T4. Hogares y precios: INE; extracción 12/10/2026. La acumulación arranca en cero antes de 2014; no estima déficit anterior, ni ajustes por vacantes, demoliciones o localización."
+    },
+    {
+      "id": "ice-housing-emancipation",
+      "title": "El déficit de vivienda de emancipación: demanda joven de vivienda",
+      "publisher": "Cagigas Castro y Beraza Pérez · Revista ICE, n.º 942",
+      "period": "2014-2024",
+      "updated": "2026-10-12",
+      "file": "official/housing-emancipation.json",
+      "url": "https://www.revistasice.com/index.php/ICE/article/download/7963/8228",
+      "notes": "Estimación con microdatos ECV del INE; figura 6, página 17. Stock de hogares jóvenes bloqueados respecto a las tasas de emancipación de 2014, no nuevas pérdidas anuales. No se suma a la brecha de construcción ni se extrapola a 2025."
+    },
+    {
+      "id": "ine-housing-ech-history",
+      "title": "Hogares históricos: Encuesta Continua de Hogares",
+      "publisher": "INE",
+      "period": "2013-2020",
+      "updated": "2026-10-12",
+      "file": "raw/housing-ech-2013-2020.csv",
+      "url": "https://www.ine.es/jaxi/Tabla.htm?path=/t20/p274/serie/prov/p01/l0/&file=01001.px&L=0",
+      "download": "https://www.ine.es/jaxi/files/_px/es/csv_bdsc/t20/p274/serie/prov/p01/l0/01001.csv_bdsc?nocab=1",
+      "notes": "Total nacional, total de tipos y nacionalidades; miles de hogares. Media anual. Sus variaciones se calculan dentro de esta fuente, sin restar directamente niveles ECH y ECP."
+    },
+    {
+      "id": "mivau-housing-history",
+      "title": "Viviendas iniciadas y terminadas: serie histórica",
+      "publisher": "Ministerio de Vivienda y Agenda Urbana",
+      "period": "2003-2024",
+      "updated": "2025-07-04",
+      "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/vivienda-agenda-urbana/Documents/2025/040725-ObservatoriodeviviendaysueloBoletnanual24.pdf",
+      "notes": "Tabla 1.2, página 7. Totales de viviendas libres y protegidas. En el gráfico se usa esta edición para 2014–2017 y el boletín n.º 56 para 2018–2025."
+    },
+    {
+      "id": "airef-migration-fiscal",
+      "title": "Sostenibilidad de las Administraciones Públicas e impacto fiscal de la inmigración",
+      "publisher": "AIReF",
+      "period": "Opinión de 2025 · escenarios de largo plazo",
+      "updated": "2025-03-31",
+      "url": "https://www.airef.es/es/centro-documental/opiniones/segunda-opinion-sobre-la-sostenibilidad-de-las-administraciones-publicas-a-largo-plazo/",
+      "notes": "La inmigración forma parte de los escenarios demográficos y fiscales. El impacto depende del empleo, salarios, gasto y envejecimiento. El motivo declarado de sostener las pensiones se documenta por separado en la declaración ministerial de Escrivá."
+    },
+    {
+      "id": "bde-migration-housing",
+      "title": "Mercado residencial: demanda demográfica y oferta de vivienda",
+      "publisher": "Banco de España · Documento Ocasional 2433",
+      "period": "Análisis publicado en 2024",
+      "updated": "2024-10-01",
+      "url": "https://www.bde.es/f/webbe/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosOcasionales/24/Fich/do2433.pdf",
+      "notes": "Analiza crecimiento demográfico, flujos migratorios, demanda de no residentes y oferta limitada. No asigna todo el aumento de precios o el déficit de vivienda exclusivamente a inmigrantes."
+    },
+    {
+      "id": "moncloa-migration-pensions",
+      "title": "Escrivá: inmigración y sostenibilidad del sistema de pensiones",
+      "publisher": "La Moncloa · Ministerio de Inclusión, Seguridad Social y Migraciones",
+      "period": "Declaración ministerial · 17/01/2020",
+      "updated": "2020-01-17",
+      "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/Paginas/2020/170120-inmigracion.aspx",
+      "notes": "Fuente oficial que documenta la sostenibilidad de las pensiones como motivo para promover la inmigración. Se refiere a sostener el sistema de pensiones, no a un compromiso de amortizar deuda pública acumulada."
+    },
+    {
+      "id": "imv-nationality-202502",
+      "title": "IMV: sexo y nacionalidad de los titulares",
+      "publisher": "Seguridad Social",
+      "period": "Nómina de febrero de 2025",
+      "updated": "2025-02-28",
+      "url": "https://www.seg-social.es/wps/wcm/connect/wss/ece9dd02-1601-438f-8f72-c9f076fd50d2/202502%2BCOMPLETO%2BDossier%2Bcomunidad%2Baut%C3%B3noma%2By%2Bprovincia.pdf?MOD=AJPERES",
+      "notes": "Tabla 1.5, página 6: 121.252 titulares extranjeros de 688.007 titulares totales (17,6 %). Incluye IMV y CAPI. Es composición de titulares, no tasa de recepción entre inmigrantes ni porcentaje que vive exclusivamente de ayudas. No estima importes por nacionalidad."
+    },
+    {
+      "id": "ine-convictions-nationality-2024",
+      "title": "Condenados adultos: tasas por nacionalidad",
+      "publisher": "INE · Registro Central de Penados",
+      "period": "2024",
+      "updated": "2025-09-18",
+      "url": "https://www.ine.es/dyngs/Prensa/ECAECM2024.htm",
+      "notes": "Tasas por 1.000 habitantes de 18 y más años: extranjeros 15,7; españoles 6,2. El 71,4 % de condenados tenía nacionalidad española. Condenas firmes registradas, no necesariamente delitos cometidos ese año; tasas sin ajuste por edad, sexo o situación económica. Nacionalidad no equivale a condición migratoria; no es una estimación causal o de coste."
+    },
+    {
+      "id": "sns-waiting-202512",
+      "title": "Listas de espera quirúrgica del Sistema Nacional de Salud",
+      "publisher": "Ministerio de Sanidad",
+      "period": "31 de diciembre de 2025",
+      "updated": "2026-04-16",
+      "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/Informe_situacion_listas_de_espera_dic_2025_V1.pdf",
+      "notes": "853.509 pacientes y 121 días de espera media. Datos del conjunto del SNS: el informe no atribuye esperas a la inmigración ni estima su contribución al aumento de demanda."
     }
   ]
 }

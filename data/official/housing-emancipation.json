@@ -1,0 +1,21 @@
+{
+  "sourceId": "ice-housing-emancipation",
+  "baseYear": 2014,
+  "estimated": true,
+  "unit": "hogares",
+  "series": [
+    {"year": 2014, "households": 0},
+    {"year": 2015, "households": 22208},
+    {"year": 2016, "households": 35255},
+    {"year": 2017, "households": 75116},
+    {"year": 2018, "households": 164707},
+    {"year": 2019, "households": 235883},
+    {"year": 2020, "households": 202742},
+    {"year": 2021, "households": 173891},
+    {"year": 2022, "households": 191535},
+    {"year": 2023, "households": 211073},
+    {"year": 2024, "households": 311403}
+  ],
+  "notes": "Transcripción de la figura 6, página 17, Diego Cagigas Castro e Iker Beraza Pérez, ICE n.º 942 (2026). Estimación de hogares jóvenes bloqueados respecto a las tasas de emancipación de 2014, con microdatos ECV; jóvenes ocupados de 16 a 34 años con empleo estable. Es un stock estimado de demanda de emancipación, no hogares perdidos cada año ni una medida causal directa de falta física de viviendas. No sumar a la brecha de construcción. No extrapolar después de 2024.",
+  "url": "https://www.revistasice.com/index.php/ICE/article/download/7963/8228"
+}

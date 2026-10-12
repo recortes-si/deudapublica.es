@@ -35,5 +35,7 @@
   "inflationSourceId": "eurostat-inflacion",
   "debtTimelineSourceId": "debt-timeline",
   "citizenIncomeSourceId": "oecd-salarios-impuestos",
-  "inflationBaselineYear": 2000
+  "inflationBaselineYear": 2000,
+  "housingSourceId": "housing-demand-supply",
+  "emancipationHousingSourceId": "ice-housing-emancipation"
 }

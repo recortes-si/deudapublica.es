@@ -17,6 +17,11 @@ export function templateValues(data) {
   return {
     ...repaymentValues(data, { format, escapeHtml }),
     ...financialValues(data, { format, escapeHtml, table, signed }),
+    HOUSING_FIRST:data.housing.rows[0].year,HOUSING_YEAR:data.housing.latest.year,HOUSING_BASE:data.housing.baseYear,
+    HOUSING_HOUSEHOLDS:format(data.housing.latest.cumulativeHouseholds,0),HOUSING_COMPLETED:format(data.housing.latest.cumulativeCompleted,0),HOUSING_GAP:format(data.housing.latest.cumulativeGap,0),
+    HOUSING_BLOCKED:format(data.housing.blockedLatest.households,0),HOUSING_BLOCKED_YEAR:data.housing.blockedLatest.year,
+    HOUSING_OPTIONS:data.housing.rows.map(r=>`<option value="${r.year}" ${r.year===data.housing.latest.year?'selected':''}>${r.year}</option>`).join(''),
+    HOUSING_TABLE:table(['Año','Hogares creados acumulados','Viviendas terminadas acumuladas','Déficit acumulado desde '+data.housing.rows[0].year,'Nuevos hogares del año','Viviendas terminadas del año','Cambio de la brecha en el año','Hogares bloqueados (estimación ICE)','Precio vs. año anterior','Precio desde '+data.housing.baseYear],data.housing.rows.map(r=>[r.year,format(r.cumulativeHouseholds,0),format(r.cumulativeCompleted,0),format(r.cumulativeGap,0),format(r.newHouseholds,0),format(r.completed,0),format(r.gap,0),r.blockedHouseholds==null?'Sin estimación':format(r.blockedHouseholds,0),signed(r.priceGrowth)+'%',signed(r.priceAccumulated)+'%']),'Hogares, construcción y precio de vivienda en España'),
     INTEREST_YEAR: interest.year, INTEREST_VALUE: format(interest.value,0), INTEREST_DAY: format(interest.perDay,0),
     INTEREST_SOURCE: escapeHtml(data.sources.find(source => source.id === data.config.interestSourceId).download),
     TAX_EXAMPLE_COUNT: interest.example.count, TAX_EXAMPLE_TOTAL: format(interest.example.total,0), TAX_EXAMPLE_REMAINING: format(interest.example.remaining,0),

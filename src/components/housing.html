@@ -1,0 +1,28 @@
+<article class="white-card housing-panel" id="vivienda" aria-labelledby="housing-title">
+  <span class="card-kicker">La externalidad residencial · España</span>
+  <h3 id="housing-title">Faltan viviendas.<br>Y hogares que no llegan a formarse.</h3>
+  <p class="housing-policy-link">La inmigración que amplía la base de cotizantes también añade demanda de alojamiento. Si la oferta no crece al mismo ritmo, los residentes que alquilan o buscan su primera vivienda pueden asumir parte del coste del crecimiento. La vivienda conecta así la estrategia fiscal con el bolsillo y la emancipación de los vecinos.</p>
+  <p>El déficit se arrastra: cada año se suman los nuevos hogares y se restan las viviendas terminadas. Las curvas acumulan ambas cantidades desde {{HOUSING_FIRST}}; la roja muestra la diferencia. La discontinua representa hogares jóvenes bloqueados en su emancipación.</p>
+  <div class="housing-kpis">
+    <div><strong id="housing-households">{{HOUSING_HOUSEHOLDS}}</strong><span>Hogares creados · {{HOUSING_FIRST}}—<b data-housing-year>{{HOUSING_YEAR}}</b></span></div>
+    <div><strong id="housing-completed">{{HOUSING_COMPLETED}}</strong><span>Viviendas terminadas · {{HOUSING_FIRST}}—<b data-housing-year>{{HOUSING_YEAR}}</b></span></div>
+    <div><strong id="housing-gap">{{HOUSING_GAP}}</strong><span>Déficit acumulado · {{HOUSING_FIRST}}—<b data-housing-year>{{HOUSING_YEAR}}</b></span></div>
+    <div><strong>{{HOUSING_BLOCKED}}</strong><span>Hogares jóvenes bloqueados · estimación ICE {{HOUSING_BLOCKED_YEAR}}, respecto a 2014</span></div>
+  </div>
+  <div class="chart-controls housing-controls">
+    <label for="housing-year">Acumulado hasta <select id="housing-year">{{HOUSING_OPTIONS}}</select></label>
+  </div>
+  <div id="housing-chart" role="img" aria-label="Hogares nuevos, viviendas terminadas y déficit acumulado de construcción, junto a hogares jóvenes bloqueados estimados. Datos completos en la tabla inferior."></div>
+  <div class="housing-chart-key"><span><i class="housing-demand-dot"></i>Hogares creados · acumulado</span><span><i class="housing-supply-dot"></i>Viviendas terminadas · acumulado</span><span><i class="housing-gap-dot"></i>Déficit acumulado</span><span><i class="housing-blocked-dot"></i>Hogares bloqueados · estimación</span></div>
+  <p class="housing-history-note">Histórico {{HOUSING_FIRST}}—{{HOUSING_YEAR}} · 2014–2020: ECH; desde 2021: ECP. Enlace aproximado entre fuentes.</p>
+  <p class="housing-series-note">Hogares bloqueados: demanda pendiente estimada, no hogares perdidos cada año. No se suma al déficit de construcción. La estimación termina en 2024.</p>
+  <p id="housing-cumulative-gap" class="housing-price-result"></p>
+  <p class="housing-price-result" id="housing-price-result"></p>
+  <details class="data-details"><summary>Ver cifras y cómo se comparan</summary>
+    <p>Hogares 2014–2020: variación de las medias anuales de la Encuesta Continua de Hogares (ECH). Desde 2021: diferencia entre el 1 de enero del año y el siguiente de la ECP (datos provisionales). Se calculan los cambios dentro de cada fuente; no se cuenta la diferencia de niveles entre las dos encuestas como creación de hogares. La referencia temporal cambia, por lo que el enlace es aproximado. Viviendas terminadas: libres más protegidas, según el Ministerio. Precios: índice general del IPV del cuarto trimestre, vivienda nueva y usada, en euros corrientes; no incluye alquiler.</p>
+    <p>El déficit acumulado es la suma de hogares creados menos viviendas terminadas desde {{HOUSING_FIRST}}, partiendo de cero antes de ese año. Los años con más construcción que hogares reducen la brecha; no se descartan ni se reinicia el déficit cada año. No es una estimación de todo el déficit preexistente de vivienda: el parque existente, viviendas vacías, rehabilitación, demoliciones y localización también cuentan. No todos los hogares nuevos son inmigrantes: influyen la emancipación, las separaciones y el tamaño de los hogares. Este gráfico no calcula el efecto causal de la inmigración sobre los precios.</p>
+    <p>La estimación ICE de emancipación usa jóvenes ocupados de 16–34 años con empleo estable y las tasas de emancipación de 2014 como referencia. Mide demanda potencial bloqueada por problemas de acceso económico; no permite atribuir cada hogar a una falta física de vivienda. Fuente: Cagigas Castro y Beraza Pérez, figura 6, página 17.</p>
+    {{HOUSING_TABLE}}
+  </details>
+  <p class="growth-note">Fuentes: <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=60131" target="_blank" rel="noopener noreferrer">INE · hogares ECP ↗</a>, <a href="https://www.ine.es/jaxi/Tabla.htm?path=/t20/p274/serie/prov/p01/l0/&amp;file=01001.px&amp;L=0" target="_blank" rel="noopener noreferrer">INE · hogares históricos ↗</a>, <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=25171" target="_blank" rel="noopener noreferrer">INE · precios de compra ↗</a>, <a href="https://publicaciones.transportes.gob.es/downloadcustom/sample/4096" target="_blank" rel="noopener noreferrer">Ministerio · viviendas terminadas ↗</a> y <a href="https://www.revistasice.com/index.php/ICE/article/download/7963/8228" target="_blank" rel="noopener noreferrer">ICE · hogares bloqueados ↗</a>. La demanda residencial también genera presión sobre la vivienda pública y los servicios; endeudarse para financiar gasto no resuelve por sí solo la falta de oferta.</p>
+</article>

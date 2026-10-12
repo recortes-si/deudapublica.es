@@ -1,0 +1,212 @@
+{
+  "sourceId": "housing-demand-supply",
+  "updated": "2026-10-12",
+  "baseYear": 2013,
+  "householdsProvisional": true,
+  "households": [
+    {
+      "year": 2021,
+      "households": 18539223
+    },
+    {
+      "year": 2022,
+      "households": 18822103
+    },
+    {
+      "year": 2023,
+      "households": 19103050
+    },
+    {
+      "year": 2024,
+      "households": 19314630
+    },
+    {
+      "year": 2025,
+      "households": 19521046
+    },
+    {
+      "year": 2026,
+      "households": 19762059
+    }
+  ],
+  "prices": [
+    {
+      "year": 2013,
+      "index": 95.512
+    },
+    {
+      "year": 2014,
+      "index": 97.194
+    },
+    {
+      "year": 2015,
+      "index": 101.305
+    },
+    {
+      "year": 2016,
+      "index": 105.848
+    },
+    {
+      "year": 2017,
+      "index": 113.457
+    },
+    {
+      "year": 2018,
+      "index": 120.954
+    },
+    {
+      "year": 2019,
+      "index": 125.32
+    },
+    {
+      "year": 2020,
+      "index": 127.179
+    },
+    {
+      "year": 2021,
+      "index": 135.291
+    },
+    {
+      "year": 2022,
+      "index": 142.666
+    },
+    {
+      "year": 2023,
+      "index": 148.69
+    },
+    {
+      "year": 2024,
+      "index": 165.433
+    },
+    {
+      "year": 2025,
+      "index": 186.75
+    }
+  ],
+  "construction": [
+    {
+      "year": 2014,
+      "completed": 50428
+    },
+    {
+      "year": 2015,
+      "completed": 49472
+    },
+    {
+      "year": 2016,
+      "completed": 44630
+    },
+    {
+      "year": 2017,
+      "completed": 54274
+    },
+    {
+      "year": 2018,
+      "quarters": [
+        12616,
+        17769,
+        16763,
+        16896
+      ]
+    },
+    {
+      "year": 2019,
+      "quarters": [
+        15460,
+        19207,
+        18285,
+        25225
+      ]
+    },
+    {
+      "year": 2020,
+      "quarters": [
+        19605,
+        18026,
+        23314,
+        25624
+      ]
+    },
+    {
+      "year": 2021,
+      "quarters": [
+        21346,
+        25204,
+        23444,
+        24734
+      ]
+    },
+    {
+      "year": 2022,
+      "quarters": [
+        21297,
+        22486,
+        21736,
+        24026
+      ]
+    },
+    {
+      "year": 2023,
+      "quarters": [
+        22308,
+        22929,
+        21127,
+        22956
+      ]
+    },
+    {
+      "year": 2024,
+      "quarters": [
+        22833,
+        23967,
+        23063,
+        31117
+      ]
+    },
+    {
+      "year": 2025,
+      "quarters": [
+        20868,
+        23226,
+        21208,
+        26594
+      ]
+    }
+  ],
+  "notes": "Construcción 2014–2017: total anual de viviendas libres y protegidas, tabla 1.2 del Boletín anual 2024 del Observatorio. 2018–2025: suma trimestral, tabla 1.2 del boletín n.º 56, 2025-T4. Hogares y precios: INE; extracción 12/10/2026. La acumulación arranca en cero antes de 2014; no estima déficit anterior, ni ajustes por vacantes, demoliciones o localización.",
+  "historicalHouseholds": [
+    {
+      "year": 2013,
+      "households": 18217300
+    },
+    {
+      "year": 2014,
+      "households": 18303100
+    },
+    {
+      "year": 2015,
+      "households": 18346200
+    },
+    {
+      "year": 2016,
+      "households": 18406100
+    },
+    {
+      "year": 2017,
+      "households": 18472800
+    },
+    {
+      "year": 2018,
+      "households": 18535900
+    },
+    {
+      "year": 2019,
+      "households": 18625700
+    },
+    {
+      "year": 2020,
+      "households": 18754800
+    }
+  ],
+  "historicalMethod": "2014–2020: diferencia de medias anuales de hogares de la ECH, tabla 01001 (2013–2020). Desde 2021: diferencia entre el 1 de enero del año y el siguiente de la ECP 60131. Se suman cambios calculados dentro de cada fuente; no se resta el nivel ECH de 2020 del nivel ECP de 2021. La referencia temporal y metodología cambian: el enlace histórico es aproximado, no una serie homogénea."
+}
