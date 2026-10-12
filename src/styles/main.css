@@ -581,3 +581,31 @@ td { text-align:right; white-space:nowrap; }
 .debt-government-panel p { font-size:11px; line-height:1.7; }
 .debt-event-key { display:flex; flex-wrap:wrap; gap:10px 24px; margin:14px 0; font-size:12px; color:var(--chart-muted); }
 .debt-event-key a,.debt-government-panel a { text-decoration:underline; text-underline-offset:3px; }
+
+/* Keep the historical chart controls and year picker next to the plot. */
+.debt-balance-card .debt-toolbar { display:flex; align-items:flex-end; flex-wrap:wrap; gap:12px 24px; margin-top:20px; }
+.debt-balance-card .debt-toolbar .chart-controls { flex:1; margin:0; gap:12px; }
+.debt-toolbar .debt-context-controls { margin:0; }
+.debt-toolbar .debt-context-controls button { display:flex; align-items:center; gap:10px; border:0; padding:0 4px; background:transparent; min-height:44px; }
+.government-switch { display:inline-block; width:34px; height:20px; border-radius:20px; background:var(--chart-muted); position:relative; }
+.government-switch::after { content:""; position:absolute; width:14px; height:14px; top:3px; left:3px; border-radius:50%; background:#fff; transition:transform .15s; }
+[aria-pressed="true"] .government-switch { background:var(--chart-debt); }
+[aria-pressed="true"] .government-switch::after { transform:translateX(14px); }
+.debt-balance-card .chart-wrap { margin-top:8px; }
+.debt-balance-card .debt-year-control { margin:8px 0 12px; gap:4px; }
+.debt-balance-card .debt-balance-legend { flex-direction:row; gap:10px 18px; margin:0 0 16px; }
+.debt-balance-card .debt-year-summary { margin-top:12px; }
+.debt-reading-notes { margin-top:20px; border-top:1px solid var(--chart-line); font-size:12px; color:var(--chart-muted); }
+.debt-reading-notes summary { cursor:pointer; min-height:44px; padding:14px 0; color:var(--chart-ink); font-weight:700; }
+.debt-reading-notes .income-method { color:var(--chart-muted); font-size:12px; margin:12px 0; }
+.debt-reading-notes .debt-axis-note { margin-top:0; }
+@media(max-width:760px) {
+ .debt-balance-card .debt-toolbar { gap:2px; margin-top:16px; }
+ .debt-balance-card .debt-toolbar .chart-controls { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; flex-basis:100%; }
+ .debt-balance-card .debt-toolbar .chart-controls label { display:flex; flex-direction:column; align-items:stretch; gap:6px; min-width:0; }
+ .debt-balance-card .debt-toolbar select { width:100%; min-width:0; max-width:100%; min-height:44px; padding:8px; font-size:12px; }
+ .debt-toolbar .debt-context-controls { margin-left:auto; }
+ .debt-balance-card .chart-wrap { margin-top:0; }
+ .debt-balance-card .debt-year-summary strong { font-size:20px; }
+}
+@media(prefers-reduced-motion:reduce) { .government-switch::after { transition:none; } }

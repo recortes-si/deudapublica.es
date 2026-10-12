@@ -8,7 +8,7 @@ function initDebtChart({ data, format, escapeHtml, reducedMotion, charts }, time
   function renderGovernments(rows,grid) {
     bands.hidden = panel.hidden = !showGovernments;
     governmentToggle.setAttribute('aria-pressed',String(showGovernments));
-    governmentToggle.textContent = showGovernments ? 'Ocultar gobiernos' : 'Mostrar gobiernos';
+    governmentToggle.setAttribute('aria-label',showGovernments ? 'Ocultar gobiernos' : 'Mostrar gobiernos');
     for (const side of ['left','right','top','bottom']) bands.style[side] = grid[side]+'px';
     const segments = governmentSegments(context,rows.map(row=>row.year));
     bands.innerHTML = segments.map(({government:g,startIndex,endIndex})=>`<span class="government-band" data-party="${escapeHtml(g.party)}" style="flex:${endIndex-startIndex+1}"></span>`).join('');
