@@ -258,10 +258,15 @@ saldo = B9 = TR − TE. Son euros corrientes, no tipos de impuestos ni
 importes ajustados por inflación. El déficit no es el incremento exacto de deuda.
 
 `src/js/fiscal-timeline.js` selecciona cualquier año disponible de finanzas públicas.
-El selector actualiza el desglose de ingresos y el saldo anual. Al elegir un año
-fuera del periodo corto, las gráficas vuelven a toda la serie.
-El gráfico de saldo usa un eje simétrico alrededor de cero: verde arriba para
-superávit, rojo abajo para déficit. Tocar una barra selecciona ese año.
+Los selectores de año del gráfico histórico y del desglose de ingresos están
+sincronizados. Elegir un año fuera del periodo visible devuelve esa gráfica a
+toda la serie. «Décadas de deuda» reúne las barras de saldo anual y la línea de
+deuda total al cierre, ambas en miles de millones de euros. El saldo utiliza
+un eje izquierdo simétrico alrededor de cero: verde para superávit y rojo para
+déficit; la deuda usa un eje derecho propio que comienza en cero. Tocar una
+barra o la línea selecciona ese año. El periodo admite toda la serie fiscal
+disponible, los últimos 20 años o los últimos 10. El antiguo gráfico separado
+de saldo se ha retirado.
 Las tablas y el desglose inicial se generan también sin JavaScript.
 
 El desglose de TR muestra impuestos; D61REC (cotizaciones); P11_P12_P131 (ventas,
@@ -276,11 +281,12 @@ el stock de deuda en una obligación tributaria individual.
 
 ### Datos archivados
 
-Las vistas del MEI, impuestos habituales, salarios e inflación y reparto del coste
+Las vistas del MEI, impuestos habituales, salarios y reparto del coste
 laboral se han retirado, junto con sus controles, estilos y enlaces. Sus datasets
 originales permanecen en `data/` para conservar su trazabilidad, con
 `archived: true` en `data/sources.json`. Las fuentes archivadas no se publican
 ni sus series se cargan en el build o se incluyen en el HTML final.
+La serie de IPCA vuelve a publicarse para calcular los euros constantes de la deuda; las vistas de salarios siguen archivadas.
 Los adaptadores conservan sus pruebas, que leen estos archivos por separado
 mediante `scripts/tests/archived-economy.mjs`.
 
@@ -341,8 +347,8 @@ primarios anuales. `requiredSpendingAdjustment` descuenta esos flujos para
 calcular el ajuste de gasto constante que completa el plazo elegido.
 
 La gráfica histórica de saldo añade la deuda total al cierre del año (Banco de
-España), con eje derecho propio y valores exactos en el tooltip, el resumen del
-año elegido y la tabla. Si una serie se amplía sin una observación de deuda,
+España), con eje derecho propio, valores con tres decimales en el tooltip, resumen
+redondeado a un decimal y tabla en millones de euros. Si una serie se amplía sin una observación de deuda,
 se muestra «sin dato» y un hueco en la línea; no se inventa ni se arrastra otro año.
 
 ### Desglose navegable del presupuesto
@@ -358,3 +364,13 @@ Social, Eurostat) y comentario propio. No se cargan a través del catálogo de d
 son análisis comparativo con fuentes citadas en línea, igual que las secciones de
 «factura futura» o «claves». El crecimiento del gasto que citan reutiliza las variables
 `FINANCE_SPEND_GROWTH` y `FINANCE_SOURCE` de la sección de finanzas públicas.
+
+### Unidades históricas y tema de gráficos
+
+El gráfico de deuda ofrece euros nominales (por defecto), porcentaje del PIB, euros constantes del último año fiscal y euros por habitante. Todas las vistas mantienen el saldo anual y la deuda total, con ejes independientes. La vista de porcentaje calcula el PIB implícito mediante deuda nominal / ratio oficial; el redondeo de esta ratio afecta al porcentaje del saldo.
+
+`inflationSourceId` en `data/site.json` recupera el IPCA de España, total de consumo, índice medio anual, de Eurostat. `scripts/lib/debt-history.mjs` valida años y dimensiones y fija como año base el último año fiscal disponible. Importe constante = nominal × IPCA(base) / IPCA(año). El ajuste expresa poder adquisitivo de consumo; no es un deflactor del PIB ni una reducción del principal pendiente. La deuda al cierre también usa aquí el índice medio anual. Para añadir un año fiscal hay que aportar su IPCA; el build falla si falta. La tabla publicada incluye valores nominales y constantes sin JavaScript. Las conversiones compartidas están en `src/shared/debt-history.mjs`.
+
+`src/js/chart-theme.js` aplica una paleta accesible clara u oscura a los cinco gráficos (deuda, cuentas públicas, presupuesto, repago y PIB por habitante). El tema claro es el predeterminado. El selector está junto al gráfico de deuda; guarda la preferencia en localStorage cuando está disponible y conserva años, filtros, partidas abiertas y medidas del simulador al cambiar. La página continúa siendo un único HTML autónomo.
+
+Los sucesos y gobiernos de la gráfica histórica se editan en `data/official/debt-timeline.json`: cada suceso tiene año, etiqueta y fuente; cada gobierno, partido y fechas de nombramiento/cese. Las líneas señalan 2008 (crisis financiera) y 2020 (COVID). El botón «Mostrar gobiernos» añade franjas por gobierno: los datos son anuales, por lo que cada año se atribuye al presidente que ocupó el cargo más días. Los años de relevo no representan decisiones de un único gobierno. Al ampliar la serie, actualiza también `observedThrough` y los relevos necesarios.

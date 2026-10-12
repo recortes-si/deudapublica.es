@@ -31,5 +31,7 @@
   "financesSourceId": "eurostat-finanzas",
   "benefitsSourceId": "ss-prestaciones-2024",
   "gdpPerCapitaSourceId": "worldbank-gdp-per-capita",
-  "populationSeriesSourceId": "worldbank-poblacion"
+  "populationSeriesSourceId": "worldbank-poblacion",
+  "inflationSourceId": "eurostat-inflacion",
+  "debtTimelineSourceId": "debt-timeline"
 }

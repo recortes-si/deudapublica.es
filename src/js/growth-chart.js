@@ -1,4 +1,4 @@
-function initGrowthChart({ data, format, reducedMotion }) {
+function initGrowthChart({ data, format, reducedMotion, charts }) {
   const rows = data.gdpPerCapita.series;
   const baseYear = data.gdpPerCapita.baseYear;
   const base = rows.find(row => row.year === baseYear);
@@ -9,7 +9,7 @@ function initGrowthChart({ data, format, reducedMotion }) {
     { name: 'PIB per cápita', key: 'pcap', color: '#a84919', width: 3, type: 'solid' },
     { name: 'PIB per cápita real', key: 'pcapReal', color: '#436828', width: 3, type: 'dashed' }
   ];
-  const chart = echarts.init(document.querySelector('#gdp-pcap-chart'), null, { renderer: 'canvas' });
+  const chart = charts.init(document.querySelector('#gdp-pcap-chart'),'growth');
   function render() {
     chart.setOption({
       animation: !reducedMotion.matches,

@@ -1,3 +1,5 @@
+import { validateDebtTimeline } from '../../src/shared/debt-timeline.mjs';
+import { debtHistoryModel } from './debt-history.mjs';
 import { repaymentModel } from './repayment.mjs';
 import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
@@ -112,6 +114,9 @@ export async function loadData(root) {
     row.population = population ?? null;
     row.perCapita = population ? row.euros * 1e12 / population : null;
   }
+  const debtTimeline = validateDebtTimeline(JSON.parse(await read('debtTimelineSourceId')), finances.rows.map(row=>row.year));
+  if (debtTimeline.sourceId !== config.debtTimelineSourceId) throw new Error('Cronología: sourceId no coincide');
+  const debtHistory = debtHistoryModel(JSON.parse(await read('inflationSourceId')), { debt, finances, sourceId: config.inflationSourceId });
   const repayment = repaymentModel(await json('official/repayment-plan.json'), {debt,finances,interest,benefits,spendingHistory});
-  return { repayment, finances, interest, gdpPerCapita, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
+  return { debtTimeline, debtHistory, repayment, finances, interest, gdpPerCapita, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
 }

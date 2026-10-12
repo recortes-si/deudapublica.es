@@ -68,3 +68,48 @@ test('consumption scenarios reconcile taxes, purchases and savings across histor
  const unordered=structuredClone(p);unordered.vat.reverse();assert.throws(()=>validateFiscalContext(unordered),/IVA/);
  assert.equal(p.mei.at(-1).total,2*p.mei[0].total);
 });
+
+test('debt views preserve nominal obligations, purchasing power and GDP units',async()=>{
+ const {debtHistory:h}=await loadData(root);
+ const {debtHistoryValues:view}=await import('../../src/shared/debt-history.mjs');
+ const base=h.rows.find(row=>row.year===h.baseYear),first=h.rows[0];
+ assert.deepEqual(view(base,'real'),view(base,'euros'));
+ assert.equal(h.baseYear,2025);assert.equal(h.baseIndex,126.65);
+ assert.ok(Math.abs(view(first,'real').debt/view(first,'euros').debt-126.65/71.22)<1e-12);
+ for(const row of h.rows) {
+  assert.equal(view(row,'pib').debt,row.ratio);
+  assert.ok(Math.abs(view(row,'pib').balance-row.balanceM/row.gdpM*100)<1e-12);
+  assert.equal(Math.sign(view(row,'real').balance),Math.sign(row.balanceM));
+  assert.ok(Math.abs(view(row,'percapita').debt*row.population-row.debtM*1e6)<.001);
+ }
+ assert.equal(view({...first,debtM:null,ratio:null,gdpM:null},'pib').debt,null);
+ assert.equal(view({...first,population:null},'percapita').debt,null);
+});
+
+test('constant-euro history rejects missing base prices and incorrect inflation dimensions',async()=>{
+ const {debtHistoryModel:model}=await import('../lib/debt-history.mjs');
+ const data=await loadData(root),raw=JSON.parse(await readFile(resolve(root,'data/raw/eurostat-inflacion-2000-2025.json'),'utf8'));
+ const context={debt:data.debt,finances:data.finances,sourceId:data.config.inflationSourceId};
+ const missing=structuredClone(raw);delete missing.value[missing.dimension.time.category.index['2025']];
+ assert.throws(()=>model(missing,context),/año base 2025/);
+ const wrong=structuredClone(raw);wrong.dimension.unit.category.index={RCH_A_AVG:0};
+ assert.throws(()=>model(wrong,context),/INX_A_AVG/);
+});
+
+
+test('annual government attribution handles transition years and filtered periods',async()=>{
+ const {debtTimeline:t}=await loadData(root);
+ const {governmentForYear:gov,governmentSegments:segments}=await import('../../src/shared/debt-timeline.mjs');
+ assert.equal(gov(t,2003).id,'aznar');assert.equal(gov(t,2004).id,'zapatero');
+ assert.equal(gov(t,2011).id,'zapatero');assert.equal(gov(t,2012).id,'rajoy');
+ assert.equal(gov(t,2017).id,'rajoy');assert.equal(gov(t,2018).id,'sanchez');
+ assert.deepEqual(segments(t,[2016,2017,2018,2019]).map(s=>[s.government.id,s.startIndex,s.endIndex]),[['rajoy',0,1],['sanchez',2,3]]);
+});
+
+test('historical context rejects missing coverage, duplicate events and invalid dates',async()=>{
+ const {debtTimeline:t}=await loadData(root);
+ const {validateDebtTimeline:validate}=await import('../../src/shared/debt-timeline.mjs');
+ const stale=structuredClone(t);stale.observedThrough=2024;assert.throws(()=>validate(stale,[2025]),/observedThrough/);
+ const duplicate=structuredClone(t);duplicate.events.push(duplicate.events[0]);assert.throws(()=>validate(duplicate,[2000,2025]),/duplicado/);
+ const invalid=structuredClone(t);invalid.governments[0].start='1996-02-30';assert.throws(()=>validate(invalid,[2000,2025]),/fecha inválida/);
+});

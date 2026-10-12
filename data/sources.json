@@ -198,8 +198,7 @@
       "file": "raw/eurostat-inflacion-2000-2025.json",
       "url": "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_aind/default/table?lang=en",
       "download": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_aind?geo=ES&coicop=CP00&unit=INX_A_AVG&sinceTimePeriod=2000",
-      "license": "https://ec.europa.eu/eurostat/about/legal-notices",
-      "archived": true
+      "license": "https://ec.europa.eu/eurostat/about/legal-notices"
     },
     {
       "id": "impuestos-habituales",
@@ -236,6 +235,16 @@
       "file": "official/social-benefits-2024.json",
       "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/Documents/2025/310325-ejecucion-presupuesto-dic-2024.pdf",
       "note": "Obligaciones reconocidas. Cuadros de las páginas 6 y 7 impresas. Las filas separan mínimos e IMV para evitar solapamientos."
+    },
+    {
+      "id": "debt-timeline",
+      "title": "Gobiernos y sucesos de contexto de la serie de deuda",
+      "publisher": "La Moncloa · Banco de España",
+      "period": "2000–2025",
+      "updated": "2026-10-12",
+      "file": "official/debt-timeline.json",
+      "url": "https://www.lamoncloa.gob.es/presidente/presidentes-desde-1823/Paginas/index.aspx",
+      "note": "Fechas de nombramiento y cese de La Moncloa. Crisis financiera de 2008 y pandemia de 2020: informes del Banco de España enlazados en el dataset. Las franjas anuales corresponden a quien gobernó más días en cada año."
     }
   ]
 }

@@ -401,13 +401,8 @@ td { text-align:right; white-space:nowrap; }
 /* Public balance and the MEI calendar remain readable on narrow screens. */
 .fiscal-callout { margin:22px 0; padding:20px; border-left:4px solid #a84919; background:#fff0e8; font-size:14px; line-height:1.7; }
 .fiscal-callout strong { display:block; font-size:18px; }.fiscal-callout p { margin-top:6px; }
-.balance-panel { margin-top:24px; padding:24px; background:#fff; border:1px solid var(--line); border-radius:6px; }
-#balance-chart { width:100%; height:310px; }
-.balance-result { font-size:clamp(20px,3vw,28px); font-weight:750; margin:18px 0 6px; font-variant-numeric:tabular-nums; }
-.balance-result[data-sign="deficit"] { color:#bb3434; }.balance-result[data-sign="surplus"] { color:#436828; }
 .surplus-dot { background:#436828; }.deficit-dot { background:#bb3434; }
 @media(max-width:760px) {
- .balance-panel { padding:20px 12px; }#balance-chart { height:280px; }
 }
 
 /* Debt costs and an explicit primary-balance repayment scenario. */
@@ -447,7 +442,6 @@ td { text-align:right; white-space:nowrap; }
 .repay-goal { margin-top:28px; }.repay-goal > summary { font-size:17px; line-height:1.4; }.repay-goal .repay-target { margin-top:20px; }.repay-pensions { border:0; background:transparent; padding:0 0 20px; }
 @media(max-width:760px) { .repay-benefit-panel { padding:18px 12px; }.repay-benefit-tabs { gap:6px; }.repay-benefit-tabs button { flex:1 1 auto; }.repay-balance { padding:18px; }.repay-account,.repay-chosen { font-size:12px; } }
 
-.balance-debt-result { color:#3274a2; font-size:clamp(16px,2.4vw,23px); font-weight:700; margin:8px 0 18px; }
 .repay-spending-choices { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin:20px 0 26px; }.repay-spending-choices button { min-width:0; text-align:left; border:1px solid var(--line); background:#fff; border-radius:5px; padding:16px 12px; font:inherit; color:var(--ink); cursor:pointer; }.repay-spending-choices button[aria-pressed="true"] { background:var(--ink); color:#fff; border-color:var(--ink); }.repay-spending-choices span { display:block; font-size:12px; min-height:38px; line-height:1.5; }.repay-spending-choices strong { display:block; font-size:clamp(16px,1.6vw,23px); letter-spacing:-.04em; margin:10px 0; }.repay-spending-choices small { display:block; font-size:11px; opacity:.8; }
 .repay-spending-panel { border:1px solid #ecd7c9; border-radius:5px; background:#fff0e8; padding:20px; margin:0; }.repay-spending-panel[hidden] { display:none; }.repay-spending-panel h4 { margin:0 0 18px; font-size:24px; line-height:1.2; }.repay-range-ends { display:flex; justify-content:space-between; gap:12px; }.repay-spending-panel label { grid-template-columns:1fr auto; }
 .repay-income { margin-top:22px; background:#edf2f5; border:1px solid var(--line); border-radius:5px; padding:20px; }.repay-income h4 { font-size:22px; line-height:1.3; margin:0 0 18px; }.repay-income label { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px; font-weight:700; margin-top:18px; }.repay-income p { font-size:12px; color:var(--muted); line-height:1.7; }.repay-income > strong { font-size:14px; display:block; margin-top:18px; }
@@ -517,3 +511,73 @@ td { text-align:right; white-space:nowrap; }
 .hero .stat-change { margin-top:auto; line-height:1.5; }
 .hero a.stat-change { text-decoration:underline; text-underline-offset:3px; }
 @media(max-width:760px) { .hero { grid-template-columns:minmax(0,1fr); gap:28px; } .hero .stat,.hero .stat:not(:first-child) { padding:18px 12px; min-height:155px; } .hero .stat-value { font-size:clamp(24px,5.8vw,36px); } }
+
+/* One historical chart combines the annual balance and closing debt stock. */
+.debt-balance-card .chart-title { font-size:16px; }
+.debt-axis-note { margin:18px 0 0; color:#b5c7da; font-size:12px; line-height:1.6; }
+.debt-year-summary { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:20px; }
+.debt-year-summary > div { padding:14px 16px; background:#1b2c43; border:1px solid #2d405b; border-radius:4px; min-width:0; }
+.debt-year-summary span { display:block; font-size:11px; color:#b5c7da; }
+.debt-year-summary strong { display:block; margin-top:8px; font-size:clamp(18px,2vw,26px); font-variant-numeric:tabular-nums; line-height:1.4; }
+#balance-result[data-sign="deficit"] { color:#ff9a85; } #balance-result[data-sign="surplus"] { color:#80c58a; }
+#balance-debt-result { color:#80b9e8; }
+.debt-balance-card .chart-wrap { height:350px; }
+.debt-balance-legend { display:flex; flex-wrap:wrap; gap:10px 22px; font-size:11px; color:#b5c7da; margin:12px 0 24px; }
+.debt-balance-legend span { display:flex; align-items:center; gap:8px; }
+.debt-balance-legend i { width:10px; height:10px; display:inline-block; flex:none; border-radius:2px; }
+.debt-balance-legend .surplus-dot { background:#80c58a; } .debt-balance-legend .deficit-dot { background:#ff715b; } .debt-balance-legend .debt-line-dot { background:#80b9e8; height:3px; width:18px; }
+.debt-year-control { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:20px 0; font-size:12px; color:#b5c7da; }
+.debt-year-control output { color:#fff; font-weight:800; margin-left:auto; }
+.debt-year-control input { width:100%; accent-color:#80b9e8; cursor:pointer; min-height:32px; }
+.debt-balance-card .chart-foot { align-items:flex-start; line-height:1.6; }
+.debt-balance-card .chart-foot > span { flex:1; }
+.debt-balance-card .chart-foot a { text-decoration:underline; text-underline-offset:3px; }
+@media(max-width:760px) { .debt-year-summary { grid-template-columns:minmax(0,1fr); gap:10px; } .debt-year-summary > div { padding:12px; } .debt-balance-card .chart-wrap { height:300px; } .debt-balance-legend { flex-direction:column; gap:12px; } }
+
+/* A shared chart palette changes only chart surfaces, keeping the page typography. */
+:root[data-chart-theme="dark"] { --chart-bg:#10243e; --chart-panel:#1b2c43; --chart-ink:#fff; --chart-muted:#b5c7da; --chart-line:#2d405b; --chart-debt:#80b9e8; --chart-deficit:#ff715b; --chart-surplus:#80c58a; --chart-tax:#ff9a85; --chart-spend:#d7f84b; --chart-gdp:#c3a0ee; }
+:root[data-chart-theme="light"] { --chart-bg:#fff; --chart-panel:#f1f5f8; --chart-ink:#10243e; --chart-muted:#526579; --chart-line:#e0e7ec; --chart-debt:#246fa7; --chart-deficit:#bb3434; --chart-surplus:#436828; --chart-tax:#a84919; --chart-spend:#10243e; --chart-gdp:#75539e; }
+.chart-preferences { display:flex; align-items:center; flex-wrap:wrap; gap:12px 20px; margin:20px 0; font-size:13px; font-weight:700; }
+.chart-preferences small { color:var(--muted); font-weight:400; }
+.chart-theme-buttons { display:flex; padding:3px; border:1px solid var(--line); border-radius:6px; background:#fff; }
+.chart-theme-buttons button { min-height:44px; min-width:78px; border:0; border-radius:4px; background:transparent; color:var(--ink); font:inherit; cursor:pointer; }
+.chart-theme-buttons button[aria-pressed="true"] { background:var(--ink); color:#fff; }
+.chart-surface { background:var(--chart-bg); color:var(--chart-ink); border:1px solid var(--chart-line); border-radius:6px; }
+.repay-chart-card.chart-surface { padding:24px; }
+.chart-surface .chart-title span,.chart-surface .chart-foot,.chart-surface .finance-chart-top p,.chart-surface .finance-legend,.chart-surface .budget-level-summary,.chart-surface .budget-foot,.chart-surface .card-kicker,.chart-surface > p,.chart-surface .growth-note { color:var(--chart-muted); }
+.chart-surface .chart-controls select,.chart-surface .finances-controls select { color:var(--chart-ink); background:var(--chart-panel); border-color:var(--chart-line); }
+.chart-surface .budget-toolbar,.chart-surface .budget-list li,.chart-surface .chart-foot { border-color:var(--chart-line); }
+.chart-surface .budget-list button { color:var(--chart-ink); }
+.chart-surface .budget-list button span,.chart-surface .budget-list small { color:var(--chart-muted); }
+.chart-surface .tax-dot { background:var(--chart-tax); }.chart-surface .revenue-dot,.chart-surface .debt-line-dot { background:var(--chart-debt); }.chart-surface .spend-dot { background:var(--chart-spend); }.chart-surface .gdp-dot { background:var(--chart-gdp); }.chart-surface .deficit-dot { background:var(--chart-deficit); }.chart-surface .surplus-dot { background:var(--chart-surplus); }
+.debt-balance-card .debt-axis-note,.debt-balance-card .debt-view-note,.debt-balance-card .debt-balance-legend,.debt-balance-card .debt-year-control { color:var(--chart-muted); }
+.debt-view-note { font-size:12px; line-height:1.6; margin:8px 0 0; }
+.debt-balance-card .debt-year-summary > div { background:var(--chart-panel); border-color:var(--chart-line); }
+.debt-balance-card .debt-year-summary span,.debt-balance-card .debt-year-summary small { color:var(--chart-muted); }
+.debt-balance-card .debt-year-summary small { display:block; margin-top:8px; line-height:1.6; font-size:11px; }
+.debt-balance-card #balance-result[data-sign="deficit"] { color:var(--chart-deficit); }.debt-balance-card #balance-result[data-sign="surplus"] { color:var(--chart-surplus); }.debt-balance-card #balance-debt-result { color:var(--chart-debt); }
+.debt-balance-card .debt-year-control output { color:var(--chart-ink); }.debt-balance-card .debt-year-control input { accent-color:var(--chart-debt); }
+@media(max-width:760px) { .chart-surface.repay-chart-card { padding:18px 12px; }.debt-balance-card .chart-controls { flex-direction:column; align-items:stretch; }.debt-balance-card .chart-controls label { justify-content:space-between; }.chart-preferences small { flex-basis:100%; } }
+.chart-surface .budget-total span,.chart-surface .budget-hint { color:var(--chart-muted); }
+.chart-surface .budget-foot a,.chart-surface .growth-note a { color:var(--chart-debt); }
+
+/* Historical events and optional annual government bands. */
+.debt-context-controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin:16px 0; font-size:12px; color:var(--chart-muted); }
+.debt-context-controls button { min-height:44px; padding:10px 14px; border:1px solid var(--chart-line); border-radius:4px; background:var(--chart-panel); color:var(--chart-ink); font:inherit; font-weight:700; cursor:pointer; }
+.debt-context-controls button[aria-pressed="true"] { border-color:var(--chart-debt); }
+.debt-context-controls button:focus-visible { outline:2px solid var(--chart-debt); outline-offset:3px; }
+.debt-balance-card .chart-wrap { position:relative; }
+#debt-chart { position:relative; z-index:1; }
+.government-bands { display:flex; position:absolute; pointer-events:none; z-index:0; overflow:hidden; }
+.government-band { min-width:0; background:rgba(40,125,195,.10); border-right:1px solid rgba(40,125,195,.24); }
+.government-band[data-party="PSOE"] { background:rgba(215,60,75,.09); border-color:rgba(215,60,75,.24); }
+.government-bands[hidden],.debt-government-panel[hidden] { display:none; }
+.debt-government-panel { margin:14px 0; }
+.debt-government-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; }
+.government-key { border-left:4px solid #287dc3; background:var(--chart-panel); padding:10px 12px; min-width:0; }
+.government-key[data-party="PSOE"] { border-left-color:#d73c4b; }
+.government-key strong,.government-key span,.government-key small { display:block; font-size:12px; line-height:1.6; }
+.government-key span,.government-key small,.debt-government-panel p { color:var(--chart-muted); }
+.debt-government-panel p { font-size:11px; line-height:1.7; }
+.debt-event-key { display:flex; flex-wrap:wrap; gap:10px 24px; margin:14px 0; font-size:12px; color:var(--chart-muted); }
+.debt-event-key a,.debt-government-panel a { text-decoration:underline; text-underline-offset:3px; }

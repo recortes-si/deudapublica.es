@@ -45,19 +45,11 @@ export function templateValues(data) {
     TAX_TABLE: `<div class="table-scroll"><table><caption>Bases anuales · ${interest.year} · millones de euros · ámbitos y criterios por partida</caption><thead><tr><th scope="col">Partida</th><th scope="col">Base (M€)</th><th scope="col">Fuente y metodología</th></tr></thead><tbody>${interest.taxes.items.map(item => `<tr><th scope="row">${escapeHtml(item.name)}</th><td>${format(item.value,3)}</td><td><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(item.sourceLocator)} ↗</a><p>${escapeHtml(item.basis)}. ${escapeHtml(item.scope)}</p><p>${escapeHtml(item.note)}</p></td></tr>`).join('')}</tbody></table></div>`,
     DEBT: format(latest.euros, 2), YEAR: latest.year, START_YEAR: data.debt[0].year, PREVIOUS_YEAR: previous.year,
     RATIO: format(latest.ratio), RATIO_CHANGE: signed(latest.ratio-previous.ratio), DEBT_CHANGE: signed((latest.euros/previous.euros-1)*100),
-    DEBT_DIVERGENCE_NOTE: (() => {
-      for (let i = data.debt.length - 1; i >= 1; i--) {
-        const a = data.debt[i - 1], b = data.debt[i];
-        if (b.euros > a.euros && b.ratio < a.ratio) return `Entre ${a.year} y ${b.year} la deuda subió de ${format(a.euros, 2)} a ${format(b.euros, 2)} billones de euros y, aun así, bajó del ${format(a.ratio)}% al ${format(b.ratio)}% del PIB: si la economía crece más, el porcentaje cae aunque debamos más euros.`;
-      }
-      return 'El importe en euros y el porcentaje sobre el PIB no siempre se mueven juntos: si el PIB crece, el porcentaje puede bajar aunque la deuda en euros suba.';
-    })(),
     SPENDING_GDP: data.spendingGdp == null ? '—' : format(data.spendingGdp), SOCIAL_SHARE: format(social.share),
     SPENDING_YEAR: spendingYear, SPENDING_STATUS: status, BUDGET_DATASET: escapeHtml(budget.dataset), BUDGET_TOTAL: format(budget.total,0), BUDGET_STATUS: escapeHtml(budget.status),
     PER_CAPITA: format(latest.euros*1e12/population.value,0), POPULATION_DATE: escapeHtml(population.date),
     ANNUAL_FLOW: signed(flow/1e6,0), SECOND_FLOW: signed(flow/(365.25*86400),0), MINUTE_FLOW: signed(flow/(365.25*1440),0), DAY_FLOW: signed(flow/(365.25*1e6),0),
     COUNTER_NOTE: `Proyección desde el cierre de ${latest.year}, al ritmo medio de la variación ${period}. No es una medición en tiempo real ni una predicción: la deuda puede aumentar o disminuir.`,
-    DEBT_TABLE: table(['Año','Deuda (billones €)','Deuda / PIB'],data.debt.map(row=>[row.year,format(row.euros,2),format(row.ratio)+'%']), 'Serie anual de deuda pública'),
     SPENDING_TABLE: table(['Función',...spendingHistory.map(row=>`${row.year} (M€)`)],spending.map(item=>[item.name,...spendingHistory.map(row=>format(row.items.find(entry=>entry.code===item.code).value,0))]),'Gasto por funciones COFOG'),
     BUDGET_TREE: tree(budget.root),
     SOURCES: data.sources.map(source => `<div class="source-item"><div><strong>${escapeHtml(source.publisher)}</strong><p>${escapeHtml(source.title)} · ${escapeHtml(source.period)} · actualizado ${escapeHtml(source.updated)}</p></div><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">Ver fuente ↗</a></div>`).join(''),

@@ -1,3 +1,4 @@
+import { governmentForYear } from '../../src/shared/debt-timeline.mjs';
 export function financialValues(data, {format,escapeHtml,table,signed}) {
   const {finances:f}=data;
   const source = key => escapeHtml(data.sources.find(item=>item.id===data.config[key]).url);
@@ -8,9 +9,15 @@ export function financialValues(data, {format,escapeHtml,table,signed}) {
   const gdpGrowth = gdpFirst && gdpLast ? (gdpLast/gdpFirst-1)*100 : null;
   const selected=f.latest;
   return {
+    DEBT_EVENTS:data.debtTimeline.events.map(event=>`<span><b>${event.year}</b> · <a href="${escapeHtml(event.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(event.label)} ↗</a></span>`).join(''),
+    GOVERNMENT_SOURCE:escapeHtml(data.debtTimeline.governmentSourceUrl),
+    REAL_BASE_YEAR:data.debtHistory.baseYear, INFLATION_SOURCE:source('inflationSourceId'),
     FISCAL_YEAR_MIN:f.first.year,FISCAL_YEAR_MAX:f.latest.year,FISCAL_SELECTED_YEAR:selected.year,
     FINANCE_DEBT_SOURCE:source('debtSourceId'),
-    FINANCE_DEBT:data.debt.some(row=>row.year===selected.year)?format(data.debt.find(row=>row.year===selected.year).euros*1e6,0)+' M€':'sin dato disponible',
+    EVOLUTION_BALANCE:signed(selected.balance/1000,1),
+    EVOLUTION_DEBT:debtByYear.has(selected.year)?format(debtByYear.get(selected.year).euros*1000,1):'Sin dato',
+    FINANCE_BALANCE_SIGN:selected.balance<0?'deficit':selected.balance>0?'surplus':'balanced',
+    DEBT_BALANCE_TABLE:table(['Año','Saldo nominal (M€)','Deuda nominal (M€)','Deuda / PIB','Saldo a precios de '+data.debtHistory.baseYear+' (M€)','Deuda a precios de '+data.debtHistory.baseYear+' (M€)','Gobierno durante más días del año'],f.rows.map(row=>[row.year,signed(row.balance,0),debtByYear.has(row.year)?format(debtByYear.get(row.year).euros*1e6,0):'Sin dato',debtByYear.has(row.year)?format(debtByYear.get(row.year).ratio)+'%':'Sin dato',format(row.balance*data.debtHistory.rows.find(item=>item.year===row.year).priceFactor,0),debtByYear.has(row.year)?format(debtByYear.get(row.year).euros*1e6*data.debtHistory.rows.find(item=>item.year===row.year).priceFactor,0):'Sin dato',governmentForYear(data.debtTimeline,row.year)?.name ?? 'Sin dato']),'Serie anual de deuda pública y saldo de todas las Administraciones · nominal y constante a precios de '+data.debtHistory.baseYear),
     FINANCE_BALANCE_NAME:f.latest.balance<0?'déficit':f.latest.balance>0?'superávit':'equilibrio',
     FINANCE_REVENUE:format(selected.revenue,0),
     FINANCE_PARTS:selected.incomeParts.filter(part=>part.value>0).map(part=>`<div class="income-part"><div><strong>${escapeHtml(part.name)}</strong><span>${format(part.value,0)} M€ · ${format(part.value/selected.revenue*100)}%</span></div><div class="income-track"><span style="width:${part.value/selected.revenue*100}%"></span></div><p>${escapeHtml(part.description)}</p></div>`).join(''),

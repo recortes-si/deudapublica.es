@@ -1,5 +1,5 @@
-function initBudget({ data, format, escapeHtml, reducedMotion }) {
-  const budgetChart = echarts.init(document.querySelector('#budget-chart'), null, { renderer: 'canvas' });
+function initBudget({ data, format, escapeHtml, reducedMotion, charts }) {
+  const budgetChart = charts.init(document.querySelector('#budget-chart'),'budget');
   const budgetBack = document.querySelector('#budget-back');
   const budgetHome = document.querySelector('#budget-home');
   const budgetSummary = document.querySelector('#budget-level-summary');

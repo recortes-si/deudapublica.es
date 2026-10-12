@@ -1,0 +1,15 @@
+{
+  "sourceId": "debt-timeline",
+  "observedThrough": 2025,
+  "governmentSourceUrl": "https://www.lamoncloa.gob.es/presidente/presidentes-desde-1823/Paginas/index.aspx",
+  "governments": [
+    { "id": "aznar", "name": "José María Aznar", "shortName": "Aznar", "party": "PP", "start": "1996-05-04", "end": "2004-04-17" },
+    { "id": "zapatero", "name": "José Luis Rodríguez Zapatero", "shortName": "Zapatero", "party": "PSOE", "start": "2004-04-17", "end": "2011-12-21" },
+    { "id": "rajoy", "name": "Mariano Rajoy", "shortName": "Rajoy", "party": "PP", "start": "2011-12-21", "end": "2018-06-01" },
+    { "id": "sanchez", "name": "Pedro Sánchez", "shortName": "Sánchez", "party": "PSOE", "start": "2018-06-02", "end": null }
+  ],
+  "events": [
+    { "year": 2008, "label": "Crisis financiera", "shortLabel": "Crisis", "description": "Inicio de la crisis financiera y bancaria de 2008–2014 en España.", "sourceUrl": "https://www.bde.es/wbe/es/noticias-eventos/otros-temas-interes/reestructuracion-sector-financiero/reestructuracion-recapitalizacion/Informe-sobre-la-crisis-financiera-y-bancaria-en-Espana--2008-2014-.html" },
+    { "year": 2020, "label": "Pandemia de COVID-19", "shortLabel": "COVID", "description": "Impacto económico de la pandemia de COVID-19.", "sourceUrl": "https://www.bde.es/wbe/es/publicaciones/informes-memorias-anuales/informe-anual/informe-anual-2020.html" }
+  ]
+}

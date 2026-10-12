@@ -1,5 +1,5 @@
-function initRepayment({data,format,escapeHtml,reducedMotion}) {
- const p=data.repayment,chart=echarts.init(document.querySelector('#repay-chart'),null,{renderer:'canvas'});
+function initRepayment({data,format,escapeHtml,reducedMotion,charts}) {
+ const p=data.repayment,chart=charts.init(document.querySelector('#repay-chart'),'repayment');
  const byId=id=>document.getElementById(id),cuts=[...document.querySelectorAll('[data-repay-cut]')];
  const horizon=byId('repay-horizon'),rate=byId('repay-rate'),inflation=byId('repay-inflation'),pensionMode=byId('repay-pension-mode'),taxIncome=byId('repay-tax-income'),growth=byId('repay-growth');
  let modelRate=p.rate;
