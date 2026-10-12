@@ -3,8 +3,8 @@ import { citizenIncomeModel } from './citizen-income.mjs';
 import { validateDebtTimeline } from '../../src/shared/debt-timeline.mjs';
 import { debtHistoryModel } from './debt-history.mjs';
 import { repaymentModel } from './repayment.mjs';
-import { readFile } from 'node:fs/promises';
-import { resolve, relative, isAbsolute } from 'node:path';
+import { createDataStore } from './sources.mjs';
+import { editorialModel } from './editorial.mjs';
 import { parseCsv, numeric } from './csv.mjs';
 import { financesModel } from './finances.mjs';
 import { interestModel, taxComparison } from './interest.mjs';
@@ -12,28 +12,8 @@ import { interestModel, taxComparison } from './interest.mjs';
 export const nodeTotal = node => node.children ? node.children.reduce((sum, child) => sum + nodeTotal(child), 0) : node.value;
 
 export async function loadData(root) {
-  const dataRoot = resolve(root, 'data');
-  const json = async file => JSON.parse(await readFile(resolve(dataRoot, file), 'utf8'));
-  const [config, catalog] = await Promise.all([json('site.json'), json('sources.json')]);
+  const { config, catalog, sources, sourceFor, read, json, byId } = await createDataStore(root);
   if (!Array.isArray(config.provisionalSpendingYears) || config.provisionalSpendingYears.some(year => !Number.isInteger(year))) throw new Error('site.json: provisionalSpendingYears debe ser una lista de años');
-  const allSources = catalog.datasets;
-  if (!Array.isArray(allSources)) throw new Error('sources.json: datasets debe ser una lista');
-  const byId = new Map();
-  for (const source of allSources) {
-    if (!source.id || byId.has(source.id)) throw new Error(`Fuente duplicada o sin id: ${source.id}`);
-    if (!source.title || !source.publisher || !source.period || !/^\d{4}-\d{2}-\d{2}$/.test(source.updated)) throw new Error(`Metadatos incompletos: ${source.id}`);
-    if (!/^https?:$/.test(new URL(source.url).protocol)) throw new Error(`URL de fuente no válida: ${source.id}`);
-    byId.set(source.id, source);
-  }
-  const sources = allSources.filter(source => !source.archived);
-  const sourceFor = key => {
-    const source = byId.get(config[key]);
-    if (!source?.file) throw new Error(`site.json: ${key} debe referenciar una fuente con file`);
-    const path = resolve(dataRoot, source.file), rel = relative(dataRoot, path);
-    if (rel.startsWith('..') || isAbsolute(rel)) throw new Error(`Ruta fuera de data/: ${source.file}`);
-    return { source, path };
-  };
-  const read = async key => readFile(sourceFor(key).path, 'utf8');
   const [debtText, ratioText, spendingText, budgetText, populationText, interestText, taxText, financesText] = await Promise.all(
     ['debtSourceId','ratioSourceId','spendingSourceId','budgetSourceId','populationSourceId','interestSourceId','taxSourceId','financesSourceId'].map(read)
   );
@@ -125,5 +105,6 @@ export async function loadData(root) {
   if(emancipationHousing.sourceId!==config.emancipationHousingSourceId)throw Error('Vivienda: sourceId de emancipación no coincide');
   const housing=housingModel(JSON.parse(await read('housingSourceId')),emancipationHousing);
   if(housing.sourceId!==config.housingSourceId)throw Error('Vivienda: sourceId no coincide');
-  return { housing, citizenIncome, debtTimeline, debtHistory, repayment, finances, interest, gdpPerCapita, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
+  const editorial = editorialModel(await json(config.editorialDataFile), byId);
+  return { editorial, housing, citizenIncome, debtTimeline, debtHistory, repayment, finances, interest, gdpPerCapita, generatedAt: catalog.generatedAt, config, sources, debt, latest, previous, budget, population, spendingHistory, spendingYear: spendingLatest.year, spending: spendingLatest.items, spendingTotal: spendingLatest.total, spendingGdp: spendingLatest.gdp };
 }

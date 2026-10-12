@@ -5,3 +5,4 @@ import './tests/finances.test.mjs';
 import './tests/economy.test.mjs';
 import './tests/repayment.test.mjs';
 import './tests/housing.test.mjs';
+import './tests/provenance.test.mjs';

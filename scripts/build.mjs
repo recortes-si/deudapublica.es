@@ -3,34 +3,25 @@ import { resolve, relative, isAbsolute } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadData } from './lib/data.mjs';
 import { fillTemplate, templateValues } from './lib/render.mjs';
+import { assembleComponents } from './lib/components.mjs';
+import { loadAssets } from './lib/assets.mjs';
+import { loadChartRegistry, checkChartDocumentation } from './lib/chart-registry.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 export async function buildSite(directory = 'public') {
   const output = resolve(root, directory);
   const rel = relative(output, root);
-  if (rel === '' || (!rel.startsWith('..') && !isAbsolute(rel)) || ['src','data','scripts','.git'].some(dir => {
+  if (rel === '' || (!rel.startsWith('..') && !isAbsolute(rel)) || ['src','data','scripts','docs','.git','.github'].some(dir => {
     const path = relative(resolve(root, dir), output);
     return path === '' || (!path.startsWith('..') && !isAbsolute(path));
   })) throw new Error('El directorio de salida no puede sobrescribir el repositorio ni sus fuentes');
 
   // Fully validate and assemble before touching the published page.
   const data = await loadData(root);
-  const text = file => readFile(resolve(root, file), 'utf8');
-  const assemble = async (template, parents = []) => {
-    for (const match of template.matchAll(/<!-- COMPONENT:([a-z-]+) -->/g)) {
-      const name = match[1];
-      if (parents.includes(name)) throw new Error('Componentes con referencia circular: ' + [...parents, name].join(' → '));
-      const component = await assemble(await text(`src/components/${name}.html`), [...parents, name]);
-      template = template.replace(match[0], () => component);
-    }
-    return template;
-  };
-  const template = await assemble(await text('src/index.html'));
-  const [css, vendor, license, ...modules] = await Promise.all([
-    text('src/styles/main.css'), text('src/vendor/echarts.min.js'), text('src/vendor/echarts.LICENSE.txt'),
-    ...['helpers','chart-theme','indicators','debt-chart','interest','repayment','fiscal-timeline','finances','spending','budget','growth-chart','housing','sharing','app'].map(name => text(`src/js/${name}.js`))
-  ]);
-  modules.unshift((await text('src/shared/inflation.mjs')).replace(/^export /gm, ''), (await text('src/shared/debt-timeline.mjs')).replace(/^export /gm, ''), (await text('src/shared/debt-history.mjs')).replace(/^export /gm, ''), (await text('src/shared/repayment.mjs')).replace(/^export /gm, ''), (await text('src/shared/fiscal.mjs')).replace(/^export /gm, ''));
+  const template = await assembleComponents(root, await readFile(resolve(root, 'src/index.html'), 'utf8'));
+  const registry = await loadChartRegistry(root, { data, template });
+  await checkChartDocumentation(root, registry);
+  const { css, vendor, license, modules } = await loadAssets(root);
   const json = JSON.stringify(data).replace(/</g, '\\u003c');
   const inline = script => script.replace(/<\/script/gi, '<\\/script');
   const imageUri = async name => 'data:image/png;base64,' + (await readFile(resolve(root, 'src/assets', name))).toString('base64');

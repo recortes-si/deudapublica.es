@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 1,
+  "description": "Contrato de procedencia de las visualizaciones activas. No contiene series; identifica los ficheros que consume loadData y cómo se representan.",
+  "charts": [
+    {
+      "id": "debt",
+      "title": "Deuda pública y saldo anual",
+      "selector": "#debt-chart",
+      "renderer": "src/js/debt-chart.js",
+      "inputs": [
+        {
+          "configKey": "debtSourceId"
+        },
+        {
+          "configKey": "ratioSourceId"
+        },
+        {
+          "configKey": "financesSourceId"
+        },
+        {
+          "configKey": "inflationSourceId"
+        },
+        {
+          "configKey": "populationSeriesSourceId"
+        },
+        {
+          "configKey": "debtTimelineSourceId"
+        }
+      ],
+      "models": [
+        "debtHistory.rows",
+        "debtTimeline"
+      ],
+      "unit": "mil M€, % del PIB, euros constantes o euros por habitante",
+      "calculation": "Deuda nominal BDE y saldo B9 de Eurostat. PIB implícito = deuda / (ratio/100). Constantes = nominal × IPCA(base)/IPCA(año). Por habitante = nominal/población. Gobiernos: presidente con más días en cada año.",
+      "limitations": "Dos ejes independientes. Déficit no es aumento de deuda; IPCA no es deflactor del PIB. Las franjas de gobierno no atribuyen causalidad. Huecos de deuda no se interpolan."
+    },
+    {
+      "id": "interest",
+      "title": "Intereses e impuestos equivalentes",
+      "selector": "#interest-chart",
+      "renderer": "src/js/interest.js",
+      "inputs": [
+        {
+          "configKey": "interestSourceId"
+        },
+        {
+          "configKey": "taxSourceId"
+        }
+      ],
+      "models": [
+        "interest"
+      ],
+      "unit": "M€ anuales",
+      "calculation": "D41PAY realizado del año frente a suma de measureCost(partida, control). IVA: base × (tipo inicial − elegido)/tipo inicial; rebaja proporcional: base × porcentaje/100. Se resta RETA del agregado de cotizaciones.",
+      "limitations": "Bases tributarias y ámbitos diferentes, identificados por partida. No incluye respuestas económicas ni estima cómo liquidar el principal."
+    },
+    {
+      "id": "inflation",
+      "title": "Recaudación, gasto, inflación, salario, ahorro y deuda",
+      "selector": "#finance-chart",
+      "renderer": "src/js/finances.js",
+      "inputs": [
+        {
+          "configKey": "financesSourceId"
+        },
+        {
+          "configKey": "inflationSourceId"
+        },
+        {
+          "configKey": "citizenIncomeSourceId"
+        },
+        {
+          "configKey": "debtSourceId"
+        },
+        {
+          "configKey": "ratioSourceId"
+        },
+        {
+          "configKey": "populationSeriesSourceId"
+        }
+      ],
+      "models": [
+        "finances.rows",
+        "debtHistory.rows",
+        "citizenIncome.rows"
+      ],
+      "unit": "variación acumulada en % desde el año elegido",
+      "calculation": "Cada serie: (valor año/valor inicio − 1) × 100. Poder de compra: (IPCA inicio/IPCA año − 1) × 100. Recaudación = D2REC+D5REC+D91REC+D61REC. Fin común observado; OCDE excluye estimatedYears.",
+      "limitations": "Salario neto THP: soltero sin hijos al 100% del salario medio, antes de IVA. Totales estatales y perfil individual no miden la misma población. D61 incluye cotizaciones imputadas."
+    },
+    {
+      "id": "purchasing",
+      "title": "Cesta y poder de compra de 100 euros",
+      "selector": "#inflacion",
+      "renderer": "src/js/finances.js",
+      "inputs": [
+        {
+          "configKey": "inflationSourceId"
+        },
+        {
+          "configKey": "financesSourceId"
+        },
+        {
+          "configKey": "citizenIncomeSourceId"
+        }
+      ],
+      "models": [
+        "debtHistory.rows",
+        "citizenIncome.rows"
+      ],
+      "unit": "euros del ejemplo inicial",
+      "calculation": "Cesta = 100 × IPCA año/IPCA inicio. Ahorro = 100 × IPCA inicio/IPCA año. Usa el mismo periodo que inflación.",
+      "limitations": "100 € es una base ilustrativa, no una observación del ahorro total. No se presupone rendimiento ni una cesta individual idéntica al IPCA."
+    },
+    {
+      "id": "income",
+      "title": "Desglose de ingresos totales",
+      "selector": "#income-parts",
+      "renderer": "src/js/finances.js",
+      "inputs": [
+        {
+          "configKey": "financesSourceId"
+        }
+      ],
+      "models": [
+        "finances.rows"
+      ],
+      "unit": "M€ y % de TR",
+      "calculation": "Agrupa impuestos D2+D5+D91, cotizaciones D61, ventas P11_P12_P131, rentas D4, transferencias D7, capital D9−D91 y subvenciones D39. Porcentaje = partida/TR × 100.",
+      "limitations": "La deuda emitida es financiación y no ingreso TR. Transferencias de capital excluyen D91 para evitar duplicarlo."
+    },
+    {
+      "id": "spending",
+      "title": "Gasto por funciones: queso, barras y desglose",
+      "selector": "#spending-donut",
+      "renderer": "src/js/spending.js",
+      "inputs": [
+        {
+          "configKey": "spendingSourceId"
+        }
+      ],
+      "models": [
+        "spendingHistory"
+      ],
+      "unit": "euros por cada 100 de gasto y M€",
+      "calculation": "Share = valor función/TOTAL × 100. Queso = tres funciones destacadas + resto. Barras = cuatro featuredSpendingCodes; tabla/lista incluye todas las funciones.",
+      "limitations": "Todas las Administraciones. Los años provisionales dependen de site.json. No es el presupuesto estatal PGE ni una atribución de financiación por deuda."
+    },
+    {
+      "id": "budget",
+      "title": "Presupuesto estatal navegable",
+      "selector": "#budget-chart",
+      "renderer": "src/js/budget.js",
+      "inputs": [
+        {
+          "configKey": "budgetSourceId"
+        }
+      ],
+      "models": [
+        "budget.root"
+      ],
+      "unit": "M€ presupuestados y % del nivel",
+      "calculation": "Cada agrupación suma sus hojas recursivamente. Áreas proporcionales a nodeTotal. La lista y árbol sin JS usan el mismo JSON.",
+      "limitations": "PGE estatal consolidado prorrogado, capítulos 1 a 8. Agrupaciones editoriales y restos/ redondeos se identifican en el fichero. No mezclar con ejecución o COFOG."
+    },
+    {
+      "id": "debt-cost",
+      "title": "Intereses frente al gasto en educación",
+      "selector": ".cost-scale",
+      "renderer": "scripts/lib/render-repayment.mjs",
+      "inputs": [
+        {
+          "configKey": "debtSourceId"
+        },
+        {
+          "configKey": "ratioSourceId"
+        },
+        {
+          "configKey": "financesSourceId"
+        },
+        {
+          "configKey": "interestSourceId"
+        },
+        {
+          "configKey": "benefitsSourceId"
+        },
+        {
+          "configKey": "spendingSourceId"
+        },
+        {
+          "file": "official/repayment-plan.json",
+          "role": "Parámetros del escenario, no observaciones"
+        }
+      ],
+      "models": [
+        "repayment"
+      ],
+      "unit": "educación = 100%; M€ anuales",
+      "calculation": "Intereses D41PAY/COFOG09 del año del plan × 100. Escenarios ilustrativos: intereses × 10; deuda × 0,01.",
+      "limitations": "Comparación de tamaños y supuestos, no previsión ni presupuesto intercambiable. Año de referencia distinto del último cierre cuando así lo indique el plan."
+    },
+    {
+      "id": "repayment",
+      "title": "Simulador de repago",
+      "selector": "#repay-chart",
+      "renderer": "src/js/repayment.js",
+      "inputs": [
+        {
+          "configKey": "debtSourceId"
+        },
+        {
+          "configKey": "ratioSourceId"
+        },
+        {
+          "configKey": "financesSourceId"
+        },
+        {
+          "configKey": "interestSourceId"
+        },
+        {
+          "configKey": "benefitsSourceId"
+        },
+        {
+          "configKey": "spendingSourceId"
+        },
+        {
+          "file": "official/repayment-plan.json",
+          "role": "Parámetros del escenario, no observaciones"
+        }
+      ],
+      "models": [
+        "repayment"
+      ],
+      "unit": "mil M€ de principal por año de escenario",
+      "calculation": "Saldo primario = B9+intereses. Deuda siguiente = max(0,deuda+intereses−saldo primario ajustado). Intereses sobre principal pendiente. Cambios de prestaciones antes de protección social; ingresos fiscales con cambio proporcional y crecimiento nominal compuesto.",
+      "limitations": "Escenario de tipo constante y supuestos explícitos, no pronóstico. COFOG y obligaciones presupuestarias de Seguridad Social no son bases reconciliadas. Se impide doble cómputo de RETA/intereses/prestaciones."
+    },
+    {
+      "id": "growth",
+      "title": "PIB total y por habitante",
+      "selector": "#gdp-pcap-chart",
+      "renderer": "src/js/growth-chart.js",
+      "inputs": [
+        {
+          "configKey": "gdpPerCapitaSourceId"
+        }
+      ],
+      "models": [
+        "gdpPerCapita.series"
+      ],
+      "unit": "índice 100 = baseYear (2000)",
+      "calculation": "Cada serie gdp, pcap, pcapReal se divide por su propio valor en baseYear y multiplica por 100. Redondeo visual a una decimal.",
+      "limitations": "PIB corriente y per cápita corriente en dólares; per cápita real en dólares de 2015. Diferencia corriente/real no aísla inflación por efectos del tipo de cambio."
+    },
+    {
+      "id": "housing",
+      "title": "Brecha de vivienda y emancipación",
+      "selector": "#housing-chart",
+      "renderer": "src/js/housing.js",
+      "inputs": [
+        {
+          "configKey": "housingSourceId"
+        },
+        {
+          "configKey": "emancipationHousingSourceId"
+        }
+      ],
+      "models": [
+        "housing.rows"
+      ],
+      "unit": "miles de hogares/viviendas",
+      "calculation": "ECH 2014–2020: diferencia de medias anuales. ECP desde 2021: hogares enero(t+1)−enero(t). Viviendas: total anual o suma de cuatro trimestres. Brecha acumulada = suma nuevos hogares−suma terminadas. ICE = stock estimado independiente.",
+      "limitations": "Acumulación cero antes de 2014, no déficit nacional preexistente; enlace ECH/ECP aproximado. Sin ajuste por vacantes, demoliciones ni geografía. Hogares ICE no se suman a brecha ni se extrapolan a 2025. IPV compra Q4 solo se usa en la tabla/resumen, no alquiler."
+    },
+    {
+      "id": "security",
+      "title": "Comparación de tasas de condenados",
+      "selector": ".migration-rate-comparison",
+      "renderer": "scripts/lib/render-editorial.mjs",
+      "inputs": [
+        {
+          "configFileKey": "editorialDataFile"
+        },
+        {
+          "sourceId": "ine-convictions-nationality-2024"
+        }
+      ],
+      "models": [
+        "editorial"
+      ],
+      "unit": "condenados por 1.000 habitantes adultos",
+      "calculation": "Tasas del INE transcritas al JSON editorial. Ancho de cada barra = tasa/max(tasas) × 100, redondeado a dos decimales para el CSS.",
+      "limitations": "Nacionalidad no equivale a inmigración. Condenas firmes registradas; tasas sin ajuste por edad, sexo o situación económica. No identifica causalidad ni coste neto."
+    },
+    {
+      "id": "editorial",
+      "title": "Cifras de inmigración, ayudas, servicios y trabajo",
+      "selector": ".migration-kpis",
+      "renderer": "scripts/lib/render-editorial.mjs",
+      "inputs": [
+        {
+          "configFileKey": "editorialDataFile"
+        },
+        {
+          "configKey": "populationSourceId"
+        }
+      ],
+      "models": [
+        "editorial",
+        "population"
+      ],
+      "unit": "unidad y ámbito por indicador",
+      "calculation": "Tarjetas desde indicators[id].value. Población en millones = población/1e6. IMV extranjero = titulares extranjeros/titulares totales × 100. Redondeo solo de presentación.",
+      "limitations": "IMV no mide el porcentaje de inmigrantes que vive de ayudas. Esperas son del SNS completo. Indicadores laborales antiguos sin fecha/tabla exactas están marcados legacy-unverified; se preservan, no se inventa su procedencia."
+    },
+    {
+      "id": "counter",
+      "title": "Contador y escala humana",
+      "selector": "#live-debt",
+      "renderer": "src/js/indicators.js",
+      "inputs": [
+        {
+          "configKey": "debtSourceId"
+        },
+        {
+          "configKey": "ratioSourceId"
+        },
+        {
+          "configKey": "populationSourceId"
+        }
+      ],
+      "models": [
+        "debt",
+        "latest",
+        "previous",
+        "population"
+      ],
+      "unit": "euros, euros por segundo y por habitante",
+      "calculation": "Prolonga diferencia entre los dos últimos cierres usando 365,25 días/año, desde el cierre más reciente. Equivalencia por habitante usa población INE configurada.",
+      "limitations": "Proyección lineal ilustrativa, no contador oficial en tiempo real. Puede crecer o reducirse. Población puntual INE y población histórica del Banco Mundial tienen fechas distintas."
+    }
+  ]
+}

@@ -9,8 +9,10 @@ initSpending(context);
 const budgetView = initBudget(context);
 const growthView = initGrowthChart(context);
 const housingView = initHousing(context);
-const resizeCharts = () => { interestView.resize(); repaymentView.resize(); debtView.resize(); budgetView.resize(); financesView.resize(); growthView.resize(); housingView.resize(); };
-context.charts.subscribe(() => { interestView.refresh(); repaymentView.refresh(); debtView.refresh(); budgetView.refresh(); financesView.refresh(); growthView.refresh(); housingView.refresh(); });
+const chartViews = [interestView, repaymentView, debtView, budgetView, financesView, growthView, housingView];
+const resizeCharts = () => chartViews.forEach(view => view.resize());
+const refreshCharts = () => chartViews.forEach(view => view.refresh());
+context.charts.subscribe(refreshCharts);
 // Coalesce layout changes; keep chart instances and their selected state.
 let resizeFrame=0;
 const scheduleChartResize=()=>{
@@ -22,6 +24,6 @@ document.querySelectorAll('[_echarts_instance_]').forEach(element=>chartSizeObse
 window.addEventListener('resize',scheduleChartResize,{passive:true});
 window.visualViewport?.addEventListener('resize',scheduleChartResize,{passive:true});
 window.addEventListener('pageshow',scheduleChartResize);
-context.reducedMotion.addEventListener('change', () => { interestView.refresh(); repaymentView.refresh(); debtView.refresh(); budgetView.refresh(); financesView.refresh(); growthView.refresh(); housingView.refresh(); });
+context.reducedMotion.addEventListener('change', refreshCharts);
 
 initSharing(context);

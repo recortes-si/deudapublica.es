@@ -37,5 +37,6 @@
   "citizenIncomeSourceId": "oecd-salarios-impuestos",
   "inflationBaselineYear": 2000,
   "housingSourceId": "housing-demand-supply",
-  "emancipationHousingSourceId": "ice-housing-emancipation"
+  "emancipationHousingSourceId": "ice-housing-emancipation",
+  "editorialDataFile": "official/editorial-indicators.json"
 }

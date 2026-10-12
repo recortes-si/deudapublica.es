@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "notes": "Extracción del HTML anterior a la limpieza del 12/10/2026. Los indicadores documentados reutilizan fuentes ya verificadas; legacy-unverified identifica carencias de procedencia del contenido antiguo, sin inventar fechas ni observaciones.",
+  "indicators": [
+    {
+      "id": "population-growth",
+      "value": 508602,
+      "unit": "personas",
+      "scope": "Variación anual de población residente",
+      "period": "2024–2025",
+      "sourceId": "ine-poblacion-2025",
+      "locator": "Nota de prensa, variación a 1 de enero de 2025",
+      "status": "documented"
+    },
+    {
+      "id": "foreign-born-share",
+      "value": 19.3,
+      "unit": "porcentaje",
+      "scope": "Población nacida fuera de España / residentes",
+      "period": "Censo 2025",
+      "sourceId": "ine-poblacion-2025",
+      "locator": "Censo anual, lugar de nacimiento; porcentaje publicado redondeado",
+      "status": "documented"
+    },
+    {
+      "id": "foreign-nationality-millions",
+      "value": 6.9,
+      "unit": "millones de personas",
+      "scope": "Residentes con nacionalidad extranjera",
+      "period": "Censo 2025",
+      "sourceId": "ine-poblacion-2025",
+      "locator": "Censo anual, nacionalidad; cifra redondeada que ya mostraba la web",
+      "status": "documented"
+    },
+    {
+      "id": "imv-foreign-holders",
+      "value": 121252,
+      "unit": "titulares",
+      "scope": "Titulares de nacionalidad extranjera; IMV y CAPI",
+      "period": "Febrero de 2025",
+      "sourceId": "imv-nationality-202502",
+      "locator": "Tabla 1.5, página 6 del PDF",
+      "status": "documented"
+    },
+    {
+      "id": "imv-total-holders",
+      "value": 688007,
+      "unit": "titulares",
+      "scope": "Titulares totales; incluye nacionalidad no registrada",
+      "period": "Febrero de 2025",
+      "sourceId": "imv-nationality-202502",
+      "locator": "Tabla 1.5, página 6 del PDF",
+      "status": "documented"
+    },
+    {
+      "id": "convictions-foreign",
+      "value": 15.7,
+      "unit": "por mil",
+      "scope": "Condenados adultos de nacionalidad extranjera / habitantes de 18 y más años",
+      "period": "2024",
+      "sourceId": "ine-convictions-nationality-2024",
+      "locator": "Nota de prensa: Condenados adultos, nacionalidad",
+      "status": "documented"
+    },
+    {
+      "id": "convictions-spanish",
+      "value": 6.2,
+      "unit": "por mil",
+      "scope": "Condenados adultos de nacionalidad española / habitantes de 18 y más años",
+      "period": "2024",
+      "sourceId": "ine-convictions-nationality-2024",
+      "locator": "Nota de prensa: Condenados adultos, nacionalidad",
+      "status": "documented"
+    },
+    {
+      "id": "convictions-spanish-share",
+      "value": 71.4,
+      "unit": "porcentaje",
+      "scope": "Condenados adultos de nacionalidad española / todos los condenados adultos",
+      "period": "2024",
+      "sourceId": "ine-convictions-nationality-2024",
+      "locator": "Nota de prensa: Condenados adultos, nacionalidad",
+      "status": "documented"
+    },
+    {
+      "id": "surgery-wait-days",
+      "value": 121,
+      "unit": "días",
+      "scope": "Espera media de cirugía electiva en el SNS",
+      "period": "Diciembre de 2025",
+      "sourceId": "sns-waiting-202512",
+      "locator": "Resumen, página 2 del PDF",
+      "status": "documented"
+    },
+    {
+      "id": "surgery-wait-patients",
+      "value": 853509,
+      "unit": "personas",
+      "scope": "Pacientes en lista de espera quirúrgica estructural del SNS",
+      "period": "Diciembre de 2025",
+      "sourceId": "sns-waiting-202512",
+      "locator": "Resumen, página 2 del PDF",
+      "status": "documented"
+    },
+    {
+      "id": "unemployment",
+      "value": 10.4,
+      "unit": "porcentaje",
+      "scope": "Tasa de paro citada en crecer y precariedad",
+      "period": "No especificado en el contenido original",
+      "sourceUrl": "https://ec.europa.eu/eurostat/",
+      "locator": "Pendiente: el contenido original solo citaba Eurostat/INE, sin tabla ni fecha",
+      "status": "legacy-unverified",
+      "note": "Cifra editorial preexistente preservada para no alterar la página. No se ha verificado una observación oficial de un periodo exacto. No usar como nueva serie ni convertirla en dato anual hasta completar procedencia."
+    },
+    {
+      "id": "youth-unemployment",
+      "value": 24.9,
+      "unit": "porcentaje",
+      "scope": "Tasa de paro juvenil citada en precariedad",
+      "period": "No especificado en el contenido original",
+      "sourceUrl": "https://ec.europa.eu/eurostat/",
+      "locator": "Pendiente: el contenido original solo citaba Eurostat/INE, sin tabla ni fecha",
+      "status": "legacy-unverified",
+      "note": "Cifra editorial preexistente preservada para no alterar la página. No se ha verificado una observación oficial de un periodo exacto. No usar como nueva serie ni convertirla en dato anual hasta completar procedencia."
+    },
+    {
+      "id": "eu-youth-unemployment",
+      "value": 15.2,
+      "unit": "porcentaje",
+      "scope": "Referencia de la UE para el paro juvenil",
+      "period": "No especificado en el contenido original",
+      "sourceUrl": "https://ec.europa.eu/eurostat/",
+      "locator": "Pendiente: el contenido original solo citaba Eurostat/INE, sin tabla ni fecha",
+      "status": "legacy-unverified",
+      "note": "Cifra editorial preexistente preservada para no alterar la página. No se ha verificado una observación oficial de un periodo exacto. No usar como nueva serie ni convertirla en dato anual hasta completar procedencia."
+    },
+    {
+      "id": "temporary-contracts",
+      "value": 15,
+      "unit": "porcentaje",
+      "scope": "Aproximación de asalariados con contrato temporal",
+      "period": "No especificado en el contenido original",
+      "sourceUrl": "https://ec.europa.eu/eurostat/",
+      "locator": "Pendiente: el contenido original solo citaba Eurostat/INE, sin tabla ni fecha",
+      "status": "legacy-unverified",
+      "note": "Cifra editorial preexistente preservada para no alterar la página. No se ha verificado una observación oficial de un periodo exacto. No usar como nueva serie ni convertirla en dato anual hasta completar procedencia."
+    },
+    {
+      "id": "research-spain",
+      "value": 1.4,
+      "unit": "porcentaje del PIB",
+      "scope": "Aproximación de gasto en I+D en España",
+      "period": "No especificado en el contenido original",
+      "sourceUrl": "https://ec.europa.eu/eurostat/",
+      "locator": "Pendiente: el contenido original solo citaba Eurostat/INE, sin tabla ni fecha",
+      "status": "legacy-unverified",
+      "note": "Cifra editorial preexistente preservada para no alterar la página. No se ha verificado una observación oficial de un periodo exacto. No usar como nueva serie ni convertirla en dato anual hasta completar procedencia."
+    },
+    {
+      "id": "research-eu",
+      "value": 2.2,
+      "unit": "porcentaje del PIB",
+      "scope": "Aproximación de gasto en I+D en la UE",
+      "period": "No especificado en el contenido original",
+      "sourceUrl": "https://ec.europa.eu/eurostat/",
+      "locator": "Pendiente: el contenido original solo citaba Eurostat/INE, sin tabla ni fecha",
+      "status": "legacy-unverified",
+      "note": "Cifra editorial preexistente preservada para no alterar la página. No se ha verificado una observación oficial de un periodo exacto. No usar como nueva serie ni convertirla en dato anual hasta completar procedencia."
+    },
+    {
+      "id": "early-school-leaving",
+      "value": 13,
+      "unit": "porcentaje",
+      "scope": "Aproximación de abandono escolar",
+      "period": "No especificado en el contenido original",
+      "sourceUrl": "https://ec.europa.eu/eurostat/",
+      "locator": "Pendiente: el contenido original solo citaba Eurostat/INE, sin tabla ni fecha",
+      "status": "legacy-unverified",
+      "note": "Cifra editorial preexistente preservada para no alterar la página. No se ha verificado una observación oficial de un periodo exacto. No usar como nueva serie ni convertirla en dato anual hasta completar procedencia."
+    }
+  ]
+}

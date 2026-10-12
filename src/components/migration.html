@@ -2,9 +2,9 @@
   <div class="section-heading"><div><span class="section-index">Deuda, inmigración y costes locales</span><h2 id="migration-title">Más cotizantes.<br>La factura también es local.</h2></div><p>El Gobierno promueve la inmigración, entre otros objetivos, para ampliar los cotizantes y sostener las pensiones. Es un motivo declarado por el ministro Escrivá, recogido por La Moncloa. Esa estrategia busca aliviar la presión del envejecimiento sobre las cuentas públicas, pero también aumenta la demanda de vivienda: si la oferta no acompaña, parte del coste recae sobre quienes ya viven allí.</p></div>
 
   <div class="migration-kpis">
-    <div><strong>49,1 <i>millones</i></strong><span>habitantes a 1 de enero de 2025 · +508.602 en un año</span></div>
-    <div><strong>19,3 %</strong><span>de la población nació fuera de España · censo de 2025</span></div>
-    <div><strong>6,9 <i>millones</i></strong><span>residentes de nacionalidad extranjera · censo de 2025</span></div>
+    <div><strong>{{MIGRATION_POPULATION}} <i>millones</i></strong><span>habitantes a {{MIGRATION_CENSUS_DATE}} · +{{MIGRATION_POPULATION_GROWTH}} en un año</span></div>
+    <div><strong>{{MIGRATION_FOREIGN_BORN}} %</strong><span>de la población nació fuera de España · censo de {{MIGRATION_CENSUS_YEAR}}</span></div>
+    <div><strong>{{MIGRATION_FOREIGN_NATIONALITY}} <i>millones</i></strong><span>residentes de nacionalidad extranjera · censo de {{MIGRATION_CENSUS_YEAR}}</span></div>
   </div>
 
   <article class="white-card migration-evidence" aria-labelledby="migration-evidence-title">
@@ -57,32 +57,32 @@
       <article class="white-card migration-cost-card">
         <span class="card-kicker">01 · Ayudas y gasto público</span>
         <h4>También hay perceptores de ayudas.</h4>
-        <strong class="migration-cost-value">17,6 %</strong>
-        <span class="migration-cost-label">de los titulares del IMV tenía nacionalidad extranjera · febrero de 2025</span>
-        <p>121.252 de 688.007 titulares. Estas prestaciones suponen gasto público: al evaluar la estrategia de sumar cotizantes, hay que contabilizar también las ayudas y los servicios que reciben.</p>
+        <strong class="migration-cost-value">{{IMV_FOREIGN_SHARE}} %</strong>
+        <span class="migration-cost-label">de los titulares del IMV tenía nacionalidad extranjera · {{IMV_PERIOD}}</span>
+        <p>{{IMV_FOREIGN_HOLDERS}} de {{IMV_TOTAL_HOLDERS}} titulares. Estas prestaciones suponen gasto público: al evaluar la estrategia de sumar cotizantes, hay que contabilizar también las ayudas y los servicios que reciben.</p>
         <details><summary>Qué mide este porcentaje</summary><p>Es la proporción de titulares extranjeros dentro del IMV, que incluye el complemento de ayuda para la infancia. No es el porcentaje de inmigrantes que recibe ayudas ni de quienes viven exclusivamente de ellas. El IMV puede complementar ingresos laborales; esta tabla no cuantifica el gasto por nacionalidad ni el balance fiscal neto.</p></details>
-        <a href="https://www.seg-social.es/wps/wcm/connect/wss/ece9dd02-1601-438f-8f72-c9f076fd50d2/202502%2BCOMPLETO%2BDossier%2Bcomunidad%2Baut%C3%B3noma%2By%2Bprovincia.pdf?MOD=AJPERES" target="_blank" rel="noopener noreferrer">Seguridad Social · tabla 1.5, pág. 6 ↗</a>
+        <a href="{{IMV_SOURCE}}" target="_blank" rel="noopener noreferrer">Seguridad Social · tabla 1.5, pág. 6 ↗</a>
       </article>
       <article class="white-card migration-cost-card">
         <span class="card-kicker">02 · Seguridad y justicia</span>
         <h4>La seguridad también tiene un coste.</h4>
-        <div class="migration-rate-comparison" aria-label="Condenados adultos por cada mil habitantes: nacionalidad extranjera 15,7; española 6,2">
-          <div><span>Nacionalidad extranjera</span><strong>15,7</strong><i style="--rate-width:100%"></i></div>
-          <div><span>Nacionalidad española</span><strong>6,2</strong><i style="--rate-width:39.49%"></i></div>
+        <div class="migration-rate-comparison" aria-label="Condenados adultos por cada mil habitantes: nacionalidad extranjera {{CONVICTIONS_FOREIGN}}; española {{CONVICTIONS_SPANISH}}">
+          <div><span>Nacionalidad extranjera</span><strong>{{CONVICTIONS_FOREIGN}}</strong><i style="--rate-width:{{CONVICTIONS_FOREIGN_WIDTH}}%"></i></div>
+          <div><span>Nacionalidad española</span><strong>{{CONVICTIONS_SPANISH}}</strong><i style="--rate-width:{{CONVICTIONS_SPANISH_WIDTH}}%"></i></div>
         </div>
-        <span class="migration-cost-label">condenados adultos por cada 1.000 habitantes de 18 y más años · 2024</span>
+        <span class="migration-cost-label">condenados adultos por cada 1.000 habitantes de 18 y más años · {{CONVICTIONS_YEAR}}</span>
         <p>El INE registra una tasa mayor entre extranjeros. Los delitos perjudican a las víctimas y requieren recursos policiales, judiciales y penitenciarios, que también forman parte del gasto público.</p>
-        <details><summary>Qué permite concluir el dato</summary><p>Son condenas firmes registradas en 2024, por delitos de ese año o anteriores. El 71,4 % de los condenados tenía nacionalidad española. Nacionalidad no equivale a inmigración y las tasas no están ajustadas por edad, sexo o situación económica. Esta comparación no demuestra que inmigrar cause delincuencia ni estima el coste fiscal asociado.</p></details>
-        <a href="https://www.ine.es/dyngs/Prensa/ECAECM2024.htm" target="_blank" rel="noopener noreferrer">INE · condenados adultos 2024 ↗</a>
+        <details><summary>Qué permite concluir el dato</summary><p>Son condenas firmes registradas en {{CONVICTIONS_YEAR}}, por delitos de ese año o anteriores. El {{CONVICTIONS_SPANISH_SHARE}} % de los condenados tenía nacionalidad española. Nacionalidad no equivale a inmigración y las tasas no están ajustadas por edad, sexo o situación económica. Esta comparación no demuestra que inmigrar cause delincuencia ni estima el coste fiscal asociado.</p></details>
+        <a href="{{CONVICTIONS_SOURCE}}" target="_blank" rel="noopener noreferrer">INE · condenados adultos {{CONVICTIONS_YEAR}} ↗</a>
       </article>
       <article class="white-card migration-cost-card">
         <span class="card-kicker">03 · Sanidad y servicios locales</span>
         <h4>Más demanda exige más capacidad.</h4>
-        <strong class="migration-cost-value">121 <small>días</small></strong>
-        <span class="migration-cost-label">de espera media para una cirugía · SNS, diciembre de 2025</span>
-        <p>853.509 pacientes en lista de espera quirúrgica. Si crece la población sin reforzar personal, centros y plazas, aumenta la presión sobre sanidad, escuelas y servicios sociales.</p>
+        <strong class="migration-cost-value">{{SURGERY_WAIT_DAYS}} <small>días</small></strong>
+        <span class="migration-cost-label">de espera media para una cirugía · SNS, {{SURGERY_WAIT_PERIOD}}</span>
+        <p>{{SURGERY_WAIT_PATIENTS}} pacientes en lista de espera quirúrgica. Si crece la población sin reforzar personal, centros y plazas, aumenta la presión sobre sanidad, escuelas y servicios sociales.</p>
         <details><summary>Qué mide esta lista de espera</summary><p>Es el total del Sistema Nacional de Salud, no una espera atribuida a la inmigración. El informe no desglosa las causas ni permite calcular qué parte depende de las llegadas. Para medir ese efecto hacen falta datos locales de demanda, envejecimiento, recursos y gestión.</p></details>
-        <a href="https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/Informe_situacion_listas_de_espera_dic_2025_V1.pdf" target="_blank" rel="noopener noreferrer">Sanidad · informe diciembre de 2025 ↗</a>
+        <a href="{{SURGERY_WAIT_SOURCE}}" target="_blank" rel="noopener noreferrer">Sanidad · informe {{SURGERY_WAIT_PERIOD}} ↗</a>
       </article>
     </div>
     <p class="interest-method">Tres indicadores distintos: ayudas por nacionalidad, condenas por nacionalidad y esperas del conjunto del SNS. No se suman ni equivalen a una estimación del coste neto de la inmigración. El saldo fiscal exige comparar todos los ingresos y gastos a lo largo del tiempo.</p>

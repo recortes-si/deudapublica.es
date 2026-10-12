@@ -1,3 +1,4 @@
+import { editorialValues } from './render-editorial.mjs';
 import { sourceCards } from './render-sources.mjs';
 import { repaymentValues } from './render-repayment.mjs';
 import { financialValues } from './render-finances.mjs';
@@ -15,6 +16,7 @@ export function templateValues(data) {
   const status = spendingHistory.at(-1).provisional ? 'provisional' : 'definitivo';
   const period = `${previous.year} → ${latest.year}`;
   return {
+    ...editorialValues(data, { format }),
     ...repaymentValues(data, { format, escapeHtml }),
     ...financialValues(data, { format, escapeHtml, table, signed }),
     HOUSING_FIRST:data.housing.rows[0].year,HOUSING_YEAR:data.housing.latest.year,HOUSING_BASE:data.housing.baseYear,
