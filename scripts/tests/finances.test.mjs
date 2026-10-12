@@ -113,3 +113,78 @@ test('historical context rejects missing coverage, duplicate events and invalid 
  const duplicate=structuredClone(t);duplicate.events.push(duplicate.events[0]);assert.throws(()=>validate(duplicate,[2000,2025]),/duplicado/);
  const invalid=structuredClone(t);invalid.governments[0].start='1996-02-30';assert.throws(()=>validate(invalid,[2000,2025]),/fecha inválida/);
 });
+
+
+test('inflation comparison distinguishes price increases from lost purchasing power',async()=>{
+ const {inflationComparison:compare}=await import('../../src/shared/inflation.mjs');
+ const finances={first:{year:2000,fiscalRevenue:100,expenditure:200},latest:{year:2025,fiscalRevenue:200,expenditure:400}};
+ const history={rows:[{year:2000,priceIndex:100},{year:2025,priceIndex:200}]};
+ const x=compare(finances,history);
+ assert.equal(x.priceGrowth,100);assert.equal(x.purchasingPower,50);
+ assert.equal(x.taxGrowthNominal,100);assert.equal(x.taxGrowthReal,0);assert.equal(x.spendGrowthReal,0);
+ assert.throws(()=>compare(finances,{rows:history.rows.slice(1)}),/faltan precios/);
+ const zero=structuredClone(history);zero.rows[0].priceIndex=0;assert.throws(()=>compare(finances,zero),/faltan precios/);
+});
+
+test('observed revenue and spending growth reconcile after the consumer-price adjustment',async()=>{
+ const {inflationComparison:compare}=await import('../../src/shared/inflation.mjs');
+ const d=await loadData(root),x=compare(d.finances,d.debtHistory);
+ assert.equal(x.firstYear,2000);assert.equal(x.lastYear,2025);
+ assert.ok(Math.abs(x.priceRatio-126.65/71.22)<1e-12);
+ assert.ok(Math.abs((1+x.taxGrowthReal/100)*x.priceRatio-(1+x.taxGrowthNominal/100))<1e-12);
+ assert.ok(Math.abs((1+x.spendGrowthReal/100)*x.priceRatio-(1+x.spendGrowthNominal/100))<1e-12);
+ assert.ok(x.taxGrowthReal<x.taxGrowthNominal);assert.ok(x.spendGrowthReal<x.spendGrowthNominal);
+});
+
+test('rebased fiscal and purchasing-power series share prices and retain annual deflation',async()=>{
+ const {financeInflationSeries:model}=await import('../../src/shared/inflation.mjs');
+ const d=await loadData(root);
+ for(const start of [2000,2008,2013,2019,2024]) {
+  const x=model(d.finances,d.debtHistory,start);
+  assert.equal(x.rows[0].taxIndex,100);assert.equal(x.rows[0].spendIndex,100);assert.equal(x.rows[0].priceIndex,100);assert.equal(x.rows[0].purchasingPower,100);
+  assert.equal(x.firstYear,start);assert.equal(x.lastYear,2025);
+  for(const row of x.rows) { assert.ok(Math.abs(row.purchasingPower*row.priceIndex-10000)<1e-9);assert.ok(Math.abs(row.loss+row.purchasingPower-100)<1e-9); }
+  assert.equal(x.debtEndM,d.debtHistory.rows.at(-1).debtM);
+ }
+ const all=model(d.finances,d.debtHistory,2000);
+ assert.equal(all.rows[0].annualInflation,null);
+ assert.ok(all.rows.find(row=>row.year===2009).annualInflation<0);
+ assert.ok(all.rows.find(row=>row.year===2022).annualInflation>8);
+ const deflation=model(d.finances,d.debtHistory,2013).rows.find(row=>row.year===2015);assert.ok(deflation.purchasingPower>100);assert.ok(deflation.loss<0);
+ assert.throws(()=>model(d.finances,d.debtHistory,1999),/año de inicio/);
+ assert.throws(()=>model(d.finances,d.debtHistory,2025),/periodo comparable/);
+ const missing=structuredClone(d.debtHistory);missing.rows=missing.rows.filter(row=>row.year!==2022);assert.throws(()=>model(d.finances,missing,2000),/faltan precios del año 2022/);
+});
+
+
+test('citizen income comparison excludes estimates and does not force wages below prices',async()=>{
+ const {financeInflationSeries:model}=await import('../../src/shared/inflation.mjs');
+ const d=await loadData(root),recent=model(d.finances,d.debtHistory,2019,d.citizenIncome),long=model(d.finances,d.debtHistory,2000,d.citizenIncome);
+ assert.equal(d.citizenIncome.lastYear,2024);assert.equal(recent.lastYear,2024);assert.ok(!recent.rows.some(row=>row.year===2025));
+ assert.ok(recent.netGrowthReal<0);assert.ok(recent.taxGrowthReal>0);assert.ok(recent.spendGrowthReal>0);
+ assert.ok(long.netGrowthReal>0);assert.ok(long.netGrowthReal<1);
+ for(const r of recent.rows)assert.ok(Math.abs(r.netIndex-100*d.citizenIncome.rows.find(x=>x.year===r.year).net/d.citizenIncome.rows.find(x=>x.year===2019).net)<1e-9);
+ const missing=structuredClone(d.citizenIncome);missing.rows=missing.rows.filter(row=>row.year!==2022);assert.throws(()=>model(d.finances,d.debtHistory,2019,missing),/falta salario neto comparable en 2022/);
+});
+
+test('citizen-income loader validates the profile and removes estimated observations',async()=>{
+ const {citizenIncomeModel:model}=await import('../lib/citizen-income.mjs');
+ const csv=await readFile(resolve(root,'data/raw/oecd-salarios-impuestos-2000-2025.csv'),'utf8');
+ const result=model(csv,{id:'test',estimatedYears:[2025]});assert.equal(result.rows.length,25);assert.equal(result.lastYear,2024);
+ assert.throws(()=>model(csv.replaceAll('S_C0','S_C2'),{id:'test',estimatedYears:[2025]}),/perfil/);
+ assert.throws(()=>model(csv,{id:'test',estimatedYears:['2025']}),/años estimados/);
+});
+
+
+test('debt-growth curve uses nominal closing debt and the common comparison period',async()=>{
+ const {financeInflationSeries:model}=await import('../../src/shared/inflation.mjs');
+ const d=await loadData(root);
+ for(const start of [2000,2008,2019,2023]) {
+  const story=model(d.finances,d.debtHistory,start,d.citizenIncome),base=d.debtHistory.rows.find(row=>row.year===start);
+  assert.equal(story.rows[0].debtIndex,100);assert.equal(story.lastYear,2024);
+  for(const row of story.rows)assert.ok(Math.abs(row.debtIndex-100*d.debtHistory.rows.find(r=>r.year===row.year).debtM/base.debtM)<1e-9);
+  assert.ok(Math.abs(story.rows.at(-1).debtIndex-100-story.debtGrowth)<1e-9);
+ }
+ const missing=structuredClone(d.debtHistory);missing.rows.find(row=>row.year===2020).debtM=null;
+ assert.equal(model(d.finances,missing,2000,d.citizenIncome).rows.find(row=>row.year===2020).debtIndex,null);
+});

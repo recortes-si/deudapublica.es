@@ -23,6 +23,14 @@
       <div class="tax-actions"><button class="tax-reset" type="button" id="tax-only">Ejemplo: {{TAX_ONLY_COUNT}} impuestos completos</button><button class="tax-reset" type="button" id="tax-reset">Volver a las {{TAX_EXAMPLE_COUNT}} medidas iniciales</button></div>
     </article>
   </div>
+  <div class="finance-chart-card interest-comparison-card">
+    <div class="interest-chart-heading"><span class="card-kicker">Del coste de la deuda a tus impuestos</span><h3>¿Qué podríamos hacer con esos intereses?</h3><p id="interest-chart-caption">{{INTEREST_YEAR}} · M€ / año</p></div>
+    <div class="interest-chart-kpis" id="interest-chart-kpis"><div><span>Intereses pagados</span><strong>{{INTEREST_VALUE}} M€</strong></div><div><span>Rebajas elegidas</span><strong id="interest-chart-total">{{TAX_EXAMPLE_TOTAL}} M€</strong></div><div><span id="interest-chart-balance-label">Ahorro sin utilizar</span><strong id="interest-chart-balance">{{TAX_EXAMPLE_REMAINING}} M€</strong></div></div>
+    <div id="interest-chart" role="img" aria-label="Comparación del coste anual de los intereses con las rebajas de impuestos seleccionadas."></div>
+    <div class="interest-chart-legend" id="interest-chart-legend"></div>
+    <p id="interest-chart-result" class="interest-chart-result" aria-live="polite"></p>
+    <p class="interest-chart-note">Escenario sin deuda, con el resto de cuentas constante.</p>
+  </div>
   <p class="interest-method">Comparación de magnitudes de {{INTEREST_YEAR}}: intereses devengados (Eurostat), recaudación tributaria (AEAT y Hacienda) e ingresos de gestión ordinaria de la Seguridad Social. Se asume deuda e intereses cero y el resto de ingresos y gastos constantes. No calcula el coste de amortizar la deuda ni los efectos económicos de eliminar impuestos. Los impuestos AEAT excluyen la recaudación foral; herencias y donaciones sí la incluyen. Las cotizaciones excluyen RETA, que se ofrece por separado. La rebaja del IRPF estima una reducción proporcional de recaudación, sin simular tramos ni rebajas en puntos de los tipos. La rebaja del IVA escala proporcionalmente todos sus tipos y su recaudación; no es una previsión de una reforma.</p>
   <details class="data-details"><summary>Ver importes, fuentes y cálculo del ejemplo</summary>{{TAX_TABLE}}<p class="interest-formula">Medidas iniciales: {{TAX_EXAMPLE_DESCRIPTION}}.</p><p class="interest-formula">Ahorro restante = intereses anuales − coste estimado de las medidas seleccionadas. Ejemplo inicial: {{INTEREST_VALUE}} − {{TAX_EXAMPLE_TOTAL}} = {{TAX_EXAMPLE_REMAINING}} M€ (cifras redondeadas).</p></details>
 </section>

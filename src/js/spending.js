@@ -7,6 +7,7 @@ function initSpending({ data, format, escapeHtml }) {
     const highestShare = Math.max(...featured.map(item => item.share));
     document.querySelector('#spending-description').textContent = `Gasto de todas las Administraciones Públicas en ${year}${observation.provisional ? ' (provisional)' : ''}: ${format(observation.total, 0)} M€.`;
     document.querySelector('#spending-bars').innerHTML = featured.map((item, index) => `<div class="bar-row"><span>${escapeHtml(item.name)}</span><div class="bar-track"><div class="bar-fill ${index === 1 ? 'acid' : index === 2 ? 'orange' : ''}" style="width:${item.share / highestShare * 100}%"></div></div><b class="bar-value">${format(item.share)}%</b></div>`).join('');
+    document.querySelector('#spending-full-breakdown').innerHTML = [...observation.items].sort((a,b)=>b.share-a.share).map(item=>`<li><div><strong>${escapeHtml(item.name)}</strong><b>${format(item.share,2)} € <small>de cada 100 €</small></b></div><span class="spending-detail-track" aria-hidden="true"><i style="width:${item.share}%"></i></span><span class="spending-detail-amount">${format(item.value,0)} M€ al año</span></li>`).join('');
     const rest = Math.max(0, 100 - featured.slice(0,3).reduce((sum, item) => sum + item.share, 0));
     const donutItems = [...featured.slice(0,3), { name: 'Resto de funciones', share: rest }];
     let cursor = 0;

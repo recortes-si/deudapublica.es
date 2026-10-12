@@ -25,7 +25,7 @@ Puedes cambiar el puerto con `PORT=9090 npm run preview`.
 | Ruta | Responsabilidad |
 | --- | --- |
 | `src/index.html` | Estructura general y orden de las secciones |
-| `src/components/*.html` | Una sección por fichero: portada, contador, evolución, gasto, presupuesto… |
+| `src/components/*.html` | Componentes por fichero: portada, contador, evolución, gasto… El presupuesto se incluye dentro del apartado de gasto. |
 | `src/styles/main.css` | Diseño, estados accesibles y adaptaciones para móvil |
 | `src/js/helpers.js` | Formato, escape de texto y preferencias de movimiento |
 | `src/js/{indicators,debt-chart,spending,budget}.js` | Módulos con estado privado y dependencias explícitas |
@@ -355,7 +355,7 @@ se muestra «sin dato» y un hueco en la línea; no se inventa ni se arrastra ot
 
 `data/official/pge-2024-politicas.json` admite tantos niveles de `children` como sean necesarios. Los programas llevan su código oficial y cada política desglosada identifica la tabla 1.6, columna 2024-P, del documento de Hacienda. Los importes se expresan en millones y los hijos deben conservar el total de la política; el resto no separado y el redondeo se identifican expresamente. No mezclar ejecución de Seguridad Social ni COFOG con estos créditos presupuestados. El IMV y las prestaciones familiares permanecen agrupados como en el programa 221A.
 
-Orden editorial: situación y trayectoria de la deuda → factura futura e intereses → ingresos y déficit → gasto total → presupuesto estatal detallado → plan de repago → hacer crecer la economía → inmigración y cuentas públicas → precariedad y gasto → claves y fuentes. La navegación sigue el mismo orden y está disponible también en móviles.
+Orden editorial: situación y trayectoria de la deuda → factura futura e intereses → ingresos y déficit → gasto y partidas (vista general y presupuesto estatal detallado) → costes reales de la deuda → hacer crecer la economía → inmigración y cuentas públicas → precariedad y gasto → claves → simulador de repago opcional → fuentes. La navegación sigue el mismo orden y está disponible también en móviles.
 
 ### Apartados comparativos (crecer, inmigración, precariedad)
 
@@ -371,6 +371,52 @@ El gráfico de deuda ofrece euros nominales (por defecto), porcentaje del PIB, e
 
 `inflationSourceId` en `data/site.json` recupera el IPCA de España, total de consumo, índice medio anual, de Eurostat. `scripts/lib/debt-history.mjs` valida años y dimensiones y fija como año base el último año fiscal disponible. Importe constante = nominal × IPCA(base) / IPCA(año). El ajuste expresa poder adquisitivo de consumo; no es un deflactor del PIB ni una reducción del principal pendiente. La deuda al cierre también usa aquí el índice medio anual. Para añadir un año fiscal hay que aportar su IPCA; el build falla si falta. La tabla publicada incluye valores nominales y constantes sin JavaScript. Las conversiones compartidas están en `src/shared/debt-history.mjs`.
 
-`src/js/chart-theme.js` aplica una paleta accesible clara u oscura a los cinco gráficos (deuda, cuentas públicas, presupuesto, repago y PIB por habitante). El tema claro es el predeterminado. El selector está junto al gráfico de deuda; guarda la preferencia en localStorage cuando está disponible y conserva años, filtros, partidas abiertas y medidas del simulador al cambiar. La página continúa siendo un único HTML autónomo.
+`src/js/chart-theme.js` aplica una paleta accesible clara u oscura a los seis gráficos (deuda, intereses, cuentas públicas, presupuesto, repago y PIB por habitante). El tema claro es el predeterminado. El selector está junto al gráfico de deuda; guarda la preferencia en localStorage cuando está disponible y conserva años, filtros, partidas abiertas y medidas del simulador al cambiar. La página continúa siendo un único HTML autónomo.
 
 Los sucesos y gobiernos de la gráfica histórica se editan en `data/official/debt-timeline.json`: cada suceso tiene año, etiqueta y fuente; cada gobierno, partido y fechas de nombramiento/cese. Las líneas señalan 2008 (crisis financiera) y 2020 (COVID). El botón «Mostrar gobiernos» añade franjas por gobierno: los datos son anuales, por lo que cada año se atribuye al presidente que ocupó el cargo más días. Los años de relevo no representan decisiones de un único gobierno. Al ampliar la serie, actualiza también `observedThrough` y los relevos necesarios.
+
+
+La sección de inflación y cuentas públicas usa un único gráfico: variación acumulada de recaudación, gasto, precios y poder de compra de 100 € nominales sin rendimiento. Las cuatro curvas empiezan en 0% y comparten la misma escala; la pérdida de compra baja de cero. Inflación acumulada = (IPCA(año) / IPCA(inicio) − 1) × 100; variación de compra = (IPCA(inicio) / IPCA(año) − 1) × 100. No son porcentajes simétricos. Dos ejemplos bajo la gráfica traducen los porcentajes a euros: el coste de una compra inicialmente de 100 € y la capacidad de compra de 100 € guardados. Un selector de año sincroniza líneas, cifras y tabla. El cálculo compartido está en `src/shared/inflation.mjs`. Se conserva el desglose fiscal para auditoría en un desplegable. Todo se publica en el único HTML estático.
+
+La gráfica añade el salario neto anual observado del perfil OCDE soltero sin hijos con el 100% del salario medio (THP, euros; después de IRPF y cotizaciones del trabajador, antes de impuestos al consumo). `scripts/lib/citizen-income.mjs` valida el perfil y excluye años marcados como estimados en el catálogo. Todas las curvas terminan en el último año común observado, actualmente 2024. `inflationBaselineYear` fija 2000 como inicio por defecto; el selector permite elegir los demás años. El comentario del gráfico se calcula a partir de los datos: no afirma pérdida de renta real cuando el salario supera la inflación. La curva de ahorro conserva la hipótesis de 100 € sin rendimiento y no representa todo el ahorro ciudadano.
+
+La comparación también incluye el incremento acumulado de deuda pública nominal al cierre, con el mismo año inicial y final que el resto de curvas. Deuda: (saldo nominal del año / saldo nominal inicial − 1) × 100. Comparte el eje porcentual y se publica también en la tabla; no representa déficit anual ni deuda/PIB. Los datos ausentes se mantienen como huecos.
+
+### Compartir gráficos y escenarios
+
+`src/js/sharing.js` añade un panel de compartir a deuda, inflación, presupuesto,
+repago, crecimiento, gasto e intereses. Exporta un PNG local con título, cifras,
+leyenda y fuente, sin dependencias ni servicios de captura externos. WhatsApp y
+X comparten texto y un enlace; el PNG se adjunta desde el menú nativo compatible
+([Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share))
+o se descarga para adjuntarlo manualmente. No se publica nada automáticamente.
+
+Los parámetros `grafico` y `vista` conservan filtros, tema, controles del escenario
+ y ruta del presupuesto. Solo se restauran controles conocidos y valores válidos;
+los enlaces malformados mantienen la vista normal. En una instalación de Pages se
+conserva la ruta pública, incluso dentro de un proyecto; desde localhost o un fichero
+local se comparte el dominio de producción. El botón de copiar ofrece selección
+manual cuando el portapapeles no está disponible. El resultado sigue siendo un único HTML.
+
+Los gráficos usan SVG para conservar nitidez al ampliar con el navegador o mover
+la ventana a una pantalla con distinta densidad de píxeles. Un `ResizeObserver`
+observa los contenedores de los gráficos; los cambios de ventana, viewport móvil y
+restauración de página también ajustan su tamaño, agrupados con `requestAnimationFrame`.
+Las instancias y selecciones se conservan. Al compartir, el SVG se rasteriza localmente
+en el PNG de 1200 píxeles de ancho.
+
+El apartado de intereses incluye una comparación de barras en la misma escala:
+intereses anuales frente al coste acumulado de las medidas fiscales elegidas.
+Cada segmento identifica una medida y el saldo indica ahorro disponible o exceso.
+El gráfico y su exportación PNG se actualizan con los selectores, incluido IRPF e IVA.
+
+El simulador `src/components/repayment-planner.html` está al final, justo antes de las fuentes,
+separado de la explicación de costes de la deuda. En móvil los pasos de gastos e
+ingresos arrancan plegados y las partidas se eligen con un selector. Las tarjetas
+siguen disponibles en escritorio. El resultado permanece visible y el desglose
+de cambios se consulta bajo demanda; los valores se conservan al cambiar de partida.
+
+Las fichas de fuentes se generan en `scripts/lib/render-sources.mjs`: muestran
+organismo, título, periodo y actualización por separado, con enlaces a la fuente
+y a los datos originales cuando están disponibles. Notas y condiciones de uso
+se despliegan bajo demanda; las tarjetas se adaptan a una columna en móvil.

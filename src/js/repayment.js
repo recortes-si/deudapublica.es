@@ -1,6 +1,11 @@
 function initRepayment({data,format,escapeHtml,reducedMotion,charts}) {
  const p=data.repayment,chart=charts.init(document.querySelector('#repay-chart'),'repayment');
  const byId=id=>document.getElementById(id),cuts=[...document.querySelectorAll('[data-repay-cut]')];
+ const spendingSelect=byId('repay-spending-select'),spendingTabs=[...document.querySelectorAll('[data-spending-tab]')];
+ spendingSelect.innerHTML=spendingTabs.map(button=>'<option value="'+escapeHtml(button.dataset.spendingTab)+'">'+escapeHtml(button.querySelector('span').textContent)+' · '+escapeHtml(button.querySelector('strong').textContent)+'</option>').join('');
+ spendingSelect.value=spendingTabs.find(button=>button.getAttribute('aria-pressed')==='true').dataset.spendingTab;
+ spendingSelect.addEventListener('change',()=>spendingTabs.find(button=>button.dataset.spendingTab===spendingSelect.value)?.click());
+ if(matchMedia('(max-width:760px)').matches){byId('repay-spending-step').open=false;byId('repay-income-step').open=false;}
  const horizon=byId('repay-horizon'),rate=byId('repay-rate'),inflation=byId('repay-inflation'),pensionMode=byId('repay-pension-mode'),taxIncome=byId('repay-tax-income'),growth=byId('repay-growth');
  let modelRate=p.rate;
  const settings=()=>({inflation:Number(inflation.value),pensionMode:pensionMode.value,reductions:Object.fromEntries(cuts.map(input=>[input.dataset.repayCut,-Number(input.value)]))});
@@ -46,6 +51,7 @@ function initRepayment({data,format,escapeHtml,reducedMotion,charts}) {
  document.querySelectorAll('[data-spending-tab]').forEach(button=>button.addEventListener('click',()=>{
   document.querySelectorAll('[data-spending-tab]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
   document.querySelectorAll('[data-spending-panel]').forEach(panel=>panel.hidden=panel.dataset.spendingPanel!==button.dataset.spendingTab);
+  spendingSelect.value=button.dataset.spendingTab;
  }));
  byId('repay-complete').addEventListener('click',()=>{
   const income=repaymentRevenue(p,{taxChange:Number(taxIncome.value),growth:Number(growth.value),years:p.maxHorizon});

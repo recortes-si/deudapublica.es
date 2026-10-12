@@ -1,3 +1,4 @@
+import { financeInflationSeries } from '../../src/shared/inflation.mjs';
 import { governmentForYear } from '../../src/shared/debt-timeline.mjs';
 export function financialValues(data, {format,escapeHtml,table,signed}) {
   const {finances:f}=data;
@@ -7,8 +8,17 @@ export function financialValues(data, {format,escapeHtml,table,signed}) {
   const gdp = row => { const d=debtByYear.get(row.year); return d ? d.euros*1e6*100/d.ratio : null; };
   const gdpFirst = gdp(f.first), gdpLast = gdp(f.latest);
   const gdpGrowth = gdpFirst && gdpLast ? (gdpLast/gdpFirst-1)*100 : null;
-  const selected=f.latest;
+  const selected=f.latest, story=financeInflationSeries(f,data.debtHistory,data.config.inflationBaselineYear??f.first.year,data.citizenIncome), end=story.rows.at(-1);
   return {
+    INFLATION_DEBT_GROWTH:story.debtGrowth==null?'Sin dato':signed(story.debtGrowth)+'%',
+    INFLATION_COMPARE_FIRST:story.firstYear,
+    INFLATION_COMPARE_YEAR:story.lastYear,INFLATION_TAX_NOMINAL:signed(end.taxIndex-100),INFLATION_SPEND_NOMINAL:signed(end.spendIndex-100),INFLATION_NET_GROWTH:signed(story.netGrowth),INCOME_SOURCE:source('citizenIncomeSourceId'),
+    INFLATION_START_OPTIONS:f.rows.filter(row=>row.year<story.lastYear).map(row=>`<option value="${row.year}" ${row.year===story.firstYear?'selected':''}>${row.year}</option>`).join(''),
+    FISCAL_PRICE_INDEX_EXACT:format(end.priceIndex),
+    FISCAL_TAX_INDEX:format(end.taxIndex,0),FISCAL_SPEND_INDEX:format(end.spendIndex,0),FISCAL_PRICE_INDEX:format(end.priceIndex,0),INFLATION_LOSS:format(end.loss),
+    INFLATION_SERIES_TABLE:table(['Año','Subida de impuestos + cotizaciones','Subida del gasto','Subida de los precios','Subida del salario neto del perfil OCDE','Poder de compra del ahorro sin rendimiento','Inflación anual','Subida de deuda nominal'],story.rows.map(row=>[row.year,signed(row.taxIndex-100)+'%',signed(row.spendIndex-100)+'%',signed(row.priceIndex-100)+'%',signed(row.netIndex-100)+'%',format(row.purchasingPower)+' €',row.annualInflation==null?'Sin dato':signed(row.annualInflation)+'%',row.debtIndex==null?'Sin dato':signed(row.debtIndex-100)+'%']),'Variación desde '+story.firstYear+' · poder de compra expresado en euros de ese año · inflación IPCA media anual'),
+    INFLATION_PRICE_GROWTH:format(end.priceIndex-100),INFLATION_PURCHASING:format(end.purchasingPower),INFLATION_PURCHASING_RAW:end.purchasingPower,
+    INFLATION_TAX_REAL:signed(story.taxGrowthReal),INFLATION_SPEND_REAL:signed(story.spendGrowthReal),
     DEBT_EVENTS:data.debtTimeline.events.map(event=>`<span><b>${event.year}</b> · <a href="${escapeHtml(event.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(event.label)} ↗</a></span>`).join(''),
     GOVERNMENT_SOURCE:escapeHtml(data.debtTimeline.governmentSourceUrl),
     REAL_BASE_YEAR:data.debtHistory.baseYear, INFLATION_SOURCE:source('inflationSourceId'),

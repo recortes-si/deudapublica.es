@@ -33,5 +33,7 @@
   "gdpPerCapitaSourceId": "worldbank-gdp-per-capita",
   "populationSeriesSourceId": "worldbank-poblacion",
   "inflationSourceId": "eurostat-inflacion",
-  "debtTimelineSourceId": "debt-timeline"
+  "debtTimelineSourceId": "debt-timeline",
+  "citizenIncomeSourceId": "oecd-salarios-impuestos",
+  "inflationBaselineYear": 2000
 }

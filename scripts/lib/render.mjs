@@ -1,3 +1,4 @@
+import { sourceCards } from './render-sources.mjs';
 import { repaymentValues } from './render-repayment.mjs';
 import { financialValues } from './render-finances.mjs';
 import { measureCost } from '../../src/shared/fiscal.mjs';
@@ -52,7 +53,7 @@ export function templateValues(data) {
     COUNTER_NOTE: `Proyección desde el cierre de ${latest.year}, al ritmo medio de la variación ${period}. No es una medición en tiempo real ni una predicción: la deuda puede aumentar o disminuir.`,
     SPENDING_TABLE: table(['Función',...spendingHistory.map(row=>`${row.year} (M€)`)],spending.map(item=>[item.name,...spendingHistory.map(row=>format(row.items.find(entry=>entry.code===item.code).value,0))]),'Gasto por funciones COFOG'),
     BUDGET_TREE: tree(budget.root),
-    SOURCES: data.sources.map(source => `<div class="source-item"><div><strong>${escapeHtml(source.publisher)}</strong><p>${escapeHtml(source.title)} · ${escapeHtml(source.period)} · actualizado ${escapeHtml(source.updated)}</p></div><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">Ver fuente ↗</a></div>`).join(''),
+    SOURCES: sourceCards(data.sources, { escapeHtml }), SOURCE_COUNT: data.sources.length,
     SPENDING_OPTIONS: spendingHistory.map(row=>`<option value="${row.year}" ${row.year===spendingYear?'selected':''}>${row.year}${row.provisional?' · provisional':''}</option>`).join('')
   };
 }

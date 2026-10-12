@@ -28,9 +28,9 @@ export async function buildSite(directory = 'public') {
   const template = await assemble(await text('src/index.html'));
   const [css, vendor, license, ...modules] = await Promise.all([
     text('src/styles/main.css'), text('src/vendor/echarts.min.js'), text('src/vendor/echarts.LICENSE.txt'),
-    ...['helpers','chart-theme','indicators','debt-chart','interest','repayment','fiscal-timeline','finances','spending','budget','growth-chart','app'].map(name => text(`src/js/${name}.js`))
+    ...['helpers','chart-theme','indicators','debt-chart','interest','repayment','fiscal-timeline','finances','spending','budget','growth-chart','sharing','app'].map(name => text(`src/js/${name}.js`))
   ]);
-  modules.unshift((await text('src/shared/debt-timeline.mjs')).replace(/^export /gm, ''), (await text('src/shared/debt-history.mjs')).replace(/^export /gm, ''), (await text('src/shared/repayment.mjs')).replace(/^export /gm, ''), (await text('src/shared/fiscal.mjs')).replace(/^export /gm, ''));
+  modules.unshift((await text('src/shared/inflation.mjs')).replace(/^export /gm, ''), (await text('src/shared/debt-timeline.mjs')).replace(/^export /gm, ''), (await text('src/shared/debt-history.mjs')).replace(/^export /gm, ''), (await text('src/shared/repayment.mjs')).replace(/^export /gm, ''), (await text('src/shared/fiscal.mjs')).replace(/^export /gm, ''));
   const json = JSON.stringify(data).replace(/</g, '\\u003c');
   const inline = script => script.replace(/<\/script/gi, '<\\/script');
   const imageUri = async name => 'data:image/png;base64,' + (await readFile(resolve(root, 'src/assets', name))).toString('base64');

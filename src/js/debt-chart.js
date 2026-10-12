@@ -35,11 +35,21 @@ function initDebtChart({ data, format, escapeHtml, reducedMotion, charts }, time
     document.querySelector('#debt-view-note').textContent = view.note;
     document.querySelector('#debt-chart').setAttribute('aria-label', `Saldo anual: superávit en verde y déficit en rojo, eje izquierdo. Deuda total al cierre: línea azul, eje derecho. ${view.label}. Datos completos en la tabla inferior.`);
     const ratioMarks = mode.value === 'pib' ? [{ yAxis:60,name:'60% del PIB',label:{show:true,formatter:'60%',color:p.text,fontSize:9} },{ yAxis:100,name:'100% del PIB',label:{show:true,formatter:'100%',color:p.text,fontSize:9} }] : [];
-    const grid = {left:mode.value==='percapita'?55:46,right:mode.value==='percapita'?62:52,top:52,bottom:30};
-    const eventMarks = context.events.filter(event=>rows.some(row=>row.year===event.year)).map(event=>([{
+    const width=chart.getWidth(),compact=width<600;
+    const axisUnit=mode.value==='pib'?'% del PIB':mode.value==='percapita'?'€/persona':mode.value==='real'?'mil M€ de '+history.baseYear:'mil M€';
+    const grid = {left:mode.value==='percapita'?55:46,right:mode.value==='percapita'?62:52,top:84,bottom:30};
+    const visibleEvents=context.events.filter(event=>rows.some(row=>row.year===event.year));
+    let previousRight=-Infinity,lane=0;
+    const eventLabels=visibleEvents.map(event=>{
+      const label=event.year+' · '+event.shortLabel,labelWidth=label.length*(compact?5:6),index=rows.findIndex(row=>row.year===event.year);
+      const x=Math.max(labelWidth/2+4,Math.min(width-labelWidth/2-4,grid.left+(width-grid.left-grid.right)*(index+.5)/rows.length));
+      lane=x-labelWidth/2<previousRight+8?1-lane:0;previousRight=x+labelWidth/2;
+      return {type:'text',silent:true,x,y:4+lane*18,style:{text:label,fill:p.ink,fontSize:compact?9:11,fontWeight:600,align:'center',verticalAlign:'top'}};
+    });
+    const eventMarks = visibleEvents.map(event=>([{
       coord:[String(event.year),-extent], name:event.label,
       lineStyle:{color:p.text,type:'dashed',width:1.5},
-      label:{show:true,formatter:event.year+' · '+event.shortLabel,position:'insideEndTop',rotate:0,color:p.ink,backgroundColor:p.background,padding:[3,4],fontSize:10}
+      label:{show:false}
     },{coord:[String(event.year),extent]}]));
     renderGovernments(rows,grid);
     chart.setOption({
@@ -55,10 +65,11 @@ function initDebtChart({ data, format, escapeHtml, reducedMotion, charts }, time
         return `<strong>${escapeHtml(points[0].axisValue)}</strong><br>${lines.join('<br>')}`;
       }},
       grid,
+      graphic:eventLabels,
       xAxis:{type:'category',data:rows.map(row=>String(row.year)),axisLine:{onZero:true,lineStyle:{width:2}},axisTick:{show:false},axisLabel:{fontSize:10,interval:Math.max(0,Math.floor(rows.length/5)-1)}},
       yAxis:[
-        {type:'value',name:'Saldo anual',nameTextStyle:{fontSize:10},min:-extent,max:extent,axisLabel:{fontSize:10,formatter:value=>format(value,0)+(mode.value==='pib'?'%':'')}},
-        {type:'value',name:'Deuda total',nameTextStyle:{fontSize:10},min:0,axisLabel:{fontSize:10,formatter:value=>format(value,0)+(mode.value==='pib'?'%':'')},splitLine:{show:false}}
+        {type:'value',name:'Saldo anual\n'+axisUnit,nameGap:18,nameTextStyle:{fontSize:compact?9:10,lineHeight:14},min:-extent,max:extent,axisLabel:{fontSize:10,formatter:value=>format(value,0)+(mode.value==='pib'?'%':'')}},
+        {type:'value',name:'Deuda total\n'+axisUnit,nameGap:18,nameTextStyle:{fontSize:compact?9:10,lineHeight:14},min:0,axisLabel:{fontSize:10,formatter:value=>format(value,0)+(mode.value==='pib'?'%':'')},splitLine:{show:false}}
       ],
       series:[
         {name:'Saldo anual',type:'bar',barMaxWidth:28,markLine:{silent:true,symbol:'none',data:eventMarks},data:rows.map((row,i)=>({value:values[i].balance,itemStyle:{color:row.balanceM<0?p.deficit:p.surplus,opacity:row.year===timeline.year?1:.8,borderColor:p.ink,borderWidth:row.year===timeline.year?2:0}}))},
@@ -87,5 +98,5 @@ function initDebtChart({ data, format, escapeHtml, reducedMotion, charts }, time
   });
   chart.on('click',point=>timeline.select(Number(point.name)));
   timeline.subscribe(showYear);
-  return {resize:()=>chart.resize(),refresh:render};
+  return {resize:()=>{chart.resize();render();},refresh:render};
 }

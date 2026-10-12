@@ -17,7 +17,7 @@ function createChartTheme() {
   }));
   function init(element,kind) {
     element.closest('.chart-card,.finance-chart-card,.budget-card,.repay-chart-card,.white-card')?.classList.add('chart-surface');
-    const chart=echarts.init(element,null,{renderer:'canvas'}),set=chart.setOption.bind(chart);
+    const chart=echarts.init(element,null,{renderer:'svg'}),set=chart.setOption.bind(chart);
     chart.setOption=(option,...args)=>{
       const p=palettes[theme],result={...option,textStyle:{...option.textStyle,color:p.text}};
       if(option.tooltip) result.tooltip={...option.tooltip,backgroundColor:p.background,borderColor:p.axis,textStyle:{...option.tooltip.textStyle,color:p.ink}};

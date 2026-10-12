@@ -187,7 +187,8 @@
       "estimatedYears": [
         2025
       ],
-      "archived": true
+      "archived": false,
+      "note": "La comparación publicada utiliza solo el salario neto observado, 2000–2024; excluye 2025, marcado como estimado. Perfil OCDE soltero sin hijos al 100% del salario medio."
     },
     {
       "id": "eurostat-inflacion",
@@ -245,6 +246,24 @@
       "file": "official/debt-timeline.json",
       "url": "https://www.lamoncloa.gob.es/presidente/presidentes-desde-1823/Paginas/index.aspx",
       "note": "Fechas de nombramiento y cese de La Moncloa. Crisis financiera de 2008 y pandemia de 2020: informes del Banco de España enlazados en el dataset. Las franjas anuales corresponden a quien gobernó más días en cada año."
+    },
+    {
+      "id": "ecb-inflation-public-finances",
+      "title": "Fiscal policy and high inflation · mecanismos fiscales y deuda",
+      "publisher": "Banco Central Europeo",
+      "period": "Boletín Económico 2/2023",
+      "updated": "2026-10-12",
+      "url": "https://www.ecb.europa.eu/press/economic-bulletin/articles/2023/html/ecb.ebart202302_01~2bd46eff8f.en.html",
+      "note": "Fuente explicativa; no aporta una estimación causal para las comparaciones españolas de esta web."
+    },
+    {
+      "id": "bde-inflation-revenue",
+      "title": "Los ingresos públicos tras la pandemia. Residuos fiscales e inflación",
+      "publisher": "Banco de España",
+      "period": "Boletín Económico 2023/T1 · artículo 16",
+      "updated": "2026-10-12",
+      "url": "https://www.bde.es/wbe/es/publicaciones/analisis-economico-investigacion/boletin-economico/2023-t1-articulo-16--ingresos-publicos-tras-pandemia--residuos-fiscales-e-inflacion.html",
+      "note": "Referencia sobre inflación y recaudación; sus estimaciones no se extrapolan a toda la serie."
     }
   ]
 }

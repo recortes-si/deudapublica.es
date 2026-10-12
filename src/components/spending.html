@@ -1,9 +1,14 @@
-<section class="section" id="gasto" aria-labelledby="spending-title">
-  <div class="section-heading"><h2 id="spending-title"><span class="section-index">02 / El destino del gasto</span>Cada euro cuenta.<br>También el que falta.</h2><p>El gasto se financia con ingresos y, cuando no bastan, con déficit. Este reparto muestra el gasto total; no atribuye partidas concretas a la deuda.</p></div>
-  <div class="spending-filter"><label for="spending-year">Año del gasto <select id="spending-year">{{SPENDING_OPTIONS}}</select></label><p id="spending-description" aria-live="polite">Gasto de todas las Administraciones Públicas · {{SPENDING_YEAR}} · {{SPENDING_STATUS}}</p></div>
-  <div class="below-grid">
-    <article class="white-card"><span class="card-kicker">Todas las Administraciones · IGAE</span><h3>El reparto de cada 100 €</h3><p>Porcentaje del gasto total en las cuatro funciones destacadas.</p><div class="bars" id="spending-bars"></div></article>
-    <article class="white-card donut-card"><span class="card-kicker">Funciones del gasto</span><h3>La fotografía completa.</h3><p>Tres funciones destacadas y el resto del gasto público.</p><div class="donut-wrap"><div class="donut" id="spending-donut" role="img" aria-label="Reparto del gasto; ver tabla inferior."></div><div class="legend" id="spending-legend"></div></div></article>
-  </div>
-  <details class="data-details"><summary>Comparar todas las funciones y años</summary>{{SPENDING_TABLE}}</details>
+<section class="section spending-section" id="gasto" aria-labelledby="spending-title">
+  <div class="section-heading"><h2 id="spending-title"><span class="section-index">02 / El destino del gasto</span>Sigue el dinero.<br>Exige respuestas.</h2><p>Del reparto general a las partidas concretas: descubre en qué se gasta y abre el presupuesto estatal para explorar sus programas. Cuando los ingresos no bastan, la diferencia se financia con déficit.</p></div>
+  <article class="white-card spending-overview">
+    <span class="card-kicker">1 / Vista general · Todas las Administraciones</span><h3>¿A dónde va cada 100 € de gasto?</h3><p>Gasto ejecutado por el Estado, las comunidades autónomas, las entidades locales y la Seguridad Social. Las barras destacan cuatro funciones; el gráfico circular muestra tres de ellas y el resto del gasto. Abre el desglose para ver las diez funciones, sin agrupar ninguna en «resto».</p>
+    <div class="spending-filter"><label for="spending-year">Año <select id="spending-year">{{SPENDING_OPTIONS}}</select></label><p id="spending-description" aria-live="polite">Gasto de todas las Administraciones Públicas · {{SPENDING_YEAR}} · {{SPENDING_STATUS}}</p></div>
+    <div class="spending-visuals">
+      <div class="bars" id="spending-bars"></div>
+      <div class="spending-distribution"><h4>El reparto de un vistazo</h4><div class="donut-wrap"><div class="donut" id="spending-donut" role="img" aria-label="Reparto del gasto; ver tabla inferior."></div><div class="legend" id="spending-legend"></div></div></div>
+    </div>
+    <details class="spending-breakdown"><summary>Ver el desglose completo · 10 funciones</summary><p>Cada importe indica cuántos euros de cada 100 € se destinan a esa función. También puedes ver su gasto anual en millones de euros.</p><ul id="spending-full-breakdown" class="spending-breakdown-list"></ul></details>
+    <details class="data-details"><summary>Ver todas las funciones y comparar años</summary>{{SPENDING_TABLE}}</details>
+  </article>
+  <!-- COMPONENT:budget -->
 </section>
